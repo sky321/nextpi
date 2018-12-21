@@ -44,6 +44,7 @@ pushd "$TMPDIR"
 
 # install NCP
 echo -e "\nInstalling NextPi"
+cd /home/pi/nextpi/
 source etc/library.sh
 
 install_script  lamp.sh

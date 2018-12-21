@@ -1,0 +1,16 @@
+- delete standard pi user
+- add new user
+- finish ssl config
+- redirect http??
+- install nextcloud
+- install failtoban
+- firewall change
+- usb mount
+- copy data
+- unattendent updates
+- backup
+- cronjob
+- letsencrypt
+- sshd config
+- autorotate
+- security config

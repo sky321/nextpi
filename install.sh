@@ -36,7 +36,7 @@ echo "Getting build code..."
 apt-get update
 apt-get install --no-install-recommends -y wget ca-certificates sudo
 
-pushd "$TMPDIR"
+#pushd "$TMPDIR"
 #wget -O- --content-disposition https://github.com/nextcloud/nextcloudpi/archive/"$BRANCH"/latest.tar.gz \
 #  | tar -xz \
 # || exit 1
@@ -44,7 +44,7 @@ pushd "$TMPDIR"
 
 # install NCP
 echo -e "\nInstalling NextPi"
-cd /home/pi/nextpi/
+#cd /home/pi/nextpi/
 source etc/library.sh
 
 #install_script  lamp.sh

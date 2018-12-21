@@ -45,10 +45,10 @@ apt-get install --no-install-recommends -y wget ca-certificates sudo
 # install NCP
 echo -e "\nInstalling NextPi"
 #cd /home/pi/nextpi/
-source etc/library.sh
+source library.sh
 
 install_script  lamp.sh
-#install_script  etc/ncp-config.d/nc-nextcloud.sh
+#install_script  nc-nextcloud.sh
 #activate_script etc/ncp-config.d/nc-nextcloud.sh
 #install_script  ncp.sh
 #activate_script etc/ncp-config.d/nc-init.sh

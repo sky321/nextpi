@@ -37,20 +37,20 @@ apt-get update
 apt-get install --no-install-recommends -y wget ca-certificates sudo
 
 pushd "$TMPDIR"
-wget -O- --content-disposition https://github.com/nextcloud/nextcloudpi/archive/"$BRANCH"/latest.tar.gz \
-  | tar -xz \
-  || exit 1
-cd - && cd "$TMPDIR"/nextcloudpi-"$BRANCH"
+#wget -O- --content-disposition https://github.com/nextcloud/nextcloudpi/archive/"$BRANCH"/latest.tar.gz \
+#  | tar -xz \
+# || exit 1
+#cd - && cd "$TMPDIR"/nextcloudpi-"$BRANCH"
 
 # install NCP
-echo -e "\nInstalling NextCloudPi"
+echo -e "\nInstalling NextPi"
 source etc/library.sh
 
 install_script  lamp.sh
-install_script  etc/ncp-config.d/nc-nextcloud.sh
-activate_script etc/ncp-config.d/nc-nextcloud.sh
-install_script  ncp.sh
-activate_script etc/ncp-config.d/nc-init.sh
+#install_script  etc/ncp-config.d/nc-nextcloud.sh
+#activate_script etc/ncp-config.d/nc-nextcloud.sh
+#install_script  ncp.sh
+#activate_script etc/ncp-config.d/nc-init.sh
 
 popd
 

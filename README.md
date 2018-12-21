@@ -7,4 +7,5 @@
 - install git with "sudo apt-get install git"
 - git clone https://github.com/sky321/nextpi.git
 - cd nextpi
+- chmod +x install.sh
 - ./install.sh

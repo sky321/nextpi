@@ -5,4 +5,6 @@
 - start raspi-config
 - make ssh available
 - install git with "sudo apt-get install git"
-- clone git repo with "
+- git clone https://github.com/sky321/nextpi.git
+- cd nextpi
+- ./install.sh

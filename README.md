@@ -2,6 +2,7 @@
 - use Etcher to flash img on SD card https://www.balena.io/etcher/
 - boot with display and keyboard
 - login with pi/raspberry
+- change standard password with "passwd"
 - start raspi-config
 - make ssh available
 - install git with "sudo apt-get install git"

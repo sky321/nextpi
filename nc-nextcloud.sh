@@ -36,7 +36,7 @@ You can use nc-backup "
 install()
 {
   # During build, this step is run before ncp.sh. Avoid executing twice
-  [[ -f /usr/lib/systemd/system/nc-provisioning.service ]] && return 0
+#  [[ -f /usr/lib/systemd/system/nc-provisioning.service ]] && return 0
 
   local RELEASE=stretch
 
@@ -79,22 +79,22 @@ install()
   service php${PHPVER}-fpm restart
   
   # service to randomize passwords on first boot
-  mkdir -p /usr/lib/systemd/system
-  cat > /usr/lib/systemd/system/nc-provisioning.service <<'EOF'
-[Unit]
-Description=Randomize passwords on first boot
-Requires=network.target
-After=mysql.service redis.service
+#  mkdir -p /usr/lib/systemd/system
+#  cat > /usr/lib/systemd/system/nc-provisioning.service <<'EOF'
+#[Unit]
+#Description=Randomize passwords on first boot
+#Requires=network.target
+#After=mysql.service redis.service
 
-[Service]
-ExecStart=/bin/bash /usr/local/bin/ncp-provisioning.sh
+#[Service]
+#ExecStart=/bin/bash /usr/local/bin/ncp-provisioning.sh
 
-[Install]
-WantedBy=multi-user.target
-EOF
-  [[ "$DOCKERBUILD" != 1 ]] && systemctl enable nc-provisioning
-  return 0
-}
+#[Install]
+#WantedBy=multi-user.target
+#EOF
+#  [[ "$DOCKERBUILD" != 1 ]] && systemctl enable nc-provisioning
+#  return 0
+#}
 
 configure()
 {
@@ -175,18 +175,18 @@ configure()
   echo "Setting up database..."
 
   # workaround to emulate DROP USER IF EXISTS ..;)
-  local DBPASSWD=$( grep password /root/.my.cnf | sed 's|password=||' )
-  mysql <<EOF
-DROP DATABASE IF EXISTS nextcloud;
-CREATE DATABASE nextcloud
-    CHARACTER SET utf8mb4
-    COLLATE utf8mb4_unicode_ci;
-GRANT USAGE ON *.* TO '$DBADMIN'@'localhost' IDENTIFIED BY '$DBPASSWD';
-DROP USER '$DBADMIN'@'localhost';
-CREATE USER '$DBADMIN'@'localhost' IDENTIFIED BY '$DBPASSWD';
-GRANT ALL PRIVILEGES ON nextcloud.* TO $DBADMIN@localhost;
-EXIT
-EOF
+#  local DBPASSWD=$( grep password /root/.my.cnf | sed 's|password=||' )
+#  mysql <<EOF
+#DROP DATABASE IF EXISTS nextcloud;
+#CREATE DATABASE nextcloud
+#    CHARACTER SET utf8mb4
+#    COLLATE utf8mb4_unicode_ci;
+#GRANT USAGE ON *.* TO '$DBADMIN'@'localhost' IDENTIFIED BY '$DBPASSWD';
+#DROP USER '$DBADMIN'@'localhost';
+#CREATE USER '$DBADMIN'@'localhost' IDENTIFIED BY '$DBPASSWD';
+#GRANT ALL PRIVILEGES ON nextcloud.* TO $DBADMIN@localhost;
+#EXIT
+#EOF
 
 ## SET APACHE VHOST
   echo "Setting up Apache..."
@@ -213,16 +213,16 @@ EOF
 EOF
   a2ensite nextcloud
 
-  cat > /etc/apache2/sites-available/000-default.conf <<'EOF'
-<VirtualHost _default_:80>
-  DocumentRoot /var/www/nextcloud
-  <IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteCond %{HTTPS} !=on
-    RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
-  </IfModule>
-</VirtualHost>
-EOF
+#  cat > /etc/apache2/sites-available/000-default.conf <<'EOF'
+#<VirtualHost _default_:80>
+#  DocumentRoot /var/www/nextcloud
+#  <IfModule mod_rewrite.c>
+#    RewriteEngine On
+#    RewriteCond %{HTTPS} !=on
+#    RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+#  </IfModule>
+#</VirtualHost>
+#EOF
 
   # some added security
   sed -i 's|^ServerSignature .*|ServerSignature Off|' /etc/apache2/conf-enabled/security.conf

@@ -213,16 +213,16 @@ configure()
 EOF
   a2ensite nextcloud
 
-#  cat > /etc/apache2/sites-available/000-default.conf <<'EOF'
-#<VirtualHost _default_:80>
-#  DocumentRoot /var/www/nextcloud
-#  <IfModule mod_rewrite.c>
-#    RewriteEngine On
-#    RewriteCond %{HTTPS} !=on
-#    RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
-#  </IfModule>
-#</VirtualHost>
-#EOF
+  cat > /etc/apache2/sites-available/000-default.conf <<'EOF'
+<VirtualHost _default_:80>
+  DocumentRoot /var/www/nextcloud
+  <IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+  </IfModule>
+</VirtualHost>
+EOF
 
   # some added security
   sed -i 's|^ServerSignature .*|ServerSignature Off|' /etc/apache2/conf-enabled/security.conf

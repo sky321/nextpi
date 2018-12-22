@@ -1,3 +1,4 @@
+- delete virtual host port 80
 - delete standard pi user
 - add new user
 - finish ssl config

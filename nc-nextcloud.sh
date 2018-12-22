@@ -94,7 +94,7 @@ install()
 #EOF
 #  [[ "$DOCKERBUILD" != 1 ]] && systemctl enable nc-provisioning
 #  return 0
-#}
+}
 
 configure()
 {

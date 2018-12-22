@@ -47,11 +47,11 @@ echo -e "\nInstalling NextPi"
 #cd /home/pi/nextpi/
 source library.sh
 
-#install_script  lamp.sh
-#install_script  nc-nextcloud.sh
+install_script  lamp.sh
+install_script  nc-nextcloud.sh
 activate_script nc-nextcloud.sh
 #install_script  ncp.sh
-#activate_script etc/ncp-config.d/nc-init.sh
+#activate_script nc-init.sh
 
 #popd
 

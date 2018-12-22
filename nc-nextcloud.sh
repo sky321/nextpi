@@ -172,7 +172,7 @@ configure()
     sleep 0.5
   done
 
-  echo "Setting up database..."
+#  echo "Setting up database..."
 
   # workaround to emulate DROP USER IF EXISTS ..;)
 #  local DBPASSWD=$( grep password /root/.my.cnf | sed 's|password=||' )

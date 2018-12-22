@@ -50,17 +50,17 @@ configure()
 
   # workaround to emulate DROP USER IF EXISTS ..;)
   local DBPASSWD=$( grep password /root/.my.cnf | sed 's|password=||' )
-  mysql <<EOF
-DROP DATABASE IF EXISTS nextcloud;
-CREATE DATABASE nextcloud
-    CHARACTER SET utf8mb4
-    COLLATE utf8mb4_unicode_ci;
-GRANT USAGE ON *.* TO '$DBADMIN'@'localhost' IDENTIFIED BY '$DBPASSWD';
-DROP USER '$DBADMIN'@'localhost';
-CREATE USER '$DBADMIN'@'localhost' IDENTIFIED BY '$DBPASSWD';
-GRANT ALL PRIVILEGES ON nextcloud.* TO $DBADMIN@localhost;
-EXIT
-EOF
+#  mysql <<EOF
+#DROP DATABASE IF EXISTS nextcloud;
+#CREATE DATABASE nextcloud
+#    CHARACTER SET utf8mb4
+#    COLLATE utf8mb4_unicode_ci;
+#GRANT USAGE ON *.* TO '$DBADMIN'@'localhost' IDENTIFIED BY '$DBPASSWD';
+#DROP USER '$DBADMIN'@'localhost';
+#CREATE USER '$DBADMIN'@'localhost' IDENTIFIED BY '$DBPASSWD';
+#GRANT ALL PRIVILEGES ON nextcloud.* TO $DBADMIN@localhost;
+#EXIT
+#EOF
 
   ## INITIALIZE NEXTCLOUD
 
@@ -114,12 +114,12 @@ EOF
 
 
   # 4 Byte UTF8 support
-  sudo -u www-data php occ config:system:set mysql.utf8mb4 --type boolean --value="true"
+#  sudo -u www-data php occ config:system:set mysql.utf8mb4 --type boolean --value="true"
 
   # Default trusted domain ( only from ncp-config )
-  test -f /usr/local/bin/nextcloud-domain.sh && {
-    test -f /.ncp-image || bash /usr/local/bin/nextcloud-domain.sh
-  }
+#  test -f /usr/local/bin/nextcloud-domain.sh && {
+#    test -f /.ncp-image || bash /usr/local/bin/nextcloud-domain.sh
+#  }
   sudo -u www-data php occ config:system:set trusted_domains 5 --value="nextcloudpi.local"
   # trusted_domains 6 used by docker
   sudo -u www-data php occ config:system:set trusted_domains 7 --value="nextcloudpi"
@@ -132,38 +132,38 @@ EOF
   sudo -u www-data php occ config:system:set mail_domain       --value="ownyourbits.com"
 
   # NCP theme
-  [[ -e /usr/local/etc/logo ]] && {
-    local ID=$( grep instanceid config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g" )
-    [[ "$ID" == "" ]] && { echo "failed to get ID"; return 1; }
-    mkdir -p data/appdata_${ID}/theming/images
-    cp /usr/local/etc/logo /usr/local/etc/background data/appdata_${ID}/theming/images
-    chown -R www-data:www-data data/appdata_${ID}
-  }
+#  [[ -e /usr/local/etc/logo ]] && {
+#    local ID=$( grep instanceid config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g" )
+#    [[ "$ID" == "" ]] && { echo "failed to get ID"; return 1; }
+#    mkdir -p data/appdata_${ID}/theming/images
+#    cp /usr/local/etc/logo /usr/local/etc/background data/appdata_${ID}/theming/images
+#    chown -R www-data:www-data data/appdata_${ID}
+#  }
 
-  mysql nextcloud <<EOF
-replace into  oc_appconfig values ( 'theming', 'name'          , "NextCloudPi"             );
-replace into  oc_appconfig values ( 'theming', 'slogan'        , "keep your data close"    );
-replace into  oc_appconfig values ( 'theming', 'url'           , "https://ownyourbits.com" );
-replace into  oc_appconfig values ( 'theming', 'logoMime'      , "image/svg+xml"           );
-replace into  oc_appconfig values ( 'theming', 'backgroundMime', "image/png"               );
-EOF
+#  mysql nextcloud <<EOF
+#replace into  oc_appconfig values ( 'theming', 'name'          , "NextCloudPi"             );
+#replace into  oc_appconfig values ( 'theming', 'slogan'        , "keep your data close"    );
+#replace into  oc_appconfig values ( 'theming', 'url'           , "https://ownyourbits.com" );
+#replace into  oc_appconfig values ( 'theming', 'logoMime'      , "image/svg+xml"           );
+#replace into  oc_appconfig values ( 'theming', 'backgroundMime', "image/png"               );
+#EOF
 
   # enable some apps by default
   sudo -u www-data php /var/www/nextcloud/occ app:install calendar
   sudo -u www-data php /var/www/nextcloud/occ app:install contacts
   sudo -u www-data php /var/www/nextcloud/occ app:install notes
   sudo -u www-data php /var/www/nextcloud/occ app:install tasks
-  sudo -u www-data php /var/www/nextcloud/occ app:install news
-  sudo -u www-data php /var/www/nextcloud/occ app:install admin_notifications
-  sudo -u www-data php /var/www/nextcloud/occ app:install previewgenerator
+#  sudo -u www-data php /var/www/nextcloud/occ app:install news
+#  sudo -u www-data php /var/www/nextcloud/occ app:install admin_notifications
+#  sudo -u www-data php /var/www/nextcloud/occ app:install previewgenerator
 
   sudo -u www-data php /var/www/nextcloud/occ app:enable calendar
   sudo -u www-data php /var/www/nextcloud/occ app:enable contacts
   sudo -u www-data php /var/www/nextcloud/occ app:enable notes
   sudo -u www-data php /var/www/nextcloud/occ app:enable tasks
-  sudo -u www-data php /var/www/nextcloud/occ app:enable news
-  sudo -u www-data php /var/www/nextcloud/occ app:enable admin_notifications
-  sudo -u www-data php /var/www/nextcloud/occ app:enable previewgenerator
+#  sudo -u www-data php /var/www/nextcloud/occ app:enable news
+#  sudo -u www-data php /var/www/nextcloud/occ app:enable admin_notifications
+#  sudo -u www-data php /var/www/nextcloud/occ app:enable previewgenerator
 
   # other
   sudo -u www-data php /var/www/nextcloud/occ config:system:set overwriteprotocol --value=https

@@ -236,8 +236,8 @@ EOF
 #  sed -i "s/memory_limit=.*/memory_limit=$MEMORYLIMIT_/"               /var/www/nextcloud/.user.ini 
 
   # slow transfers will be killed after this time
-  cat >> /var/www/nextcloud/.user.ini <<< "max_execution_time=$MAXTRANSFERTIME_"
-  cat >> /var/www/nextcloud/.user.ini <<< "max_input_time=$MAXTRANSFERTIME_"
+#  cat >> /var/www/nextcloud/.user.ini <<< "max_execution_time=$MAXTRANSFERTIME_"
+#  cat >> /var/www/nextcloud/.user.ini <<< "max_input_time=$MAXTRANSFERTIME_"
 
   ## SET CRON
   echo "*/15  *  *  *  * php -f /var/www/nextcloud/cron.php" > /tmp/crontab_http

@@ -120,10 +120,14 @@ EOF
 #  test -f /usr/local/bin/nextcloud-domain.sh && {
 #    test -f /.ncp-image || bash /usr/local/bin/nextcloud-domain.sh
 #  }
-  sudo -u www-data php occ config:system:set trusted_domains 5 --value="nextcloudpi.local"
+  
+  IFACE="$( ip r | grep "default via" | awk '{ print $5 }' | head -1 )"
+  IP="$( ip a show dev "$IFACE" | grep global | grep -oP '\d{1,3}(.\d{1,3}){3}' | head -1 )" 
+  sudo -u www-data php occ config:system:set trusted_domains 1 --value=$IP
+  #sudo -u www-data php occ config:system:set trusted_domains 5 --value="nextcloudpi.local"
   # trusted_domains 6 used by docker
-  sudo -u www-data php occ config:system:set trusted_domains 7 --value="nextcloudpi"
-  sudo -u www-data php occ config:system:set trusted_domains 8 --value="nextcloudpi.lan"
+  #sudo -u www-data php occ config:system:set trusted_domains 7 --value="nextcloudpi"
+  #sudo -u www-data php occ config:system:set trusted_domains 8 --value="nextcloudpi.lan"
 
   # email
   sudo -u www-data php occ config:system:set mail_smtpmode     --value="sendmail"

@@ -1,7 +1,6 @@
 - delete virtual host port 80
 - delete standard pi user
 - add new user
-- config nextcloud
 - install failtoban
 - firewall change
 - usb mount

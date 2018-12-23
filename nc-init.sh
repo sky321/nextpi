@@ -50,17 +50,17 @@ configure()
 
   # workaround to emulate DROP USER IF EXISTS ..;)
   local DBPASSWD=$( grep password /root/.my.cnf | sed 's|password=||' )
-#  mysql <<EOF
-#DROP DATABASE IF EXISTS nextcloud;
-#CREATE DATABASE nextcloud
+  mysql <<EOF
+DROP DATABASE IF EXISTS nextcloud;
+CREATE DATABASE nextcloud;
 #    CHARACTER SET utf8mb4
 #    COLLATE utf8mb4_unicode_ci;
-#GRANT USAGE ON *.* TO '$DBADMIN'@'localhost' IDENTIFIED BY '$DBPASSWD';
-#DROP USER '$DBADMIN'@'localhost';
-#CREATE USER '$DBADMIN'@'localhost' IDENTIFIED BY '$DBPASSWD';
-#GRANT ALL PRIVILEGES ON nextcloud.* TO $DBADMIN@localhost;
-#EXIT
-#EOF
+GRANT USAGE ON *.* TO '$DBADMIN'@'localhost' IDENTIFIED BY '$DBPASSWD';
+DROP USER '$DBADMIN'@'localhost';
+CREATE USER '$DBADMIN'@'localhost' IDENTIFIED BY '$DBPASSWD';
+GRANT ALL PRIVILEGES ON nextcloud.* TO $DBADMIN@localhost;
+EXIT
+EOF
 
   ## INITIALIZE NEXTCLOUD
 

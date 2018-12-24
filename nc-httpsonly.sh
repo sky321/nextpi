@@ -11,17 +11,17 @@
 ACTIVE_=no
 DESCRIPTION="Force HTTPS"
 
-configure()
-{
+#configure()
+#{
   [[ $ACTIVE_ == "no" ]] && local OPT=Off || local OPT=On
   sed -i "s|RewriteEngine .*|RewriteEngine $OPT|" /etc/apache2/sites-available/000-default.conf
   echo "Forcing HTTPS $OPT"
 
   # delayed in bg so it does not kill the connection, and we get AJAX response
   bash -c "sleep 2 && service apache2 reload" &>/dev/null &
-}
+#}
 
-install() { :; }
+#install() { :; }
 
 # License
 #

@@ -55,6 +55,7 @@ activate_script nc-init.sh
 activate_script unattended-upgrades.sh
 
 # post install
+chmod +x ncp-provisioning.sh 
 ./ncp-provisioning.sh 
 systemctl reload apache2
 

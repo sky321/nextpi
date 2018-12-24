@@ -12,3 +12,4 @@
 - sshd config
 - autorotate
 - security config
+- cleanup files (.my.cnf) and logs

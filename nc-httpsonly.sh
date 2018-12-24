@@ -8,7 +8,7 @@
 # More at https://ownyourbits.com/2017/03/13/nextcloudpi-gets-nextcloudpi-config/
 #
 
-ACTIVE_=no
+ACTIVE_=Yes
 DESCRIPTION="Force HTTPS"
 
 configure()

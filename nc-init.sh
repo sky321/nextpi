@@ -172,7 +172,10 @@ EOF
   # other
   sudo -u www-data php /var/www/nextcloud/occ config:system:set overwriteprotocol --value=https
 
-  echo "NC init done"
+  echo "NC init done
+  
+  Login with $ADMINUSER_ and $ADMINPASS_
+  "
 }
 
 install(){ :; }

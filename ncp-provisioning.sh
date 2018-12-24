@@ -48,17 +48,6 @@ EOF
   sed -i "s|'dbpassword' =>.*|'dbpassword' => '$DBPASSWD',|" "$CFG"
 }
 
-  mysql_secure_installation <<EOF
-default
-y
-$DBPASSWD
-$DBPASSWD
-y
-y
-y
-y
-EOF
-
 
 ## nc.limits.sh (auto)adjustments: number of threads, memory limits...
 

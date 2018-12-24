@@ -65,7 +65,7 @@ echo "Done.
 
 First: Visit https://$IP/ to activate your instance of NC. 
 Attention: If all is running fine change your Passwords!
-You may run ./ncp-provisioning.sh to change your REDIS and DB password (/root/.my.cnf)
+You may run ./ncp-provisioning.sh to change your REDIS and NextcloudDB password.
 "
 
 exit 0

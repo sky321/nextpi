@@ -1,5 +1,5 @@
 - change standard password (db, nextcloud, redis,)
-- delete virtual host port 80
+- disable redirect virtual host port 80
 - delete standard pi user
 - add new user
 - install failtoban

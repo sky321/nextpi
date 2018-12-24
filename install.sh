@@ -65,8 +65,7 @@ echo "Done.
 
 First: Visit https://$IP/ to activate your instance of NC. 
 Attention: If all is running fine change your Passwords!
-You may run ./ncp-provisioning.sh to change your REDIS and NextcloudDB password 
-and use mysql_secure_installation to change MariaDB root password (default).
+You may run ./ncp-provisioning.sh to change your REDIS and DB password (/root/.my.cnf)
 "
 
 exit 0

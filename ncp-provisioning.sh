@@ -49,7 +49,7 @@ EOF
 }
 
   mysql_secure_installation <<EOF
-$DBPASSWD
+default
 y
 $DBPASSWD
 $DBPASSWD

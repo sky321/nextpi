@@ -57,7 +57,8 @@ install()
     rm /usr/bin/newaliases
     mv /newaliases /usr/bin/newaliases
   }
- 
+  $APTINSTALL mailutils  
+
   $APTINSTALL redis-server
   $APTINSTALL -t $RELEASE php${PHPVER}-redis
 

@@ -157,6 +157,7 @@ EOF
   sudo -u www-data php /var/www/nextcloud/occ app:install contacts
   sudo -u www-data php /var/www/nextcloud/occ app:install notes
   sudo -u www-data php /var/www/nextcloud/occ app:install tasks
+  sudo -u www-data php /var/www/nextcloud/occ app:install twofactor_totp
 #  sudo -u www-data php /var/www/nextcloud/occ app:install news
 #  sudo -u www-data php /var/www/nextcloud/occ app:install admin_notifications
 #  sudo -u www-data php /var/www/nextcloud/occ app:install previewgenerator
@@ -165,6 +166,7 @@ EOF
   sudo -u www-data php /var/www/nextcloud/occ app:enable contacts
   sudo -u www-data php /var/www/nextcloud/occ app:enable notes
   sudo -u www-data php /var/www/nextcloud/occ app:enable tasks
+  sudo -u www-data php /var/www/nextcloud/occ app:enable twofactor_totp
 #  sudo -u www-data php /var/www/nextcloud/occ app:enable news
 #  sudo -u www-data php /var/www/nextcloud/occ app:enable admin_notifications
 #  sudo -u www-data php /var/www/nextcloud/occ app:enable previewgenerator

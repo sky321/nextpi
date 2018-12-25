@@ -1,7 +1,6 @@
 - disable redirect virtual host port 80
 - delete standard pi user
 - add new user
-- install failtoban
 - firewall change
 - usb mount
 - copy data

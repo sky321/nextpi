@@ -6,7 +6,5 @@
 - change data dir (take care of tmp upload dir in script) 
 - backup
 - letsencrypt
-- sshd config
-- autorotate
 - security config
 - cleanup files (.my.cnf) and logs

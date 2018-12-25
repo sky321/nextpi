@@ -8,3 +8,4 @@
 - letsencrypt
 - security config
 - cleanup files (.my.cnf) and logs
+- add div system:xyz in config.php entry

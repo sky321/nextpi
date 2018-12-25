@@ -7,6 +7,16 @@
 #sudo rsync -Aax data/ /var/www/nextcloud/data/
 #nano /var/www/nextcloud/config/config.php
 #   'datadirectory' => '/var/www/nextcloud/data',
+#  'dbname' => 'nextcloud',
+#  'memcache.local' => '\\OC\\Memcache\\Redis',
+#  'memcache.locking' => '\\OC\\Memcache\\Redis',
+#  'redis' =>
+#  array (
+#    'host' => '/var/run/redis/redis.sock',
+#    'port' => 0,
+#    'timeout' => 0.0,
+#    'password' => '$REDISPASS',
+#  ),
 
 #sudo mysql -e "DROP DATABASE nextcloud"
 #sudo mysql -e "CREATE DATABASE nextcloud"

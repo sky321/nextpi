@@ -1,4 +1,3 @@
-- change standard password (db, nextcloud, redis,)
 - disable redirect virtual host port 80
 - delete standard pi user
 - add new user
@@ -6,7 +5,7 @@
 - firewall change
 - usb mount
 - copy data
-- unattendent updates
+- change data dir (take care of tmp upload dir in script) 
 - backup
 - letsencrypt
 - sshd config

@@ -11,4 +11,4 @@
 	- git clone https://github.com/sky321/nextpi.git
 	- cd nextpi
 	- chmod +x install.sh
-	- ./install.sh
+	- sudo ./install.sh

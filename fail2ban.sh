@@ -8,7 +8,7 @@
 # More at: https://ownyourbits.com/2017/02/24/nextcloudpi-fail2ban-installer/
 #
 
-ACTIVE_=no
+ACTIVE_=yes
 
 # time to ban an IP that exceeded attempts
 BANTIME_=600
@@ -17,14 +17,14 @@ BANTIME_=600
 FINDTIME_=600
 
 # bad attempts before banning an IP
-MAXRETRY_=6
+MAXRETRY_=5
 
 
 # Option to activate email notifications
-MAILALERTS_=no
+MAILALERTS_=yes
 
 # email to send notifications to
-EMAIL_=optional@email.com
+EMAIL_=pi@localhost
 
 DESCRIPTION="Brute force protection for SSH and NextCloud"
 
@@ -35,36 +35,36 @@ install()
   update-rc.d fail2ban disable
   rm -f /etc/fail2ban/jail.d/defaults-debian.conf
 
-  [[ "$DOCKERBUILD" == 1 ]] && {
-    cat > /etc/services-available.d/100fail2ban <<EOF
-#!/bin/bash
+#  [[ "$DOCKERBUILD" == 1 ]] && {
+#    cat > /etc/services-available.d/100fail2ban <<EOF
+##!/bin/bash
+#
+#source /usr/local/etc/library.sh
+#
+#[[ "\$1" == "stop" ]] && {
+#  echo "stopping fail2ban..."
+#  service fail2ban stop
+#  exit 0
+#}
 
-source /usr/local/etc/library.sh
+#persistent_cfg /etc/fail2ban
 
-[[ "\$1" == "stop" ]] && {
-  echo "stopping fail2ban..."
-  service fail2ban stop
-  exit 0
-}
+#echo "Starting fail2ban..."
+#service fail2ban start
 
-persistent_cfg /etc/fail2ban
-
-echo "Starting fail2ban..."
-service fail2ban start
-
-exit 0
-EOF
-    chmod +x /etc/services-available.d/100fail2ban
-  }
+#exit 0
+#EOF
+#    chmod +x /etc/services-available.d/100fail2ban
+#  }
 
   # tweak fail2ban email 
-  local F=/etc/fail2ban/action.d/sendmail-common.conf
-  sed -i 's|Fail2Ban|NextCloudPi|' /etc/fail2ban/action.d/sendmail-whois-lines.conf
-  grep -q actionstart_ "$F" || sed -i 's|actionstart|actionstart_|' "$F"
-  grep -q actionstop_  "$F" || sed -i 's|actionstop|actionstop_|'   "$F"
+#  local F=/etc/fail2ban/action.d/sendmail-common.conf
+#  sed -i 's|Fail2Ban|NextCloudPi|' /etc/fail2ban/action.d/sendmail-whois-lines.conf
+#  grep -q actionstart_ "$F" || sed -i 's|actionstart|actionstart_|' "$F"
+#  grep -q actionstop_  "$F" || sed -i 's|actionstop|actionstop_|'   "$F"
 
   # delay init because of automount
-  sed -i "/^ExecStart=/iExecStartPre=/bin/sleep 10" /lib/systemd/system/fail2ban.service
+#  sed -i "/^ExecStart=/iExecStartPre=/bin/sleep 10" /lib/systemd/system/fail2ban.service
 
 }
 
@@ -128,7 +128,7 @@ protocol   = tcp
 chain      = INPUT
 action_    = %(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
 action_mwl = %(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
-           sendmail-whois-lines[name=%(__name__)s, dest=$EMAIL_, sender=ncp-fail2ban@ownyourbits.com]
+           sendmail-whois-lines[name=%(__name__)s, dest=$EMAIL_, sender=ncp-fail2ban@localhost]
 action = %($ACTION)s
 
 #

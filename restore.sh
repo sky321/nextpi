@@ -16,10 +16,10 @@
 #    'port' => 0,
 #    'timeout' => 0.0,
 #    'password' => '$REDISPASS',
-  'lost_password_link' => 'disabled',
-   'auth.bruteforce.protection.enabled' => false,
-    'trashbin_retention_obligation' => 'auto, 30',
- 'log_rotate_size' => 262144,
+#  'lost_password_link' => 'disabled',
+#   'auth.bruteforce.protection.enabled' => false,
+#    'trashbin_retention_obligation' => 'auto, 30',
+# 'log_rotate_size' => 262144,
  
 
 #  ),

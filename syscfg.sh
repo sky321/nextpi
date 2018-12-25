@@ -40,6 +40,10 @@ configure()
 #}
 #EOF
 
+  # automount USB drive after reboot
+  echo "UUID=1b18feab-3afd-46f8-8fa0-9b2c45ab0abe /mnt/usbstick ext4 defaults,rw 0    0" >> /etc/fstab
+
+  # Initiat logrotate
   cat >> /etc/logrotate.d/unattended-upgrades <<'EOF'
 /var/log/unattended-upgrades/unattended-upgrades.log
 {
@@ -65,18 +69,20 @@ EOF
 }
 EOF
 
-    ## SSH hardening
-#    if [[ -f /etc/ssh/sshd_config ]]; then
-#      sed -i 's|^#AllowTcpForwarding .*|AllowTcpForwarding no|'     /etc/ssh/sshd_config
-#      sed -i 's|^#ClientAliveCountMax .*|ClientAliveCountMax 2|'    /etc/ssh/sshd_config
-#      sed -i 's|^MaxAuthTries .*|MaxAuthTries 1|'                   /etc/ssh/sshd_config
-#      sed -i 's|^#MaxSessions .*|MaxSessions 2|'                    /etc/ssh/sshd_config
-#      sed -i 's|^#TCPKeepAlive .*|TCPKeepAlive no|'                 /etc/ssh/sshd_config
-#      sed -i 's|^X11Forwarding .*|X11Forwarding no|'                /etc/ssh/sshd_config
-#      sed -i 's|^#LogLevel .*|LogLevel VERBOSE|'                    /etc/ssh/sshd_config
-#      sed -i 's|^#Compression .*|Compression no|'                   /etc/ssh/sshd_config
-#      sed -i 's|^#AllowAgentForwarding .*|AllowAgentForwarding no|' /etc/ssh/sshd_config
-#    fi
+    # SSH hardening
+    if [[ -f /etc/ssh/sshd_config ]]; then
+      sed -i 's|^#AllowTcpForwarding .*|AllowTcpForwarding no|'     /etc/ssh/sshd_config 
+      sed -i 's|^#ClientAliveCountMax .*|ClientAliveCountMax 2|'    /etc/ssh/sshd_config
+      sed -i 's|^MaxAuthTries .*|MaxAuthTries 1|'                   /etc/ssh/sshd_config
+      sed -i 's|^#MaxSessions .*|MaxSessions 2|'                    /etc/ssh/sshd_config
+      sed -i 's|^#TCPKeepAlive .*|TCPKeepAlive no|'                 /etc/ssh/sshd_config
+      sed -i 's|^X11Forwarding .*|X11Forwarding no|'                /etc/ssh/sshd_config
+      sed -i 's|^#LogLevel .*|LogLevel VERBOSE|'                    /etc/ssh/sshd_config
+      sed -i 's|^#Compression .*|Compression no|'                   /etc/ssh/sshd_config
+      sed -i 's|^#AllowAgentForwarding .*|AllowAgentForwarding no|' /etc/ssh/sshd_config
+      sed -i 's|^#Port .*|Port 10317|'                              /etc/ssh/sshd_config
+      sed -i 's|^#PermitRootLogin .*|PermitRootLogin yes|'          /etc/ssh/sshd_config
+    fi
 
     ## kernel hardening
 #    cat >> /etc/sysctl.conf <<EOF

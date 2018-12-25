@@ -2,7 +2,6 @@
 - delete standard pi user
 - add new user
 - firewall change
-- usb mount
 - copy data
 - change data dir (take care of tmp upload dir in script) 
 - backup

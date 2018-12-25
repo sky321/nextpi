@@ -51,7 +51,7 @@
   fi
 
   # create and configure opcache dir
-  local OPCACHEDIR=/var/www/nextcloud/data/.opcache
+   OPCACHEDIR=/var/www/nextcloud/data/.opcache
   sed -i "s|^opcache.file_cache=.*|opcache.file_cache=$OPCACHEDIR|" /etc/php/${PHPVER}/mods-available/opcache.ini
   mkdir -p $OPCACHEDIR
   chown -R www-data:www-data $OPCACHEDIR

@@ -13,14 +13,13 @@
 #sudo mysql nextcloud < nextcloud-mysql-dump.sql
 
 
-perm()
-{
+
 
   ## CONFIGURE FILE PERMISSIONS
-  local ocpath='/var/www/nextcloud'
-  local htuser='www-data'
-  local htgroup='www-data'
-  local rootuser='root'
+   ocpath='/var/www/nextcloud'
+   htuser='www-data'
+   htgroup='www-data'
+   rootuser='root'
 
   printf "Creating possible missing Directories\n"
   mkdir -p $ocpath/data
@@ -56,4 +55,3 @@ perm()
   sed -i "s|^opcache.file_cache=.*|opcache.file_cache=$OPCACHEDIR|" /etc/php/${PHPVER}/mods-available/opcache.ini
   mkdir -p $OPCACHEDIR
   chown -R www-data:www-data $OPCACHEDIR
-}

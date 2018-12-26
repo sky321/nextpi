@@ -41,7 +41,7 @@ configure()
 #EOF
   
 ## SET CRON for Backup Job
-# echo "0 22 * * 5 sh /home/sky/backup_sh >> /var/log/backup.log 2>&1" > /tmp/crontab_backup
+# echo "0 22 * * 5 sh /home/pi/backup_sh >> /var/log/backup.log 2>&1" > /tmp/crontab_backup
 # crontab -u root /tmp/crontab_backup
 # rm /tmp/crontab_http
 

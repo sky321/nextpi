@@ -47,12 +47,12 @@ echo -e "\nInstalling NextPi"
 
 source library.sh
 
-#install_script  lamp.sh
-#install_script  nc-nextcloud.sh
-#install_script  unattended-upgrades.sh
-#install_script  fail2ban.sh
-#activate_script nc-nextcloud.sh
-#activate_script nc-init.sh
+install_script  lamp.sh
+install_script  nc-nextcloud.sh
+install_script  unattended-upgrades.sh
+install_script  fail2ban.sh
+activate_script nc-nextcloud.sh
+activate_script nc-init.sh
 activate_script unattended-upgrades.sh
 activate_script fail2ban.sh
 activate_script syscfg.sh
@@ -69,7 +69,8 @@ IP="$( ip a show dev "$IFACE" | grep global | grep -oP '\d{1,3}(.\d{1,3}){3}' | 
 
 echo "Done.
 
-First: Visit https://$IP/ to activate your instance of NC. 
+First: Visit https://$IP/ to activate your instance of NC.
+For more information about installation check /var/log/ncp.log. 
 "
 
 exit 0

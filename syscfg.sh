@@ -46,7 +46,7 @@ configure()
 # rm /tmp/crontab_http
 
   # automount USB drive after reboot
-  #echo "UUID=1b18feab-3afd-46f8-8fa0-9b2c45ab0abe /mnt/usbstick ext4 defaults,rw 0    0" >> /etc/fstab
+  echo "UUID=1b18feab-3afd-46f8-8fa0-9b2c45ab0abe /mnt/usbstick ext4 defaults,rw 0    0" >> /etc/fstab
 
   # Initiat logrotate
   cat >> /etc/logrotate.d/unattended-upgrades <<'EOF'

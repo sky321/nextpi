@@ -41,12 +41,12 @@ configure()
 #EOF
   
 ## SET CRON for Backup Job
-# echo "0 22 * * 5 sh /home/pi/backup_sh >> /var/log/backup.log 2>&1" > /tmp/crontab_backup
+# echo "0 22 * * 5 sh /home/pi/backup.sh >> /var/log/backup.log 2>&1" > /tmp/crontab_backup
 # crontab -u root /tmp/crontab_backup
 # rm /tmp/crontab_http
 
   # automount USB drive after reboot
-  echo "UUID=1b18feab-3afd-46f8-8fa0-9b2c45ab0abe /mnt/usbstick ext4 defaults,rw 0    0" >> /etc/fstab
+  #echo "UUID=1b18feab-3afd-46f8-8fa0-9b2c45ab0abe /mnt/usbstick ext4 defaults,rw 0    0" >> /etc/fstab
 
   # Initiat logrotate
   cat >> /etc/logrotate.d/unattended-upgrades <<'EOF'

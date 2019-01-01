@@ -12,3 +12,4 @@
 	- cd nextpi
 	- chmod +x install.sh
 	- sudo ./install.sh
+- login to nextcloud and change your password

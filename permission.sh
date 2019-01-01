@@ -1,36 +1,5 @@
 #!/bin/bash
 
-
-# data resync
-#cd next-backup_##
-#sudo rsync -Aax owncloud/ /var/www/nextcloud/
-#sudo rsync -Aax data/ /var/www/nextcloud/data/
-#nano /var/www/nextcloud/config/config.php
-#   'datadirectory' => '/var/www/nextcloud/data',
-#  'dbname' => 'nextcloud',
-#  'memcache.local' => '\\OC\\Memcache\\Redis',
-#  'memcache.locking' => '\\OC\\Memcache\\Redis',
-#  'redis' =>
-#  array (
-#    'host' => '/var/run/redis/redis.sock',
-#    'port' => 0,
-#    'timeout' => 0.0,
-#    'password' => '$REDISPASS',
-#  'lost_password_link' => 'disabled',
-#   'auth.bruteforce.protection.enabled' => false,
-#    'trashbin_retention_obligation' => 'auto, 30',
-# 'log_rotate_size' => 262144,
- 
-
-#  ),
-
-#sudo mysql -e "DROP DATABASE nextcloud"
-#sudo mysql -e "CREATE DATABASE nextcloud"
-#sudo mysql nextcloud < nextcloud-mysql-dump.sql
-
-
-
-
   ## CONFIGURE FILE PERMISSIONS
    ocpath='/var/www/nextcloud'
    htuser='www-data'

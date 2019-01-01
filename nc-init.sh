@@ -173,6 +173,10 @@ EOF
 
   # other
   sudo -u www-data php /var/www/nextcloud/occ config:system:set overwriteprotocol --value=https
+  sudo -u www-data php /var/www/nextcloud/occ config:system:set lost_password_link --value=disabled
+  sudo -u www-data php /var/www/nextcloud/occ config:system:set auth.bruteforce.protection.enabled --value=false --type=boolean
+  sudo -u www-data php /var/www/nextcloud/occ config:system:set trashbin_retention_obligation --value="auto, 30"
+
 
   echo "NC init done
   

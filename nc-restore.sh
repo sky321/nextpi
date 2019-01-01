@@ -34,7 +34,7 @@ DBADMIN=ncadmin
 DBPASSWD="$( grep password /root/.my.cnf | sed 's|password=||' )"
 PHPVER=7.2
 
-DIR="$( cd "$( dirname "$BACKUPFILE" )" &>/dev/null && pwd )" #abspath
+#DIR="$( cd "$( dirname "$BACKUPFILE" )" &>/dev/null && pwd )" #abspath
 
 #[[ -f /.docker-image ]] && NCDIR=/data/app || NCDIR=/var/www/nextcloud
 
@@ -68,12 +68,16 @@ DIR="$( cd "$( dirname "$BACKUPFILE" )" &>/dev/null && pwd )" #abspath
 #  exit 1
 #}
 
+
+cd "$NCDIR"
+sudo -u www-data php occ maintenance:mode --on
+
 ## BACKUP OLD FILES and DB FILES
+echo "backup aktive files and db..."
 #sudo rsync -Aax /var/www/nextcloud ~/next-backup_`date +"%m"`/
-sudo rsync -Aax /var/www/nextcloud ~/next-backup_$( date "+%m-%d-%y" )
-"$DATADIR-$( date "+%m-%d-%y" )"
-#sudo mysqldump --lock-tables nextcloud > ~/next-backup_`date +"%m"`/nextcloud-mysql-dump.sql
-sudo mysqldump --lock-tables nextcloud > ~/next-backup_$( date "+%m-%d-%y" )/nextcloud-mysql-dump.sql
+sudo rsync -Aax /var/www/nextcloud ~/next-backup_$( date "+%y-%m-%d" )
+#sudo mysqldump --lock-tables nextcloud > ~/next-backup_$( date "+%y-%m-%d" )/nextcloud-mysql-dump.sql
+sudo mysqldump --lock-tables nextcloud > ~/nextcloud-mysql-$( date "+%y-%m-%d" ).sql
 
 ## RESTORE FILES
 
@@ -122,14 +126,14 @@ cd "$NCDIR"
 
   [[ -e "$DATADIR" ]] && { 
     echo "backing up existing $DATADIR"
-    mv "$DATADIR" "$DATADIR-$( date "+%m-%d-%y" )" || exit 1
+    mv "$DATADIR" "$DATADIR-$( date "+%y-%m-%d" )" || exit 1
   }
 
   mkdir -p "$DATADIR"
-  [[ "$( stat -fc%T "$DATADIR" )" == "btrfs" ]] && {
-    rmdir "$DATADIR"                  || exit 1
-    btrfs subvolume create "$DATADIR" || exit 1
-  }
+#  [[ "$( stat -fc%T "$DATADIR" )" == "btrfs" ]] && {
+#    rmdir "$DATADIR"                  || exit 1
+#    btrfs subvolume create "$DATADIR" || exit 1
+#  }
   chown www-data:www-data "$DATADIR"
 
 #  TMPDATA="$TMPDIR/$( basename "$DATADIR" )"
@@ -153,15 +157,25 @@ cd "$NCDIR"
 #  NEED_RESTART=1
 #fi
 
+# !!!!!!hier unbedingt das gesicherte .opcache dir aus dem ersten Backup der aktiven installation in datadir syncen!!!!!
+sudo rsync -Aax  ~/next-backup_$( date "+%y-%m-%d" )/nextcloud/data/.opcache "$DATADIR"
+
 # Just in case we moved the opcache dir
 sed -i "s|^opcache.file_cache=.*|opcache.file_cache=$DATADIR/.opcache|" /etc/php/${PHPVER}/mods-available/opcache.ini
+
 
 # tmp upload dir
 mkdir -p "$DATADIR/tmp" 
 chown www-data:www-data "$DATADIR/tmp"
-sed -i "s|^;\?upload_tmp_dir =.*$|upload_tmp_dir = $DATADIR/tmp|" /etc/php/${PHPVER}/cli/php.ini
-sed -i "s|^;\?upload_tmp_dir =.*$|upload_tmp_dir = $DATADIR/tmp|" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s|^;\?sys_temp_dir =.*$|sys_temp_dir = $DATADIR/tmp|"     /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s|^;\?upload_tmp_dir =.*$|upload_tmp_dir = $DATADIR/tmp|" /etc/php/${PHPVER}/cli/php.ini
+#sed -i "s|^;\?upload_tmp_dir =.*$|upload_tmp_dir = $DATADIR/tmp|" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s|^;\?sys_temp_dir =.*$|sys_temp_dir = $DATADIR/tmp|"     /etc/php/${PHPVER}/fpm/php.ini
+
+#
+# Afterwork TOTP
+#
+sudo -u www-data php /var/www/nextcloud/occ app:disable twofactor_totp
+sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable username
 
 # update fail2ban logpath
 #[[ ! -f /.docker-image ]] && {

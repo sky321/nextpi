@@ -30,6 +30,8 @@ You can use nc-backup"
 #BACKUPFILE="$1"
 NCDIR=/var/www/nextcloud
 BACKUPDIR=/mnt/usbstick/next-backup_## # replace ## with right numbers
+USRNME=admin
+DBNAME=nextcloud
 DBADMIN=ncadmin
 DBPASSWD="$( grep password /root/.my.cnf | sed 's|password=||' )"
 PHPVER=7.2
@@ -73,11 +75,11 @@ cd "$NCDIR"
 sudo -u www-data php occ maintenance:mode --on
 
 ## BACKUP OLD FILES and DB FILES
-echo "backup aktive files and db..."
+echo "backup active files and db..."
 #sudo rsync -Aax /var/www/nextcloud ~/next-backup_`date +"%m"`/
-sudo rsync -Aax /var/www/nextcloud ~/next-backup_$( date "+%y-%m-%d" )
+sudo rsync -Aax "$NCDIR" ~/next-backup_$( date "+%y-%m-%d" ) || { echo "Error backup active files"; exit 1; }
 #sudo mysqldump --lock-tables nextcloud > ~/next-backup_$( date "+%y-%m-%d" )/nextcloud-mysql-dump.sql
-sudo mysqldump --lock-tables nextcloud > ~/nextcloud-mysql-$( date "+%y-%m-%d" ).sql
+sudo mysqldump --lock-tables "$DBNAME" > ~/nextcloud-mysql-$( date "+%y-%m-%d" ).sql || { echo "Error backup active db"; exit 1; }
 
 ## RESTORE FILES
 
@@ -108,7 +110,7 @@ EXIT
 EOFMYSQL
 [ $? -ne 0 ] && { echo "Error configuring nextcloud database"; exit 1; }
 
-mysql -u root nextcloud <  "$BACKUPDIR"/nextcloud-mysql-dump.sql || { echo "Error restoring nextcloud database"; exit 1; }
+mysql -u root "$DBNAME" <  "$BACKUPDIR"/nextcloud-mysql-dump.sql || { echo "Error restoring nextcloud database"; exit 1; }
 
 ## RESTORE DATADIR
 
@@ -140,7 +142,7 @@ cd "$NCDIR"
 #  mv "$TMPDATA"/* "$TMPDATA"/.[!.]* "$DATADIR" || exit 1
 #  rmdir "$TMPDATA"                             || exit 1
 
-  sudo rsync -Aax "${BACKUPDIR}/data/" "$DATADIR"
+  sudo rsync -Aax "${BACKUPDIR}"/data/ "$DATADIR" || { echo "Error restoring nextcloud datadir"; exit 1; }
   sudo -u www-data php occ maintenance:mode --off
 
   
@@ -158,7 +160,7 @@ cd "$NCDIR"
 #fi
 
 # !!!!!!hier unbedingt das gesicherte .opcache dir aus dem ersten Backup der aktiven installation in datadir syncen!!!!!
-sudo rsync -Aax  ~/next-backup_$( date "+%y-%m-%d" )/nextcloud/data/.opcache "$DATADIR"
+sudo rsync -Aax  ~/next-backup_$( date "+%y-%m-%d" )/nextcloud/data/.opcache "$DATADIR" || { echo "Error restoring nextcloud .opcache dir"; exit 1; }
 
 # Just in case we moved the opcache dir
 sed -i "s|^opcache.file_cache=.*|opcache.file_cache=$DATADIR/.opcache|" /etc/php/${PHPVER}/mods-available/opcache.ini
@@ -167,21 +169,23 @@ sed -i "s|^opcache.file_cache=.*|opcache.file_cache=$DATADIR/.opcache|" /etc/php
 # tmp upload dir
 mkdir -p "$DATADIR/tmp" 
 chown www-data:www-data "$DATADIR/tmp"
-#sed -i "s|^;\?upload_tmp_dir =.*$|upload_tmp_dir = $DATADIR/tmp|" /etc/php/${PHPVER}/cli/php.ini
-#sed -i "s|^;\?upload_tmp_dir =.*$|upload_tmp_dir = $DATADIR/tmp|" /etc/php/${PHPVER}/fpm/php.ini
-#sed -i "s|^;\?sys_temp_dir =.*$|sys_temp_dir = $DATADIR/tmp|"     /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s|^;\?upload_tmp_dir =.*$|upload_tmp_dir = $DATADIR/tmp|" /etc/php/${PHPVER}/cli/php.ini
+sed -i "s|^;\?upload_tmp_dir =.*$|upload_tmp_dir = $DATADIR/tmp|" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s|^;\?sys_temp_dir =.*$|sys_temp_dir = $DATADIR/tmp|"     /etc/php/${PHPVER}/fpm/php.ini
 
 #
 # Afterwork TOTP
 #
 sudo -u www-data php /var/www/nextcloud/occ app:disable twofactor_totp
-sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable username
+sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME
 
 # update fail2ban logpath
 #[[ ! -f /.docker-image ]] && {
 #  sed -i "s|logpath  =.*|logpath  = $DATADIR/nextcloud.log|" /etc/fail2ban/jail.conf
 #  pgrep fail2ban &>/dev/null && service fail2ban restart
 #}
+
+echo "restore finish..."
 
 # refresh nextcloud trusted domains
 #bash /usr/local/bin/nextcloud-domain.sh

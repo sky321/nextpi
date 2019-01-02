@@ -1,11 +1,13 @@
 #!/bin/bash
 
+PHPVER=7.2
+
   ## CONFIGURE FILE PERMISSIONS
    ocpath='/var/www/nextcloud'
    htuser='www-data'
    htgroup='www-data'
    rootuser='root'
-
+   
   printf "Creating possible missing Directories\n"
   mkdir -p $ocpath/data
   mkdir -p $ocpath/updater

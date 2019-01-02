@@ -90,24 +90,26 @@ EOF
     fi
 
     ## kernel hardening
-#    cat >> /etc/sysctl.conf <<EOF
-#fs.protected_hardlinks=1
-#fs.protected_symlinks=1
-#kernel.core_uses_pid=1
-#kernel.dmesg_restrict=1
-#kernel.kptr_restrict=2
-#kernel.sysrq=0
-#net.ipv4.conf.all.accept_redirects=0
-#net.ipv4.conf.all.log_martians=1
-#net.ipv4.conf.all.rp_filter=1
-#net.ipv4.conf.all.send_redirects=0
-#net.ipv4.conf.default.accept_redirects=0
-#net.ipv4.conf.default.accept_source_route=0
-#net.ipv4.conf.default.log_martians=1
-#net.ipv4.tcp_timestamps=0
-#net.ipv6.conf.all.accept_redirects=0
-#net.ipv6.conf.default.accept_redirects=0
-#EOF
+    cat >> /etc/sysctl.conf <<EOF
+fs.protected_hardlinks=1
+fs.protected_symlinks=1
+kernel.core_uses_pid=1
+kernel.dmesg_restrict=1
+kernel.kptr_restrict=2
+kernel.sysrq=0
+net.ipv4.conf.all.accept_redirects=0
+net.ipv4.conf.all.log_martians=1
+net.ipv4.conf.all.rp_filter=1
+net.ipv4.conf.all.send_redirects=0
+net.ipv4.conf.default.accept_redirects=0
+net.ipv4.conf.default.accept_source_route=0
+net.ipv4.conf.default.log_martians=1
+net.ipv4.tcp_timestamps=0
+net.ipv4.icmp_echo_ignore_broadcasts = 1
+net.ipv4.tcp_syncookies = 1
+net.ipv6.conf.all.accept_redirects=0
+net.ipv6.conf.default.accept_redirects=0
+EOF
 
 
 

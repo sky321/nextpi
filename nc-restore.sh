@@ -124,12 +124,12 @@ cd "$NCDIR"
   DATADIR=$( grep datadirectory "$NCDIR"/config/config.php | awk '{ print $3 }' | grep -oP "[^']*[^']" | head -1 ) 
   [[ "$DATADIR" == "" ]] && { echo "Error reading data directory"; exit 1; }
 
-  echo "restore datadir to $DATADIR..."
-
   [[ -e "$DATADIR" ]] && { 
     echo "backing up existing $DATADIR"
     mv "$DATADIR" "$DATADIR-$( date "+%y-%m-%d" )" || exit 1
   }
+
+  echo "restore datadir to $DATADIR..."
 
   mkdir -p "$DATADIR"
 #  [[ "$( stat -fc%T "$DATADIR" )" == "btrfs" ]] && {
@@ -159,6 +159,8 @@ cd "$NCDIR"
 #  NEED_RESTART=1
 #fi
 
+  echo "restore .opcache to $DATADIR..."
+
 # !!!!!!hier unbedingt das gesicherte .opcache dir aus dem ersten Backup der aktiven installation in datadir syncen!!!!!
 sudo rsync -Aax  ~/next-backup_$( date "+%y-%m-%d" )/nextcloud/data/.opcache "$DATADIR" || { echo "Error restoring nextcloud .opcache dir"; exit 1; }
 
@@ -185,7 +187,7 @@ sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME
 #  pgrep fail2ban &>/dev/null && service fail2ban restart
 #}
 
-echo "restore finish..."
+echo "Nextcloud restore finish"
 
 # refresh nextcloud trusted domains
 #bash /usr/local/bin/nextcloud-domain.sh

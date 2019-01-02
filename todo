@@ -4,7 +4,6 @@
 - firewall change
 - backup
 - letsencrypt
-- security config
 - cleanup files (.my.cnf) and logs
 - config owndom in trusted domain 
 - config theme with pic and slogan

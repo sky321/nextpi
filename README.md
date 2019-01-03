@@ -13,3 +13,4 @@
 	- chmod +x install.sh
 	- sudo ./install.sh
 - login to nextcloud and change your password
+- if needed use nc-restore.sh and letsencrypt.sh

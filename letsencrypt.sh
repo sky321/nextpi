@@ -7,14 +7,14 @@
 #
 # More at https://ownyourbits.com/2017/03/17/lets-encrypt-installer-for-apache/
 
-DOMAIN_=mycloud.ownyourbits.com
-EMAIL_=mycloud@ownyourbits.com
-NOTIFYUSER_=ncp
+DOMAIN_=mycloud.ownyourbits.com  # replace with your own domain
+EMAIL_=mycloud@ownyourbits.com   # replace with your own email
+NOTIFYUSER_=ncp                  # replace with your own nextcloud user
 
 NCDIR=/var/www/nextcloud
 OCC="$NCDIR/occ"
 VHOSTCFG=/etc/apache2/sites-available/nextcloud.conf
-VHOSTCFG2=/etc/apache2/sites-available/ncp.conf
+#VHOSTCFG2=/etc/apache2/sites-available/ncp.conf
 DESCRIPTION="Automatic signed SSL certificates"
 
 INFOTITLE="Warning"
@@ -23,37 +23,39 @@ Both ports 80 and 443 need to be accessible from the internet
  
 Your certificate will be automatically renewed every month"
 
-is_active()
-{
-  [[ $( find /etc/letsencrypt/live/ -maxdepth 0 -empty | wc -l ) == 0 ]]
-}
+#is_active()
+#{
+#  [[ $( find /etc/letsencrypt/live/ -maxdepth 0 -empty | wc -l ) == 0 ]]
+#}
 
-install()
-{
+#install()
+#{
   cd /etc || return 1
   apt-get update
   apt-get install --no-install-recommends -y letsencrypt
   mkdir -p /etc/letsencrypt/live
 
-  [[ "$DOCKERBUILD" == 1 ]] && {
-    # execute before lamp stack
-    cat > /etc/services-available.d/009letsencrypt <<EOF
-#!/bin/bash
+#  [[ "$DOCKERBUILD" == 1 ]] && {
+#    # execute before lamp stack
+#    cat > /etc/services-available.d/009letsencrypt <<EOF
+##!/bin/bash
 
-source /usr/local/etc/library.sh
-persistent_cfg /etc/letsencrypt
+#source /usr/local/etc/library.sh
+#persistent_cfg /etc/letsencrypt
 
-exit 0
-EOF
-    chmod +x /etc/services-available.d/009letsencrypt
-  }
-}
+#exit 0
+#EOF
+#    chmod +x /etc/services-available.d/009letsencrypt
+#  }
+#}
 
 # tested with certbot 0.10.2
-configure() 
-{
-  local DOMAIN_LOWERCASE="${DOMAIN_,,}"
+#configure() 
+#{
+#  local DOMAIN_LOWERCASE="${DOMAIN_,,}"
+  DOMAIN_LOWERCASE="${DOMAIN_,,}"
 
+  
   # Configure Apache
   grep -q ServerName $VHOSTCFG && \
     sed -i "s|ServerName .*|ServerName $DOMAIN_|" $VHOSTCFG || \
@@ -63,7 +65,7 @@ configure()
   letsencrypt certonly -n --no-self-upgrade --webroot -w $NCDIR --hsts --agree-tos -m $EMAIL_ -d $DOMAIN_ && {
 
     # Set up auto-renewal
-    cat > /etc/cron.weekly/letsencrypt-ncp <<EOF
+    cat > /etc/cron.daily/letsencrypt-ncp <<EOF
 #!/bin/bash
 
 # renew and notify
@@ -87,11 +89,11 @@ EOF
     sed -i "s|SSLCertificateFile.*|SSLCertificateFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/fullchain.pem|" $VHOSTCFG
     sed -i "s|SSLCertificateKeyFile.*|SSLCertificateKeyFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/privkey.pem|" $VHOSTCFG
 
-    sed -i "s|SSLCertificateFile.*|SSLCertificateFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/fullchain.pem|" $VHOSTCFG2
-    sed -i "s|SSLCertificateKeyFile.*|SSLCertificateKeyFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/privkey.pem|" $VHOSTCFG2
+#    sed -i "s|SSLCertificateFile.*|SSLCertificateFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/fullchain.pem|" $VHOSTCFG2
+#    sed -i "s|SSLCertificateKeyFile.*|SSLCertificateKeyFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/privkey.pem|" $VHOSTCFG2
 
     # Configure Nextcloud
-    sudo -u www-data php $OCC config:system:set trusted_domains 4 --value=$DOMAIN_
+    sudo -u www-data php $OCC config:system:set trusted_domains 0 --value=$DOMAIN_
     sudo -u www-data php $OCC config:system:set overwrite.cli.url --value=https://"$DOMAIN_"/
 
     # delayed in bg so it does not kill the connection, and we get AJAX response
@@ -99,13 +101,15 @@ EOF
     rm -rf $NCDIR/.well-known
     
     # Update configuration
-    [[ "$DOCKERBUILD" == 1 ]] && update-rc.d letsencrypt enable
+#    [[ "$DOCKERBUILD" == 1 ]] && update-rc.d letsencrypt enable
 
+    echo "Letsencrypt is finished successful"
     return 0
   }
   rm -rf $NCDIR/.well-known
-  return 1
-}
+#  return 1
+  echo "something went wrong with the cert"
+#}
 
 # License
 #

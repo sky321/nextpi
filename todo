@@ -2,8 +2,6 @@
 - delete standard pi user
 - add new user
 - firewall change
-- backup
-- letsencrypt
+- enable backup cronjob in sysctl.sh
 - cleanup files (.my.cnf) and logs
-- config owndom in trusted domain 
 - config theme with pic and slogan

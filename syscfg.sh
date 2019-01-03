@@ -41,14 +41,19 @@ configure()
 #EOF
   
 ## SET CRON for Backup Job
-# echo "0 22 * * 5 sh /home/pi/backup.sh >> /var/log/backup.log 2>&1" > /tmp/crontab_backup
+echo "init backup cronjob...."
+
+# echo "0 22 * * 5 sh /home/pi/nextpi/backup.sh >> /var/log/backup.log 2>&1" > /tmp/crontab_backup
 # crontab -u root /tmp/crontab_backup
 # rm /tmp/crontab_http
 
   # automount USB drive after reboot
+  echo "automount USB...."
   echo "UUID=1b18feab-3afd-46f8-8fa0-9b2c45ab0abe /mnt/usbstick ext4 defaults,rw 0    0" >> /etc/fstab
-
+  
   # Initiat logrotate
+  echo "init logrotate...."
+
   cat >> /etc/logrotate.d/unattended-upgrades <<'EOF'
 /var/log/unattended-upgrades/unattended-upgrades.log
 {
@@ -75,6 +80,8 @@ EOF
 EOF
 
     # SSH hardening
+    echo "SSH hardnening...."
+
     if [[ -f /etc/ssh/sshd_config ]]; then
       sed -i 's|^#AllowTcpForwarding .*|AllowTcpForwarding no|'     /etc/ssh/sshd_config 
       sed -i 's|^#ClientAliveCountMax .*|ClientAliveCountMax 2|'    /etc/ssh/sshd_config
@@ -90,6 +97,8 @@ EOF
     fi
 
     ## kernel hardening
+    echo "kernel hardnening...."
+
     cat >> /etc/sysctl.conf <<EOF
 fs.protected_hardlinks=1
 fs.protected_symlinks=1

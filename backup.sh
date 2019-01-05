@@ -10,6 +10,8 @@ BACKUPDIR=/mnt/usbstick/next-backup_`date +"%m"`/
 CLEANBACK=/mnt/usbstick/next-backup_`date +"%m" --date='3 month ago'`/
 PHPVER=7.2
 
+echo $( date "+%y-%m-%d" )
+
 cd $NCDIR
 
 sudo -u www-data php occ maintenance:mode --on

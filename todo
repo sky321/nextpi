@@ -1,7 +1,8 @@
 - disable redirect virtual host port 80
-- delete standard pi user
 - add new user
-- firewall change
+- delete standard pi user
+- change standard user in fail2ban.sh and syscfg.sh
 - enable backup cronjob in sysctl.sh
-- cleanup files (.my.cnf) and logs
 - config theme with pic and slogan
+- firewall change
+- cleanup files (.my.cnf) and logs

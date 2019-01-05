@@ -6,3 +6,4 @@
 - config theme with pic and slogan
 - firewall change
 - cleanup files (.my.cnf) and logs
+- add mailconfig to config.php

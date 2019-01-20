@@ -8,6 +8,11 @@
 #
 # after do: sudo passwd -l root
 #
+# delete /etc/sudoers.d/010_pi-nopasswd
+#
+# to be ask only once each session enter:
+# sudo visudo -f /etc/sudoers.d/01_file << "Defaults        !tty_tickets"
+#
 ##
 
 user='pi'

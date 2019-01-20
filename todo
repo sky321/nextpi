@@ -1,9 +1,6 @@
-- disable redirect virtual host port 80
-- change standard pi user
-- change standard user in fail2ban.sh and syscfg.sh
-- enable backup cronjob in sysctl.sh
-- config theme with pic and slogan
-- firewall change
-- cleanup files (.my.cnf) and logs
+- enable backup cronjob in syscfg.sh
 - add mailconfig to config.php
 - change hostname /etc/hostname
+- disable redirect virtual host port 80
+- firewall change
+- config theme with pic and slogan

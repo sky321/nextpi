@@ -2,6 +2,8 @@
 
 ## Change standard PI user - https://raspberrypi.stackexchange.com/questions/12827/change-default-username
 #
+# Keep in mind that you need to change standard user in fail2ban.sh and syscfg.sh also
+#
 # before do: sudo passwd root
 #
 # login as root user (check /etc/ssh/sshd_config for PermitRootLogin) 

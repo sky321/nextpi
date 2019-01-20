@@ -21,7 +21,7 @@ usermod -l $newuser -d /home/${newuser} -m $user
 groupmod --new-name $newuser $user
 
 # rename user home 
-mv /home/${user} /home/${newuser}
+#mv /home/${user} /home/${newuser}
 
 echo "$user was renamed in $newuser
 

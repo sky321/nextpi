@@ -8,37 +8,11 @@
 # More at https://nextcloudpi.com
 #
 
-#WEBADMIN=ncp
-#WEBPASSWD=ownyourbits
-#BRANCH=master
-
-#CONFDIR=/usr/local/etc/ncp-config.d/
-#APTINSTALL="apt-get install -y --no-install-recommends"
 export DEBIAN_FRONTEND=noninteractive
 
 
 configure()
 {
-  # add the ncc shortcut
-#  cat > /usr/local/bin/ncc <<'EOF'
-#!/bin/bash
-#sudo -u www-data php /var/www/nextcloud/occ "$@"
-#EOF
-#  chmod +x /usr/local/bin/ncc
-
-  # LIMIT LOG SIZE
-#  grep -q maxsize /etc/logrotate.d/apache2 || sed -i /weekly/amaxsize2M /etc/logrotate.d/apache2
-
-#  cat >> /etc/logrotate.d/ncp <<'EOF'
-#/var/log/ncp.log
-#{
-#        rotate 4
-#        size 500K
-#        missingok
-#        notifempty
-#        compress
-#}
-#EOF
   
 ## SET CRON for Backup Job
 echo "init backup cronjob...."

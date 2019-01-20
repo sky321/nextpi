@@ -49,25 +49,5 @@ EOF
 }
 
 
-## nc.limits.sh (auto)adjustments: number of threads, memory limits...
-
-#source /usr/local/etc/library.sh
-#cd "$CONFDIR" &>/dev/null
-#activate_script nc-limits.sh
-#cd -          &>/dev/null
-
-## Check for interrupted upgrades and rollback
-#BKP="$( ls -1t /var/www/nextcloud-bkp_*.tar.gz 2>/dev/null | head -1 )"
-#[[ -f "$BKP" ]] && [[ "$( stat -c %U "$BKP" )" == "root" ]] && [[ "$( stat -c %a "$BKP" )" == 600 ]] && {
-#  echo "Detected interrupted upgrade. Restoring..."
-#  ncp-restore "$BKP" && rm "$BKP"
-#}
-
-## Fix permissions on NCP folders. The main reason for this is to make devel docker container work
-#[[ -e $CONFDIR ]] && {
-#  chown -R root:www-data "$CONFDIR"/*
-#  chmod 660              "$CONFDIR"/*
-#  chmod 750              "$CONFDIR"/l10n
-#}
 
 exit 0

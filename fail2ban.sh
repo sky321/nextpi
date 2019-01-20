@@ -35,37 +35,6 @@ install()
   update-rc.d fail2ban disable
   rm -f /etc/fail2ban/jail.d/defaults-debian.conf
 
-#  [[ "$DOCKERBUILD" == 1 ]] && {
-#    cat > /etc/services-available.d/100fail2ban <<EOF
-##!/bin/bash
-#
-#source /usr/local/etc/library.sh
-#
-#[[ "\$1" == "stop" ]] && {
-#  echo "stopping fail2ban..."
-#  service fail2ban stop
-#  exit 0
-#}
-
-#persistent_cfg /etc/fail2ban
-
-#echo "Starting fail2ban..."
-#service fail2ban start
-
-#exit 0
-#EOF
-#    chmod +x /etc/services-available.d/100fail2ban
-#  }
-
-  # tweak fail2ban email 
-#  local F=/etc/fail2ban/action.d/sendmail-common.conf
-#  sed -i 's|Fail2Ban|NextCloudPi|' /etc/fail2ban/action.d/sendmail-whois-lines.conf
-#  grep -q actionstart_ "$F" || sed -i 's|actionstart|actionstart_|' "$F"
-#  grep -q actionstop_  "$F" || sed -i 's|actionstop|actionstop_|'   "$F"
-
-  # delay init because of automount
-#  sed -i "/^ExecStart=/iExecStartPre=/bin/sleep 10" /lib/systemd/system/fail2ban.service
-
 }
 
 configure()

@@ -113,13 +113,6 @@ EOF
   sed -i "s|^;\?sys_temp_dir =.*$|sys_temp_dir = $UPLOADTMPDIR|"     /etc/php/${PHPVER}/fpm/php.ini
 
 
-  # 4 Byte UTF8 support
-#  sudo -u www-data php occ config:system:set mysql.utf8mb4 --type boolean --value="true"
-
-  # Default trusted domain ( only from ncp-config )
-#  test -f /usr/local/bin/nextcloud-domain.sh && {
-#    test -f /.ncp-image || bash /usr/local/bin/nextcloud-domain.sh
-#  }
   
   IFACE="$( ip r | grep "default via" | awk '{ print $5 }' | head -1 )"
   IP="$( ip a show dev "$IFACE" | grep global | grep -oP '\d{1,3}(.\d{1,3}){3}' | head -1 )" 
@@ -144,13 +137,6 @@ EOF
 #    chown -R www-data:www-data data/appdata_${ID}
 #  }
 
-#  mysql nextcloud <<EOF
-#replace into  oc_appconfig values ( 'theming', 'name'          , "NextCloudPi"             );
-#replace into  oc_appconfig values ( 'theming', 'slogan'        , "keep your data close"    );
-#replace into  oc_appconfig values ( 'theming', 'url'           , "https://ownyourbits.com" );
-#replace into  oc_appconfig values ( 'theming', 'logoMime'      , "image/svg+xml"           );
-#replace into  oc_appconfig values ( 'theming', 'backgroundMime', "image/png"               );
-#EOF
 
   # enable some apps by default
   sudo -u www-data php /var/www/nextcloud/occ app:install calendar

@@ -97,7 +97,7 @@ EOF
 ## Hostname replacement 
   echo "replace Hostname...."
   echo $HOST > /etc/hostname
-  sed -i "s/raspberrypi/$HOST/"  /etc/hosts
+  sed -i "s|raspberrypi|$HOST|"  /etc/hosts
   
 }
 

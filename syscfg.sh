@@ -9,7 +9,7 @@
 #
 
 export DEBIAN_FRONTEND=noninteractive
-HOST='meltdown'
+HOST='meltdown1'
 
 configure()
 {

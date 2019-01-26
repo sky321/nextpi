@@ -1,6 +1,5 @@
 - enable backup cronjob in syscfg.sh
 - add mailconfig to config.php
-- change hostname /etc/hostname
 - disable redirect virtual host port 80
 - firewall change
 - config theme with pic and slogan

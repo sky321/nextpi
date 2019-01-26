@@ -15,8 +15,7 @@ configure()
 {
   
 ## SET CRON for Backup Job
-echo "init backup cronjob...."
-
+# echo "init backup cronjob...."
 # echo "0 22 * * 5 sh /home/pi/nextpi/backup.sh >> /var/log/backup.log 2>&1" > /tmp/crontab_backup
 # crontab -u root /tmp/crontab_backup
 # rm /tmp/crontab_http
@@ -95,7 +94,9 @@ net.ipv6.conf.default.accept_redirects=0
 EOF
 
 
-
+## Hostname replacement
+  echo "replace Hostname...."
+  echo "meltdown" >> /etc/hostname
 
 }
 

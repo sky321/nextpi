@@ -11,7 +11,7 @@
 
 BRANCH=master
 
-set -e$DBG
+#set -e$DBG
 
 
 [[ ${EUID} -ne 0 ]] && {

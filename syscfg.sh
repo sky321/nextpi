@@ -9,7 +9,7 @@
 #
 
 export DEBIAN_FRONTEND=noninteractive
-
+HOST='meltdown'
 
 configure()
 {
@@ -94,10 +94,11 @@ net.ipv6.conf.default.accept_redirects=0
 EOF
 
 
-## Hostname replacement
+## Hostname replacement 
   echo "replace Hostname...."
-  echo "meltdown" >> /etc/hostname
-
+  echo $HOST > /etc/hostname
+  sed -i "s/raspberrypi/$HOST/"  /etc/hosts
+  
 }
 
 install() { :; }

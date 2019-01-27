@@ -10,7 +10,8 @@ BACKUPDIR=/mnt/usbstick/next-backup_`date +"%m"`/
 CLEANBACK=/mnt/usbstick/next-backup_`date +"%m" --date='3 month ago'`/
 PHPVER=7.2
 
-echo $( date "+%y-%m-%d" )
+echo "----------------------------------"
+echo $( date "+%d.%m.%y" )
 
 cd $NCDIR
 

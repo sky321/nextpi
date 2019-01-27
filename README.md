@@ -9,7 +9,7 @@
 - login with ssh
 - install git with "sudo apt-get install git"
 	- git clone https://github.com/sky321/nextpi.git
-- optional change standard PI user with chgusr.sh
+- optional change standard PI user with chgusr.sh (check inline comments)
 - install nextcloud
 	- cd nextpi
 	- chmod +x install.sh

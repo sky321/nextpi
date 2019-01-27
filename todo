@@ -1,4 +1,4 @@
-- enable backup cronjob in syscfg.sh
+- update nextcloud version in nc-nextcloud.sh (VER_)
 - add mailconfig to config.php
 - disable redirect virtual host port 80
 - firewall change

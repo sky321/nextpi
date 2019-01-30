@@ -35,17 +35,13 @@ Your certificate will be automatically renewed every month"
 #  [[ $( find /etc/letsencrypt/live/ -maxdepth 0 -empty | wc -l ) == 0 ]]
 #}
 
-#install()
-#{
   cd /etc || return 1
   apt-get update
   apt-get install --no-install-recommends -y letsencrypt
   mkdir -p /etc/letsencrypt/live
 
 # tested with certbot 0.10.2
-#configure() 
-#{
-#  local DOMAIN_LOWERCASE="${DOMAIN_,,}"
+
   DOMAIN_LOWERCASE="${DOMAIN_,,}"
 
   
@@ -102,7 +98,7 @@ EOF
   rm -rf $NCDIR/.well-known
 #  return 1
   echo "something went wrong with the cert"
-#}
+
 
 # License
 #

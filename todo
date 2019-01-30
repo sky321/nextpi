@@ -1,6 +1,5 @@
 - update nextcloud version in nc-nextcloud.sh (VER_)
 - add mailconfig to config.php
-- disable redirect virtual host port 80
 - firewall change
 - config theme with pic and slogan
 - customise letsencrypt.sh for the use of certbot 0.28.0 (http-01 challange)

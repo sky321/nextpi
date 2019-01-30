@@ -6,6 +6,13 @@
 # GPL licensed (see end of file) * Use at your own risk!
 #
 # More at https://ownyourbits.com/2017/03/17/lets-encrypt-installer-for-apache/
+##
+# You can get the updated packages for certbot by adding the stable-updates archive
+# for your distribution to your /etc/apt/sources.list:
+#
+#deb http://deb.debian.org/debian stretch-updates main
+#deb-src http://deb.debian.org/debian stretch-updates main
+#
 
 DOMAIN_=mycloud.ownyourbits.com  # replace with your own domain
 EMAIL_=mycloud@ownyourbits.com   # replace with your own email
@@ -34,20 +41,6 @@ Your certificate will be automatically renewed every month"
   apt-get update
   apt-get install --no-install-recommends -y letsencrypt
   mkdir -p /etc/letsencrypt/live
-
-#  [[ "$DOCKERBUILD" == 1 ]] && {
-#    # execute before lamp stack
-#    cat > /etc/services-available.d/009letsencrypt <<EOF
-##!/bin/bash
-
-#source /usr/local/etc/library.sh
-#persistent_cfg /etc/letsencrypt
-
-#exit 0
-#EOF
-#    chmod +x /etc/services-available.d/009letsencrypt
-#  }
-#}
 
 # tested with certbot 0.10.2
 #configure() 

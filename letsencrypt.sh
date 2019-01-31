@@ -37,7 +37,7 @@ Your certificate will be automatically renewed every month"
 
   cd /etc || return 1
   apt-get update
-  apt-get install --no-install-recommends -y letsencrypt
+  apt-get install --no-install-recommends -y certbot
   mkdir -p /etc/letsencrypt/live
 
 # tested with certbot 0.10.2
@@ -51,7 +51,7 @@ Your certificate will be automatically renewed every month"
     sed -i "/DocumentRoot/aServerName $DOMAIN_" $VHOSTCFG 
 
   # Do it
-  letsencrypt certonly -n --no-self-upgrade --webroot -w $NCDIR --hsts --agree-tos -m $EMAIL_ -d $DOMAIN_ && {
+  certbot certonly -n --no-self-upgrade --webroot -w $NCDIR --hsts --agree-tos -m $EMAIL_ -d $DOMAIN_ && {
 
     # Set up auto-renewal
     cat > /etc/cron.daily/letsencrypt-ncp <<EOF
@@ -72,7 +72,7 @@ Your certificate will be automatically renewed every month"
 # cleanup
 rm -rf $NCDIR/.well-known
 EOF
-    chmod +x /etc/cron.weekly/letsencrypt-ncp
+    chmod +x /etc/cron.daily/letsencrypt-ncp
 
     # Configure Apache
     sed -i "s|SSLCertificateFile.*|SSLCertificateFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/fullchain.pem|" $VHOSTCFG
@@ -89,14 +89,11 @@ EOF
     bash -c "sleep 2 && service apache2 reload" &>/dev/null &
     rm -rf $NCDIR/.well-known
     
-    # Update configuration
-#    [[ "$DOCKERBUILD" == 1 ]] && update-rc.d letsencrypt enable
-
     echo "Letsencrypt is finished successful"
     return 0
   }
   rm -rf $NCDIR/.well-known
-#  return 1
+  return 1
   echo "something went wrong with the cert"
 
 

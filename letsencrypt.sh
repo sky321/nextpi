@@ -93,9 +93,8 @@ EOF
     return 0
   }
   rm -rf $NCDIR/.well-known
-  return 1
   echo "something went wrong with the cert"
-
+  return 1
 
 # License
 #

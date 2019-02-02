@@ -6,13 +6,10 @@
 # GPL licensed (see end of file) * Use at your own risk!
 #
 # More at https://ownyourbits.com/2017/03/17/lets-encrypt-installer-for-apache/
-##
-# You can get the updated packages for certbot by adding the stable-updates archive
-# for your distribution to your /etc/apt/sources.list:
 #
-#deb http://deb.debian.org/debian stretch-updates main
-#deb-src http://deb.debian.org/debian stretch-updates main
+# https://certbot.eff.org/docs/using.html
 #
+# tested with certbot 0.28.0
 
 DOMAIN_=mycloud.ownyourbits.com  # replace with your own domain
 EMAIL_=mycloud@ownyourbits.com   # replace with your own email
@@ -21,7 +18,6 @@ NOTIFYUSER_=ncp                  # replace with your own nextcloud user
 NCDIR=/var/www/nextcloud
 OCC="$NCDIR/occ"
 VHOSTCFG=/etc/apache2/sites-available/nextcloud.conf
-#VHOSTCFG2=/etc/apache2/sites-available/ncp.conf
 DESCRIPTION="Automatic signed SSL certificates"
 
 INFOTITLE="Warning"
@@ -30,20 +26,14 @@ Both ports 80 and 443 need to be accessible from the internet
  
 Your certificate will be automatically renewed every month"
 
-#is_active()
-#{
-#  [[ $( find /etc/letsencrypt/live/ -maxdepth 0 -empty | wc -l ) == 0 ]]
-#}
 
   cd /etc || return 1
   apt-get update
   apt-get install --no-install-recommends -y certbot
-  mkdir -p /etc/letsencrypt/live
-
-# tested with certbot 0.10.2
+#  apt-get install --no-install-recommends -y certbot python3-certbot-apache
+#  mkdir -p /etc/letsencrypt/live
 
   DOMAIN_LOWERCASE="${DOMAIN_,,}"
-
   
   # Configure Apache
   grep -q ServerName $VHOSTCFG && \
@@ -51,10 +41,11 @@ Your certificate will be automatically renewed every month"
     sed -i "/DocumentRoot/aServerName $DOMAIN_" $VHOSTCFG 
 
   # Do it
-  certbot certonly -n --no-self-upgrade --webroot -w $NCDIR --hsts --agree-tos -m $EMAIL_ -d $DOMAIN_ && {
+  #
+  certbot certonly -n --webroot -w $NCDIR --hsts --agree-tos -m $EMAIL_ -d $DOMAIN_ && {
 
     # Set up auto-renewal
-    cat > /etc/cron.daily/letsencrypt-ncp <<EOF
+    cat > /etc/cron.daily/letsencrypt <<EOF
 #!/bin/bash
 
 # renew and notify
@@ -72,14 +63,11 @@ Your certificate will be automatically renewed every month"
 # cleanup
 rm -rf $NCDIR/.well-known
 EOF
-    chmod +x /etc/cron.daily/letsencrypt-ncp
+    chmod +x /etc/cron.daily/letsencrypt
 
     # Configure Apache
     sed -i "s|SSLCertificateFile.*|SSLCertificateFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/fullchain.pem|" $VHOSTCFG
     sed -i "s|SSLCertificateKeyFile.*|SSLCertificateKeyFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/privkey.pem|" $VHOSTCFG
-
-#    sed -i "s|SSLCertificateFile.*|SSLCertificateFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/fullchain.pem|" $VHOSTCFG2
-#    sed -i "s|SSLCertificateKeyFile.*|SSLCertificateKeyFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/privkey.pem|" $VHOSTCFG2
 
     # Configure Nextcloud
     sudo -u www-data php $OCC config:system:set trusted_domains 0 --value=$DOMAIN_

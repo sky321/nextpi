@@ -13,10 +13,10 @@
 
 DOMAIN_=mycloud.ownyourbits.com  # replace with your own domain
 EMAIL_=mycloud@ownyourbits.com   # replace with your own email
-NOTIFYUSER_=ncp                  # replace with your own nextcloud user
+#NOTIFYUSER_=ncp                  # replace with your own nextcloud user
 
-NCDIR=/var/www/nextcloud
-OCC="$NCDIR/occ"
+#NCDIR=/var/www/nextcloud
+#OCC="$NCDIR/occ"
 VHOSTCFG=/etc/apache2/sites-available/nextcloud.conf
 DESCRIPTION="Automatic signed SSL certificates"
 
@@ -29,8 +29,8 @@ Your certificate will be automatically renewed every month"
 
   cd /etc || return 1
   apt-get update
-  apt-get install --no-install-recommends -y certbot
-#  apt-get install --no-install-recommends -y certbot python3-certbot-apache
+#  apt-get install --no-install-recommends -y certbot
+  apt-get install --no-install-recommends -y certbot python3-certbot-apache
 #  mkdir -p /etc/letsencrypt/live
 
   DOMAIN_LOWERCASE="${DOMAIN_,,}"
@@ -42,28 +42,29 @@ Your certificate will be automatically renewed every month"
 
   # Do it
   #
-  certbot certonly -n --webroot -w $NCDIR --hsts --agree-tos -m $EMAIL_ -d $DOMAIN_ && {
+#  certbot certonly -n --webroot -w $NCDIR --hsts --agree-tos -m $EMAIL_ -d $DOMAIN_ && {
+  certbot certonly -n --apache --hsts --agree-tos -m $EMAIL_ -d $DOMAIN_ && {
 
     # Set up auto-renewal
-    cat > /etc/cron.daily/letsencrypt <<EOF
-#!/bin/bash
-
+#    cat > /etc/cron.daily/letsencrypt <<EOF
+##!/bin/bash
+#
 # renew and notify
-/usr/bin/certbot renew --quiet --renew-hook '
-  sudo -u www-data php $OCC notification:generate \
-                            $NOTIFYUSER_ "SSL renewal" \
-                            -l "Your SSL certificate(s) \$RENEWED_DOMAINS has been renewed for another 90 days"
-  '
-
+#/usr/bin/certbot renew --quiet --renew-hook '
+#  sudo -u www-data php $OCC notification:generate \
+#                            $NOTIFYUSER_ "SSL renewal" \
+#                            -l "Your SSL certificate(s) \$RENEWED_DOMAINS has been renewed for another 90 days"
+#  '
+#
 # notify if fails
-[[ \$? -ne 0 ]] && sudo -u www-data php $OCC notification:generate \
-                                             $NOTIFYUSER_ "SSL renewal error" \
-                                             -l "SSL certificate renewal failed. See /var/log/letsencrypt/letsencrypt.log"
-
+#[[ \$? -ne 0 ]] && sudo -u www-data php $OCC notification:generate \
+#                                             $NOTIFYUSER_ "SSL renewal error" \
+#                                             -l "SSL certificate renewal failed. See /var/log/letsencrypt/letsencrypt.log"
+#
 # cleanup
-rm -rf $NCDIR/.well-known
-EOF
-    chmod +x /etc/cron.daily/letsencrypt
+#rm -rf $NCDIR/.well-known
+#EOF
+#    chmod +x /etc/cron.daily/letsencrypt
 
     # Configure Apache
     sed -i "s|SSLCertificateFile.*|SSLCertificateFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/fullchain.pem|" $VHOSTCFG
@@ -75,12 +76,12 @@ EOF
 
     # delayed in bg so it does not kill the connection, and we get AJAX response
     bash -c "sleep 2 && service apache2 reload" &>/dev/null &
-    rm -rf $NCDIR/.well-known
+#    rm -rf $NCDIR/.well-known
     
     echo "Letsencrypt is finished successful"
     return 0
   }
-  rm -rf $NCDIR/.well-known
+#  rm -rf $NCDIR/.well-known
   echo "something went wrong with the cert"
   return 1
 

@@ -30,6 +30,11 @@ groupmod --new-name $newuser $user
 # rename user home 
 #mv /home/${user} /home/${newuser}
 
+# update sudo  
+mv /etc/sudoers.d/010_pi-nopasswd /home/${newuser}
+echo "Defaults        !tty_tickets" > /etc/sudoers.d/01_file
+
+# check 
 echo "$user was renamed in $newuser
 
 Check su $newuser"

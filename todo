@@ -2,5 +2,3 @@
 - add mailconfig to config.php
 - firewall change
 - config theme with pic and slogan
-- customise letsencrypt.sh for the use of certbot 0.28.0 (http-01 challange)
-	- https://lists.debian.org/debian-stable-announce/2019/01/msg00002.html

@@ -21,7 +21,6 @@ NextCloud instance, including files and database.
 You can use nc-backup"
 
 
-#BACKUPFILE="$1"
 NCDIR=/var/www/nextcloud
 BACKUPDIR=/mnt/usbstick/next-backup_## # replace ## with right numbers
 USRNME=ownroot
@@ -101,12 +100,11 @@ sed -i "s|^;\?sys_temp_dir =.*$|sys_temp_dir = $DATADIR/tmp|"     /etc/php/${PHP
 #
 sudo -u www-data php /var/www/nextcloud/occ app:disable twofactor_totp
 sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME
+echo "disable TWO Factor Auth for all needed User with:
 
-# update fail2ban logpath
-#[[ ! -f /.docker-image ]] && {
-#  sed -i "s|logpath  =.*|logpath  = $DATADIR/nextcloud.log|" /etc/fail2ban/jail.conf
-#  pgrep fail2ban &>/dev/null && service fail2ban restart
-#}
+sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME
+
+"
 
 echo "Nextcloud restore finish"
 

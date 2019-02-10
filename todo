@@ -1,4 +1,6 @@
 - update nextcloud version in nc-nextcloud.sh (VER_)
+- change backupdir nc-restore.sh
+- try TOTP backup codes after restore
 - add mailconfig to config.php
 - firewall change
 - config theme with pic and slogan

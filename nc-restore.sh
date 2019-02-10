@@ -94,8 +94,12 @@ sed -i "s|^;\?upload_tmp_dir =.*$|upload_tmp_dir = $DATADIR/tmp|" /etc/php/${PHP
 sed -i "s|^;\?sys_temp_dir =.*$|sys_temp_dir = $DATADIR/tmp|"     /etc/php/${PHPVER}/fpm/php.ini
 
 #
-# Afterwork TOTP
+# Afterwork 
 #
+
+#chmod +x permission.sh
+#./permission.sh
+
 #sudo -u www-data php /var/www/nextcloud/occ app:disable twofactor_totp
 #sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME
 echo "disable TWO Factor Auth for all needed User with:

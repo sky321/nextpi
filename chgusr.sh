@@ -5,15 +5,12 @@
 # Keep in mind that you need to change standard user in fail2ban.sh and syscfg.sh also
 #
 # before do: sudo passwd root
+# 				change /etc/ssh/sshd_config for PermitRootLogin yes
+#				/etc/init.d/ssh restart
 #
-# login as root user (check /etc/ssh/sshd_config for PermitRootLogin,/etc/init.d/ssh restart) 
+# login as root user (after running chgusr.sh change PermitRootLogin back to #PermitRootLogin)
 #
 # after do: sudo passwd -l root
-#
-# delete /etc/sudoers.d/010_pi-nopasswd
-#
-# to be ask only once each session enter:
-# sudo visudo -f /etc/sudoers.d/01_file << "Defaults        !tty_tickets"
 #
 ##
 

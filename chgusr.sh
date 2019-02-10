@@ -6,7 +6,7 @@
 #
 # before do: sudo passwd root
 #
-# login as root user (check /etc/ssh/sshd_config for PermitRootLogin) 
+# login as root user (check /etc/ssh/sshd_config for PermitRootLogin,/etc/init.d/ssh restart) 
 #
 # after do: sudo passwd -l root
 #

@@ -66,7 +66,7 @@ EOF
       sed -i 's|^#Compression .*|Compression no|'                   /etc/ssh/sshd_config
       sed -i 's|^#AllowAgentForwarding .*|AllowAgentForwarding no|' /etc/ssh/sshd_config
       sed -i 's|^#Port .*|Port 10317|'                              /etc/ssh/sshd_config
-      sed -i 's|^#PermitRootLogin .*|PermitRootLogin yes|'          /etc/ssh/sshd_config
+      sed -i 's|^#PermitRootLogin .*|PermitRootLogin no|'          /etc/ssh/sshd_config
     fi
 
     ## kernel hardening

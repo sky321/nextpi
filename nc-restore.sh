@@ -16,14 +16,12 @@ INFOTITLE="Restore NextCloud backup"
 INFO="This new installation will cleanup current
 NextCloud instance, including files and database.
 
-** perform backup before proceding **
-
-You can use nc-backup"
+"
 
 
 NCDIR=/var/www/nextcloud
 BACKUPDIR=/mnt/usbstick/next-backup_## # replace ## with right numbers
-USRNME=ownroot
+USRNME=admin
 DBNAME=nextcloud
 DBADMIN=ncadmin
 DBPASSWD="$( grep password /root/.my.cnf | sed 's|password=||' )"
@@ -98,8 +96,8 @@ sed -i "s|^;\?sys_temp_dir =.*$|sys_temp_dir = $DATADIR/tmp|"     /etc/php/${PHP
 #
 # Afterwork TOTP
 #
-sudo -u www-data php /var/www/nextcloud/occ app:disable twofactor_totp
-sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME
+#sudo -u www-data php /var/www/nextcloud/occ app:disable twofactor_totp
+#sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME
 echo "disable TWO Factor Auth for all needed User with:
 
 sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME

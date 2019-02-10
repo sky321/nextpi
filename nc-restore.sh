@@ -10,7 +10,6 @@
 #
 
 
-#BACKUPFILE_=/media/USBdrive/nextcloud-bkp_xxxxxxxx.tar
 DESCRIPTION="Restore a previously backuped NC instance"
 
 INFOTITLE="Restore NextCloud backup"
@@ -21,55 +20,15 @@ NextCloud instance, including files and database.
 
 You can use nc-backup"
 
-#install()
-#{ 
-#  cat > /usr/local/bin/ncp-restore <<'EOF'
-####!/bin/bash
-#set -eE
 
 #BACKUPFILE="$1"
 NCDIR=/var/www/nextcloud
 BACKUPDIR=/mnt/usbstick/next-backup_## # replace ## with right numbers
-USRNME=admin
+USRNME=ownroot
 DBNAME=nextcloud
 DBADMIN=ncadmin
 DBPASSWD="$( grep password /root/.my.cnf | sed 's|password=||' )"
 PHPVER=7.2
-
-#DIR="$( cd "$( dirname "$BACKUPFILE" )" &>/dev/null && pwd )" #abspath
-
-#[[ -f /.docker-image ]] && NCDIR=/data/app || NCDIR=/var/www/nextcloud
-
-#[[ $# -eq 0           ]] && { echo "missing first argument"         ; exit 1; }
-#[[ -f "$BACKUPFILE"   ]] || { echo "$BACKUPFILE not found"          ; exit 1; }
-#[[ "$DIR" =~ "$NCDIR" ]] && { echo "Refusing to restore from $NCDIR"; exit 1; }
-
-#TMPDIR="$( mktemp -d "$( dirname "$BACKUPFILE" )"/ncp-restore.XXXXXX )" || { echo "Failed to create temp dir" >&2; exit 1; }
-#grep -q -e ext -e btrfs <( stat -fc%T "$TMPDIR" ) || { echo "Can only restore from ext/btrfs filesystems"     >&2; exit 1; }
-
-#TMPDIR="$( cd "$TMPDIR" &>/dev/null && pwd )" || { echo "$TMPDIR not found"; exit 1; } #abspath
-#cleanup(){  local RET=$?; echo "Cleanup..."; rm -rf "${TMPDIR}"; trap "" EXIT; exit $RET; }
-#trap cleanup INT TERM HUP ERR EXIT
-#rm -rf "$TMPDIR" && mkdir -p "$TMPDIR"
-
-# EXTRACT FILES
-#[[ "$BACKUPFILE" =~ ".tar.gz" ]] && COMPRESSED=1 || COMPRESSED=0
-#[[ "$COMPRESSED" == "1" ]] && {
-#  echo "decompressing backup file $BACKUPFILE..."
-#  tar -xzf "$BACKUPFILE" -C "$TMPDIR" || exit 1
-#  BACKUPFILE="$( ls "$TMPDIR"/*.tar 2>/dev/null )"
-#  [[ -f "$BACKUPFILE" ]] || { echo "$BACKUPFILE not found"; exit 1; }
-#}
-
-#echo "extracting backup file $BACKUPFILE..."
-#tar -xf "$BACKUPFILE" -C "$TMPDIR" || exit 1
-
-## SANITY CHECKS
-#[[ -d "$TMPDIR"/nextcloud ]] && [[ -f "$( ls "$TMPDIR"/nextcloud-sqlbkp_*.bak 2>/dev/null )" ]] || {
-#  echo "invalid backup file. Abort"
-#  exit 1
-#}
-
 
 cd "$NCDIR"
 sudo -u www-data php occ maintenance:mode --on
@@ -80,21 +39,6 @@ echo "backup active files and db..."
 sudo rsync -Aax "$NCDIR" ~/next-backup_$( date "+%y-%m-%d" ) || { echo "Error backup active files"; exit 1; }
 #sudo mysqldump --lock-tables nextcloud > ~/next-backup_$( date "+%y-%m-%d" )/nextcloud-mysql-dump.sql
 sudo mysqldump --lock-tables "$DBNAME" > ~/nextcloud-mysql-$( date "+%y-%m-%d" ).sql || { echo "Error backup active db"; exit 1; }
-
-## RESTORE FILES
-
-#echo "restore files..."
-#rm -rf "$NCDIR"
-#mv -T "$TMPDIR"/nextcloud "$NCDIR" || { echo "Error restoring base files"; exit 1; }
-
-# update NC database password to this instance
-#sed -i "s|'dbpassword' =>.*|'dbpassword' => '$DBPASSWD',|" /var/www/nextcloud/config/config.php
-
-# update redis credentials
-#REDISPASS="$( grep "^requirepass" /etc/redis/redis.conf | cut -f2 -d' ' )"
-#[[ "$REDISPASS" != "" ]] && \
-#  sed -i "s|'password'.*|'password' => '$REDISPASS',|" /var/www/nextcloud/config/config.php
-#service redis-server restart
 
 ## RE-CREATE DATABASE TABLE
 
@@ -116,11 +60,6 @@ mysql -u root "$DBNAME" <  "$BACKUPDIR"/nextcloud-mysql-dump.sql || { echo "Erro
 
 cd "$NCDIR"
 
-### INCLUDEDATA=yes situation
-
-#NUMFILES=$(( 2 + COMPRESSED ))
-#if [[ $( ls "$TMPDIR" | wc -l ) -eq $NUMFILES ]]; then
-
   DATADIR=$( grep datadirectory "$NCDIR"/config/config.php | awk '{ print $3 }' | grep -oP "[^']*[^']" | head -1 ) 
   [[ "$DATADIR" == "" ]] && { echo "Error reading data directory"; exit 1; }
 
@@ -129,36 +68,18 @@ cd "$NCDIR"
     mv "$DATADIR" "$DATADIR-$( date "+%y-%m-%d" )" || exit 1
   }
 
+# Restore files  
+  
   echo "restore datadir to $DATADIR..."
 
   mkdir -p "$DATADIR"
-#  [[ "$( stat -fc%T "$DATADIR" )" == "btrfs" ]] && {
-#    rmdir "$DATADIR"                  || exit 1
-#    btrfs subvolume create "$DATADIR" || exit 1
-#  }
   chown www-data:www-data "$DATADIR"
-
-#  TMPDATA="$TMPDIR/$( basename "$DATADIR" )"
-#  mv "$TMPDATA"/* "$TMPDATA"/.[!.]* "$DATADIR" || exit 1
-#  rmdir "$TMPDATA"                             || exit 1
 
   sudo rsync -Aax "${BACKUPDIR}"/data/ "$DATADIR" || { echo "Error restoring nextcloud datadir"; exit 1; }
   sudo -u www-data php occ maintenance:mode --off
 
+# Restore opcache
   
-### INCLUDEDATA=no situation
-
-#else      
-#  echo "no datadir found in backup"
-#  DATADIR="$NCDIR"/data
-
-#  sudo -u www-data php occ maintenance:mode --off
-#  sudo -u www-data php occ files:scan --all
-
-  # cache needs to be cleaned as of NC 12
-#  NEED_RESTART=1
-#fi
-
   echo "restore .opcache to $DATADIR..."
 
 # !!!!!!hier unbedingt das gesicherte .opcache dir aus dem ersten Backup der aktiven installation in datadir syncen!!!!!
@@ -189,20 +110,6 @@ sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME
 
 echo "Nextcloud restore finish"
 
-# refresh nextcloud trusted domains
-#bash /usr/local/bin/nextcloud-domain.sh
-
-# restart PHP if needed
-#[[ "$NEED_RESTART" == "1" ]] && \
-#  bash -c " sleep 3; service php${PHPVER}-fpm restart" &>/dev/null &
-#EOF
-#  chmod +x /usr/local/bin/ncp-restore
-#}
-
-#configure()
-#{
-#  ncp-restore "$BACKUPFILE_"
-#}
 
 # License
 #

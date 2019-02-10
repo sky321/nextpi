@@ -15,7 +15,7 @@
 ##
 
 user='pi'
-newuser='newpi'
+newuser='sky'
 rootuser='root'
 
 # rename pi user 

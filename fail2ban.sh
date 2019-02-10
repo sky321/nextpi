@@ -24,7 +24,7 @@ MAXRETRY_=5
 MAILALERTS_=yes
 
 # email to send notifications to
-EMAIL_=pi@localhost
+EMAIL_=sky@localhost
 
 DESCRIPTION="Brute force protection for SSH and NextCloud"
 

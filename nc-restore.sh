@@ -62,7 +62,7 @@ cd "$NCDIR"
 #    echo "backing up existing ${NCDIR}/apps"
 #    mv "${NCDIR}/apps" "${NCDIR}/apps-$( date "+%y-%m-%d" )" || exit 1
 #    echo "restore ${NCDIR}/apps"
-#    sudo rsync -Aax "${BACKUPDIR}"/owncloud/apps "$NCDIR" || { echo "Error restoring nextcloud Apps"; exit 1; }
+#    sudo rsync -Aax "${BACKUPDIR}"/owncloud/apps "$NCDIR" || { echo "Error restoring nextcloud apps"; exit 1; }
 
 	
 # Restore Data  

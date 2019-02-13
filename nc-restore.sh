@@ -53,10 +53,20 @@ EOFMYSQL
 
 mysql -u root "$DBNAME" <  "$BACKUPDIR"/nextcloud-mysql-dump.sql || { echo "Error restoring nextcloud database"; exit 1; }
 
-## RESTORE DATADIR
+## RESTORE DATADIR & FILES
 
 cd "$NCDIR"
 
+# Restore files  
+  
+#    echo "backing up existing ${NCDIR}/apps"
+#    mv "${NCDIR}/apps" "${NCDIR}/apps-$( date "+%y-%m-%d" )" || exit 1
+#    echo "restore ${NCDIR}/apps"
+#    sudo rsync -Aax "${BACKUPDIR}"/owncloud/apps "$NCDIR" || { echo "Error restoring nextcloud Apps"; exit 1; }
+
+	
+# Restore Data  
+  
   DATADIR=$( grep datadirectory "$NCDIR"/config/config.php | awk '{ print $3 }' | grep -oP "[^']*[^']" | head -1 ) 
   [[ "$DATADIR" == "" ]] && { echo "Error reading data directory"; exit 1; }
 
@@ -65,8 +75,6 @@ cd "$NCDIR"
     mv "$DATADIR" "$DATADIR-$( date "+%y-%m-%d" )" || exit 1
   }
 
-# Restore files  
-  
   echo "restore datadir to $DATADIR..."
 
   mkdir -p "$DATADIR"

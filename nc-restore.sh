@@ -61,7 +61,7 @@ cd "$NCDIR"
   
 #    echo "restore ${NCDIR}/apps"
 #    rm -r "${NCDIR}"/apps
-#    sudo rsync -Aax "${BACKUPDIR}"/owncloud/apps "$NCDIR" || { echo "Error restoring nextcloud apps"; exit 1; }
+#    sudo rsync -Aax "${BACKUPDIR}"/owncloud/apps/ "$NCDIR"/apps || { echo "Error restoring nextcloud apps"; exit 1; }
 
 	
 # Restore Data  

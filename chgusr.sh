@@ -6,7 +6,8 @@
 #
 # before do: sudo passwd root
 # 				change /etc/ssh/sshd_config for PermitRootLogin yes
-#				/etc/init.d/ssh restart
+#					sudo nano /etc/ssh/sshd_config
+#					sudo /etc/init.d/ssh restart
 #
 # login as root user (after running chgusr.sh change PermitRootLogin back to #PermitRootLogin)
 #

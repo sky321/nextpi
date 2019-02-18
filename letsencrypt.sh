@@ -43,7 +43,7 @@ Your certificate will be automatically renewed every month"
   # Do it
   #
 #  certbot certonly -n --webroot -w $NCDIR --hsts --agree-tos -m $EMAIL_ -d $DOMAIN_ && {
-  certbot certonly -n --apache --hsts --agree-tos -m $EMAIL_ -d $DOMAIN_ && {
+  certbot certonly -n --apache --hsts --agree-tos --rsa-key-size 4096 -m $EMAIL_ -d $DOMAIN_ && {
 
     # Set up auto-renewal
 #    cat > /etc/cron.daily/letsencrypt <<EOF

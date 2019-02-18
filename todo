@@ -1,6 +1,7 @@
 - update nextcloud version in nc-nextcloud.sh (VER_)
 - change backupdir nc-restore.sh
-- TOTP (backup codes, restore app directory)
+- fix Two factor app user login
+- move data to a different directory
 - add mailconfig to config.php
 - config theme with pic and slogan
 - firewall change

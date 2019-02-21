@@ -2,6 +2,7 @@
 - change backupdir nc-restore.sh
 - fix Two factor app user login
 - move data to a different directory
+- check if convert-filecache-bigint (nc-init) is needed
 - add mailconfig to config.php
 - config theme with pic and slogan
 - firewall change

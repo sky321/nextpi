@@ -1,6 +1,6 @@
 - update nextcloud version in nc-nextcloud.sh (VER_)
 - change backupdir nc-restore.sh
-- fix Two factor app user login
+- fix Two factor app user login (config secret)
 - move data to a different directory
 - check if convert-filecache-bigint (nc-init) is needed
 - add mailconfig to config.php

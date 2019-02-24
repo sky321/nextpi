@@ -80,7 +80,6 @@ cd "$NCDIR"
   chown www-data:www-data "$DATADIR"
 
   sudo rsync -Aax "${BACKUPDIR}"/data/ "$DATADIR" || { echo "Error restoring nextcloud datadir"; exit 1; }
-  sudo -u www-data php occ maintenance:mode --off
 
 # Restore opcache
   
@@ -100,6 +99,13 @@ sed -i "s|^;\?upload_tmp_dir =.*$|upload_tmp_dir = $DATADIR/tmp|" /etc/php/${PHP
 sed -i "s|^;\?upload_tmp_dir =.*$|upload_tmp_dir = $DATADIR/tmp|" /etc/php/${PHPVER}/fpm/php.ini
 sed -i "s|^;\?sys_temp_dir =.*$|sys_temp_dir = $DATADIR/tmp|"     /etc/php/${PHPVER}/fpm/php.ini
 
+# restore secret for TWO factor auth
+SECRETOLD="$( grep "secret" "$NCDIR"/config/config.php )"
+SECRETNEW="$( grep "secret" "$BACKUPDIR"/owncloud/config/config.php)"
+sed -i "s|$SECRETOLD|$SECRETNEW|"  "$NCDIR"/config/config.php
+
+sudo -u www-data php occ maintenance:mode --off
+
 #
 # Afterwork 
 #
@@ -109,11 +115,6 @@ sed -i "s|^;\?sys_temp_dir =.*$|sys_temp_dir = $DATADIR/tmp|"     /etc/php/${PHP
 
 #sudo -u www-data php /var/www/nextcloud/occ app:disable twofactor_totp
 #sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME
-echo "disable TWO Factor Auth for all needed User with:
-
-sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME
-
-"
 
 echo "Nextcloud restore finish"
 

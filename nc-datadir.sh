@@ -10,24 +10,9 @@
 
 
 PHPVER=7.2
+DATADIR=/home/nextcloud/data
 
-is_active()
-{
-  local SRCDIR
-  SRCDIR="$( grep datadirectory /var/www/nextcloud/config/config.php | awk '{ print $3 }' | grep -oP "[^']*[^']" | head -1 )" || return 1
-  [[ "$SRCDIR" != "/var/www/nextcloud/data" ]]
-}
-
-install() 
-{ 
-  apt-get update 
-  apt-get install -y --no-install-recommends btrfs-tools
-}
-
-configure()
-{
   ## CHECKS
-  local SRCDIR
   SRCDIR=$( cd /var/www/nextcloud; sudo -u www-data php occ config:system:get datadirectory ) || {
     echo -e "Error reading data directory. Is NextCloud running and configured?"; 
     return 1;
@@ -37,34 +22,34 @@ configure()
   [[ "$SRCDIR" == "$DATADIR" ]] && { echo -e "INFO: data already there"; return 0; }
 
   # checks
-  local BASEDIR=$( dirname "$DATADIR" )
+  #local BASEDIR=$( dirname "$DATADIR" )
 
-  [ -d "$BASEDIR" ] || { echo "$BASEDIR does not exist"; return 1; }
+  #[ -d "$BASEDIR" ] || { echo "$BASEDIR does not exist"; return 1; }
 
   # If the user chooses the root of the mountpoint, force a folder
-  mountpoint -q "$DATADIR" && {
-    BASEDIR="$DATADIR"
-  }
+  #mountpoint -q "$DATADIR" && {
+  #  BASEDIR="$DATADIR"
+  #}
 
-  grep -q -e ext -e btrfs <( stat -fc%T "$BASEDIR" ) || {
-    echo -e "Only ext/btrfs filesystems can hold the data directory"
-    return 1
-  }
+  #grep -q -e ext -e btrfs <( stat -fc%T "$BASEDIR" ) || {
+  #  echo -e "Only ext/btrfs filesystems can hold the data directory"
+  #  return 1
+  #}
 
-  sudo -u www-data test -x "$BASEDIR" || {
-    echo -e "ERROR: the user www-data does not have access permissions over $BASEDIR"
-    return 1
-  }
+  #sudo -u www-data test -x "$BASEDIR" || {
+  #  echo -e "ERROR: the user www-data does not have access permissions over $BASEDIR"
+  #  return 1
+  #}
 
-  [[ "$DATADIR" != "/var/www/nextcloud/data" ]] && \
-  [[ $( stat -fc%d / ) == $( stat -fc%d "$BASEDIR" ) ]] && {
-    echo "Refusing to move to the SD card. Abort"
-    return 1
-  }
+  #[[ "$DATADIR" != "/var/www/nextcloud/data" ]] && \
+  #[[ $( stat -fc%d / ) == $( stat -fc%d "$BASEDIR" ) ]] && {
+  #  echo "Refusing to move to the SD card. Abort"
+  #  return 1
+  #}
 
   # backup possibly existing datadir
   [ -d $DATADIR ] && {
-    local BKP="${DATADIR}-$( date "+%m-%d-%y" )" 
+    BKP="${DATADIR}-$( date "+%m-%d-%y" )" 
     echo "INFO: $DATADIR is not empty. Creating backup $BKP"
     mv "$DATADIR" "$BKP"
   }
@@ -77,12 +62,13 @@ configure()
   echo "moving data dir from $SRCDIR to $DATADIR..."
 
   # use subvolumes, if BTRFS
-  [[ "$( stat -fc%T "$BASEDIR" )" == "btrfs" ]] && {
-    echo "BTRFS filesystem detected"
-    btrfs subvolume create "$DATADIR" || return 1
-  }
+  #[[ "$( stat -fc%T "$BASEDIR" )" == "btrfs" ]] && {
+  #  echo "BTRFS filesystem detected"
+  #  btrfs subvolume create "$DATADIR" || return 1
+  #}
 
-  cp --reflink=auto -raT "$SRCDIR" "$DATADIR" || return 1
+  #cp --reflink=auto -raT "$SRCDIR" "$DATADIR" || return 1
+  mv "$SRCDIR" "$DATADIR" || return 1
   chown www-data:www-data "$DATADIR"
  
   # tmp upload dir
@@ -103,7 +89,7 @@ configure()
   sudo -u www-data php occ config:system:set datadirectory --value="$DATADIR"
   sudo -u www-data php occ config:system:set logfile --value="$DATADIR/nextcloud.log"
   sudo -u www-data php occ maintenance:mode --off
-}
+
 
 # License
 #

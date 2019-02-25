@@ -9,10 +9,10 @@
 - login with ssh
 - install git with "sudo apt-get install git"
 	- git clone https://github.com/sky321/nextpi.git
-- optional change standard PI user with chgusr.sh (!!! check inline comments, chmod +x !!!)
+	- chmod +x *.sh
+- optional change standard PI user with chgusr.sh (!!! check inline comments !!!)
 - install nextcloud
-	- cd nextpi
-	- chmod +x install.sh
+	- cd nextpi	
 	- sudo ./install.sh
 - login to nextcloud and change your password
 - reboot (after reboot the ssh port is changed -> see syscfg.sh)

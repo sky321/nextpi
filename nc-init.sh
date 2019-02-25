@@ -128,16 +128,6 @@ EOF
   sudo -u www-data php occ config:system:set mail_from_address --value="admin"
   sudo -u www-data php occ config:system:set mail_domain       --value="ownyourbits.com"
 
-  # NCP theme
-#  [[ -e /usr/local/etc/logo ]] && {
-#    local ID=$( grep instanceid config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g" )
-#    [[ "$ID" == "" ]] && { echo "failed to get ID"; return 1; }
-#    mkdir -p data/appdata_${ID}/theming/images
-#    cp /usr/local/etc/logo /usr/local/etc/background data/appdata_${ID}/theming/images
-#    chown -R www-data:www-data data/appdata_${ID}
-#  }
-
-
   # enable some apps by default
   sudo -u www-data php /var/www/nextcloud/occ app:install calendar
   sudo -u www-data php /var/www/nextcloud/occ app:install contacts

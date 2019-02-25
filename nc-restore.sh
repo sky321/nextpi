@@ -117,8 +117,7 @@ IDNEW=$( grep instanceid "$NCDIR"/config/config.php ) | awk -F "=> " '{ print $2
 [[ "$IDNEW" == "" ]] && { echo "failed to get new ID"; return 1; }
 mkdir -p "$DATADIR"/appdata_${IDNEW}/theming/images
 cp "$BACKUPDIR"/owncloud/data/appdata_${IDOLD}/theming/images/logo "$BACKUPDIR"/owncloud/data/appdata_${IDOLD}/theming/images/background "$DATADIR"/appdata_${IDNEW}/theming/images
-chown -R www-data:www-data data/appdata_${IDNEW}
-
+chown -R www-data:www-data "$DATADIR"/appdata_${IDNEW}
 
 #chmod +x permission.sh
 #./permission.sh

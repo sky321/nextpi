@@ -111,12 +111,11 @@ sudo -u www-data php occ maintenance:mode --off
 #
 
 # NC theme
-IDOLD=$( grep instanceid "$BACKUPDIR"/owncloud/config/config.php ) | awk -F "=> " '{ print $2 }' | sed "s|[,']||g" )
-[[ "$IDOLD" == "" ]] && { echo "failed to get old ID"; return 1; }
-IDNEW=$( grep instanceid "$NCDIR"/config/config.php ) | awk -F "=> " '{ print $2 }' | sed "s|[,']||g" )
-[[ "$IDNEW" == "" ]] && { echo "failed to get new ID"; return 1; }
+IDOLD=$( grep instanceid "$BACKUPDIR"/owncloud/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
+IDNEW=$( grep instanceid "$NCDIR"/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
+
 mkdir -p "$DATADIR"/appdata_${IDNEW}/theming/images
-cp "$BACKUPDIR"/owncloud/data/appdata_${IDOLD}/theming/images/logo "$BACKUPDIR"/owncloud/data/appdata_${IDOLD}/theming/images/background "$DATADIR"/appdata_${IDNEW}/theming/images
+cp "$BACKUPDIR"/data/appdata_${IDOLD}/theming/images/logo "$BACKUPDIR"/data/appdata_${IDOLD}/theming/images/background "$DATADIR"/appdata_${IDNEW}/theming/images
 chown -R www-data:www-data "$DATADIR"/appdata_${IDNEW}
 
 #chmod +x permission.sh

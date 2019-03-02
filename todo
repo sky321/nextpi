@@ -2,7 +2,6 @@
 - change backupdir nc-restore.sh
 - check if convert-filecache-bigint (nc-init) is needed
 - add mailconfig to config.php
-- config theme with pic and slogan
 - move data to a different directory 
 	- check fail2ban nextcloud log file dir and logrotate
 - firewall change

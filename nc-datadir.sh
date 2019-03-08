@@ -15,11 +15,11 @@ DATADIR=/home/nextcloud/data
   ## CHECKS
   SRCDIR=$( cd /var/www/nextcloud; sudo -u www-data php occ config:system:get datadirectory ) || {
     echo -e "Error reading data directory. Is NextCloud running and configured?"; 
-    return 1;
+    exit;
   }
-  [ -d "$SRCDIR" ] || { echo -e "data directory $SRCDIR not found"; return 1; }
+  [ -d "$SRCDIR" ] || { echo -e "data directory $SRCDIR not found"; exit; }
 
-  [[ "$SRCDIR" == "$DATADIR" ]] && { echo -e "INFO: data already there"; return 0; }
+  [[ "$SRCDIR" == "$DATADIR" ]] && { echo -e "INFO: data already there"; exit; }
 
   # checks
   #local BASEDIR=$( dirname "$DATADIR" )
@@ -67,7 +67,7 @@ DATADIR=/home/nextcloud/data
   #}
 
   #cp --reflink=auto -raT "$SRCDIR" "$DATADIR" || return 1
-  mv "$SRCDIR" "$DATADIR" || return 1
+  mv "$SRCDIR" "$DATADIR" || exit
   chown www-data:www-data "$DATADIR"
  
   # tmp upload dir

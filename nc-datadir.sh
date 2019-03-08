@@ -10,7 +10,7 @@
 
 
 PHPVER=7.2
-DATADIR=/home/nextcloud/data    
+DATADIR=/var/www/nextcloud/data    
 BASEDIR=$( dirname "$DATADIR" )
 
   ## CHECKS

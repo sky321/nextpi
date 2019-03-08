@@ -10,7 +10,7 @@
 
 
 PHPVER=7.2
-DATADIR=/var/www/nextcloud/data    
+DATADIR=/home/nextcloud/data    
 BASEDIR=$( dirname "$DATADIR" )
 
   ## CHECKS
@@ -83,7 +83,8 @@ BASEDIR=$( dirname "$DATADIR" )
   sudo -u www-data php occ config:system:set logfile --value="$DATADIR/nextcloud.log"
   sudo -u www-data php occ maintenance:mode --off
 
-  echo "rm -r data, run permission.sh"
+  rm -r $SRCDIR
+  echo "check and run permission.sh"
 
 # License
 #

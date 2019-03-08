@@ -47,6 +47,9 @@ DATADIR=/home/nextcloud/data
   #  return 1
   #}
 
+  cd /var/www/nextcloud
+  sudo -u www-data php occ maintenance:mode --on  
+  
   # backup possibly existing datadir
   [ -d $DATADIR ] && {
     BKP="${DATADIR}-$( date "+%m-%d-%y" )" 
@@ -54,11 +57,7 @@ DATADIR=/home/nextcloud/data
     mv "$DATADIR" "$BKP"
   }
 
-
   ## COPY
-  cd /var/www/nextcloud
-  sudo -u www-data php occ maintenance:mode --on
-
   echo "moving data dir from $SRCDIR to $DATADIR..."
 
   # use subvolumes, if BTRFS

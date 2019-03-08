@@ -59,6 +59,7 @@ BASEDIR=$( dirname "$DATADIR" )
   echo "moving data dir from $SRCDIR to $DATADIR..."
 
   mkdir -p $BASEDIR 
+  chown www-data:www-data $BASEDIR 
   cp -r "$SRCDIR" "$BASEDIR" || exit
   chown www-data:www-data "$DATADIR"
  
@@ -84,7 +85,7 @@ BASEDIR=$( dirname "$DATADIR" )
   sudo -u www-data php occ maintenance:mode --off
 
   rm -r $SRCDIR
-  echo "check and run permission.sh"
+  echo "check/run permission.sh and reboot the server"
 
 # License
 #

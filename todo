@@ -1,7 +1,6 @@
 - update nextcloud version in nc-nextcloud.sh (VER_)
 - change backupdir nc-restore.sh
+- check if restore works with changed datadir
 - check if convert-filecache-bigint (nc-init) is needed
 - add mailconfig to config.php
-- move data to a different directory 
-	- check fail2ban nextcloud log file dir and logrotate
 - firewall change

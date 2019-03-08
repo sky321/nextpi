@@ -4,7 +4,7 @@ PHPVER=7.2
 
   ## CONFIGURE FILE PERMISSIONS
    ocpath='/var/www/nextcloud'
-   ocdata='/var/www/nextcloud'
+   ocdata='/home/nextcloud'
    htuser='www-data'
    htgroup='www-data'
    rootuser='root'
@@ -25,7 +25,7 @@ PHPVER=7.2
   chown -R ${htuser}:${htgroup} ${ocpath}/
   chown -R ${htuser}:${htgroup} ${ocpath}/apps/
   chown -R ${htuser}:${htgroup} ${ocpath}/config/
-  chown -R ${htuser}:${htgroup} ${ocpath}/data/
+  chown -R ${htuser}:${htgroup} ${ocdata}/data/
   chown -R ${htuser}:${htgroup} ${ocpath}/themes/
   chown -R ${htuser}:${htgroup} ${ocpath}/updater/
 

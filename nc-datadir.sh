@@ -10,7 +10,8 @@
 
 
 PHPVER=7.2
-DATADIR=/home/nextcloud/data
+DATADIR=/home/nextcloud/data    
+BASEDIR=$( dirname "$DATADIR" )
 
   ## CHECKS
   SRCDIR=$( cd /var/www/nextcloud; sudo -u www-data php occ config:system:get datadirectory ) || {
@@ -20,9 +21,6 @@ DATADIR=/home/nextcloud/data
   [ -d "$SRCDIR" ] || { echo -e "data directory $SRCDIR not found"; exit; }
 
   [[ "$SRCDIR" == "$DATADIR" ]] && { echo -e "INFO: data already there"; exit; }
-
-  # checks
-  #local BASEDIR=$( dirname "$DATADIR" )
 
   #[ -d "$BASEDIR" ] || { echo "$BASEDIR does not exist"; return 1; }
 
@@ -60,14 +58,8 @@ DATADIR=/home/nextcloud/data
   ## COPY
   echo "moving data dir from $SRCDIR to $DATADIR..."
 
-  # use subvolumes, if BTRFS
-  #[[ "$( stat -fc%T "$BASEDIR" )" == "btrfs" ]] && {
-  #  echo "BTRFS filesystem detected"
-  #  btrfs subvolume create "$DATADIR" || return 1
-  #}
-
-  #cp --reflink=auto -raT "$SRCDIR" "$DATADIR" || return 1
-  mv "$SRCDIR" "$DATADIR" || exit
+  mkdir -p $BASEDIR 
+  cp -r "$SRCDIR" "$BASEDIR" || exit
   chown www-data:www-data "$DATADIR"
  
   # tmp upload dir
@@ -84,11 +76,14 @@ DATADIR=/home/nextcloud/data
   # update fail2ban logpath
   sed -i "s|logpath  =.*nextcloud.log|logpath  = $DATADIR/nextcloud.log|" /etc/fail2ban/jail.local
 
-  # datadir
+#  sudo -u www-data php occ maintenance:mode --off
+
+  # datadir & tmp
   sudo -u www-data php occ config:system:set datadirectory --value="$DATADIR"
   sudo -u www-data php occ config:system:set logfile --value="$DATADIR/nextcloud.log"
   sudo -u www-data php occ maintenance:mode --off
 
+  echo "rm -r data, run permission.sh"
 
 # License
 #

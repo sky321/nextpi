@@ -7,7 +7,13 @@
 #
 # More at https://ownyourbits.com/2017/03/13/nextcloudpi-gets-nextcloudpi-config/
 #
-
+#####
+#
+# Moving Datadir is not supported !!!!!!!!!!!!!
+#
+# https://help.nextcloud.com/t/is-there-a-safe-and-reliable-way-to-move-data-directory-out-of-web-root/3642/8
+#
+#####
 
 PHPVER=7.2
 DATADIR=/home/nextcloud/data    
@@ -22,7 +28,7 @@ BASEDIR=$( dirname "$DATADIR" )
 
   [[ "$SRCDIR" == "$DATADIR" ]] && { echo -e "INFO: data already there"; exit; }
 
-  #[ -d "$BASEDIR" ] || { echo "$BASEDIR does not exist"; return 1; }
+  [ -d "$BASEDIR" ] || { echo "$BASEDIR does not exist"; exit; }
 
   # If the user chooses the root of the mountpoint, force a folder
   #mountpoint -q "$DATADIR" && {
@@ -60,6 +66,7 @@ BASEDIR=$( dirname "$DATADIR" )
 
   mkdir -p $BASEDIR 
   chown www-data:www-data $BASEDIR 
+#  rsync -avP 
   cp -r "$SRCDIR" "$BASEDIR" || exit
   chown www-data:www-data "$DATADIR"
  

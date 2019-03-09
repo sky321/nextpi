@@ -17,4 +17,4 @@
 	- sudo ./install.sh
 - login to nextcloud and change your password
 - reboot (after reboot the ssh port is changed -> see syscfg.sh)
-- if needed use nc-restore.sh, nc-datadir and letsencrypt.sh
+- if needed use nc-restore.sh and letsencrypt.sh

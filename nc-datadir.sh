@@ -11,6 +11,7 @@
 #
 # Moving Datadir is not supported !!!!!!!!!!!!!
 #
+# https://help.nextcloud.com/t/changing-data-directory/11156
 # https://help.nextcloud.com/t/is-there-a-safe-and-reliable-way-to-move-data-directory-out-of-web-root/3642/8
 #
 #####
@@ -92,7 +93,7 @@ BASEDIR=$( dirname "$DATADIR" )
   sudo -u www-data php occ maintenance:mode --off
 
   rm -r $SRCDIR
-  echo "Edit the database: In oc_storages change the path on the local::/old-data-dir/ entry"
+#  echo "Edit the database: In oc_storages change the path on the local::/old-data-dir/ entry"
   echo "check/run permission.sh and reboot the server"
 
 # License

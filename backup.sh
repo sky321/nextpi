@@ -18,7 +18,7 @@ cd $NCDIR
 sudo -u www-data php occ maintenance:mode --on
 
 sudo rsync -Aax $NCDIR $BACKUPDIR
-#sudo rsync -Aax $DATADIR $BACKUPDIR
+sudo rsync -Aax $DATADIR $BACKUPDIR
 
 sudo rsync -Aax /etc/apache2/sites-available $BACKUPDIR
 sudo rsync -Aax /etc/letsencrypt $BACKUPDIR

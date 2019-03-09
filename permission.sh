@@ -4,7 +4,8 @@ PHPVER=7.2
 
   ## CONFIGURE FILE PERMISSIONS
    ocpath='/var/www/nextcloud'
-   ocdata=$( cd /var/www/nextcloud; sudo -u www-data php occ config:system:get datadirectory )
+   tmpdata=$( cd /var/www/nextcloud; sudo -u www-data php occ config:system:get datadirectory )
+   ocdata=$( dirname "$tmpdata" )
    htuser='www-data'
    htgroup='www-data'
    rootuser='root'

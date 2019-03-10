@@ -23,13 +23,13 @@ BASEDIR=$( dirname "$DATADIR" )
   ## CHECKS
   SRCDIR=$( cd /var/www/nextcloud; sudo -u www-data php occ config:system:get datadirectory ) || {
     echo -e "Error reading data directory. Is NextCloud running and configured?"; 
-    exit;
+    exit 1;
   }
-  [ -d "$SRCDIR" ] || { echo -e "data directory $SRCDIR not found"; exit; }
+  [ -d "$SRCDIR" ] || { echo -e "data directory $SRCDIR not found"; exit 1; }
 
-  [[ "$SRCDIR" == "$DATADIR" ]] && { echo -e "INFO: data already there"; exit; }
+  [[ "$SRCDIR" == "$DATADIR" ]] && { echo -e "INFO: data already there"; exit 1; }
 
-  [ -d "$BASEDIR" ] || { echo "$BASEDIR does not exist"; exit; }
+  [ -d "$BASEDIR" ] || { echo "$BASEDIR does not exist"; exit 1; }
 
   # If the user chooses the root of the mountpoint, force a folder
   #mountpoint -q "$DATADIR" && {
@@ -67,7 +67,7 @@ BASEDIR=$( dirname "$DATADIR" )
 
   mkdir -p $BASEDIR 
   chown www-data:www-data $BASEDIR 
-  rsync -av "$SRCDIR" "$BASEDIR" || exit
+  rsync -av "$SRCDIR" "$BASEDIR" || exit 1
 #  cp -r "$SRCDIR" "$BASEDIR" || exit
   chown www-data:www-data "$DATADIR"
  

@@ -5,7 +5,7 @@
 - change standard password with "passwd"
 - start raspi-config
 	- change language
-	- make ssh available
+	- make ssh available (generate new key)
 - login with ssh
 - install git with "sudo apt-get install git"
 	- git clone https://github.com/sky321/nextpi.git

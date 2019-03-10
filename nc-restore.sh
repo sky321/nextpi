@@ -125,7 +125,9 @@ chown -R www-data:www-data "$DATADIR"/appdata_${IDNEW}
 #sudo -u www-data php /var/www/nextcloud/occ app:disable twofactor_totp
 #sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME
 
-echo "Nextcloud restore finish"
+echo "Nextcloud restore finish.
+
+Please reboot the server!"
 
 
 # License

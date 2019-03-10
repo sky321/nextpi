@@ -67,7 +67,7 @@ BASEDIR=$( dirname "$DATADIR" )
 
   mkdir -p $BASEDIR 
   chown www-data:www-data $BASEDIR 
-  rsync -av "$SRCDIR" "$BASEDIR" || exit 1
+  rsync -Aax "$SRCDIR" "$BASEDIR" || exit 1
 #  cp -r "$SRCDIR" "$BASEDIR" || exit
   chown www-data:www-data "$DATADIR"
  
@@ -93,8 +93,8 @@ BASEDIR=$( dirname "$DATADIR" )
   sudo -u www-data php occ maintenance:mode --off
 
   rm -r $SRCDIR
-  echo "Edit the database: In oc_storages delete the path on the local::/old-data-dir/ entry"
-  echo "Reboot the server"
+  echo "Edit the database: In oc_storages delete the path on the local::/old-data-dir/ entry."
+  echo "Reboot the server!"
 
 # License
 #

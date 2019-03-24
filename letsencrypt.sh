@@ -10,6 +10,7 @@
 # https://certbot.eff.org/docs/using.html
 #
 # tested with certbot 0.28.0
+#
 
 DOMAIN_=mycloud.ownyourbits.com  # replace with your own domain
 EMAIL_=mycloud@ownyourbits.com   # replace with your own email
@@ -27,7 +28,7 @@ Both ports 80 and 443 need to be accessible from the internet
 Your certificate will be automatically renewed every month"
 
 
-  cd /etc || return 1
+  cd /etc || exit 1
   apt-get update
 #  apt-get install --no-install-recommends -y certbot
   apt-get install --no-install-recommends -y certbot python3-certbot-apache
@@ -45,27 +46,6 @@ Your certificate will be automatically renewed every month"
 #  certbot certonly -n --webroot -w $NCDIR --hsts --agree-tos -m $EMAIL_ -d $DOMAIN_ && {
   certbot certonly -n --apache --hsts --agree-tos --rsa-key-size 4096 -m $EMAIL_ -d $DOMAIN_ && {
 
-    # Set up auto-renewal
-#    cat > /etc/cron.daily/letsencrypt <<EOF
-##!/bin/bash
-#
-# renew and notify
-#/usr/bin/certbot renew --quiet --renew-hook '
-#  sudo -u www-data php $OCC notification:generate \
-#                            $NOTIFYUSER_ "SSL renewal" \
-#                            -l "Your SSL certificate(s) \$RENEWED_DOMAINS has been renewed for another 90 days"
-#  '
-#
-# notify if fails
-#[[ \$? -ne 0 ]] && sudo -u www-data php $OCC notification:generate \
-#                                             $NOTIFYUSER_ "SSL renewal error" \
-#                                             -l "SSL certificate renewal failed. See /var/log/letsencrypt/letsencrypt.log"
-#
-# cleanup
-#rm -rf $NCDIR/.well-known
-#EOF
-#    chmod +x /etc/cron.daily/letsencrypt
-
     # Configure Apache
     sed -i "s|SSLCertificateFile.*|SSLCertificateFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/fullchain.pem|" $VHOSTCFG
     sed -i "s|SSLCertificateKeyFile.*|SSLCertificateKeyFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/privkey.pem|" $VHOSTCFG
@@ -77,13 +57,22 @@ Your certificate will be automatically renewed every month"
     # delayed in bg so it does not kill the connection, and we get AJAX response
     bash -c "sleep 2 && service apache2 reload" &>/dev/null &
 #    rm -rf $NCDIR/.well-known
-    
-    echo "Letsencrypt is finished successful"
-    return 0
+
+#    
+# pre and post hooks see https://github.com/certbot/certbot/issues/1706
+	echo "pre-hook = /bin/run-parts /etc/letsencrypt/renewal-hooks/pre/" >> /etc/letsencrypt/cli.ini
+	echo "post-hook = /bin/run-parts /etc/letsencrypt/renewal-hooks/post/" >> /etc/letsencrypt/cli.ini
+	cp pre-hook.sh /etc/letsencrypt/renewal-hooks/pre
+	cp post-hook.sh /etc/letsencrypt/renewal-hooks/post
+	
+    echo "Letsencrypt is finished successful
+	run sudo certbot renew --dry-run 
+	to see if it's OK"
+    exit 0
   }
 #  rm -rf $NCDIR/.well-known
   echo "something went wrong with the cert"
-  return 1
+  exit 1
 
 # License
 #

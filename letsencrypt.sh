@@ -14,10 +14,7 @@
 
 DOMAIN_=mycloud.ownyourbits.com  # replace with your own domain
 EMAIL_=mycloud@ownyourbits.com   # replace with your own email
-#NOTIFYUSER_=ncp                  # replace with your own nextcloud user
 
-#NCDIR=/var/www/nextcloud
-#OCC="$NCDIR/occ"
 VHOSTCFG=/etc/apache2/sites-available/nextcloud.conf
 DESCRIPTION="Automatic signed SSL certificates"
 

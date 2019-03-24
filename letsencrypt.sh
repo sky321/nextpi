@@ -28,7 +28,7 @@ Both ports 80 and 443 need to be accessible from the internet
 Your certificate will be automatically renewed every month"
 
 
-  cd /etc || exit 1
+#  cd /etc || exit 1
   apt-get update
 #  apt-get install --no-install-recommends -y certbot
   apt-get install --no-install-recommends -y certbot python3-certbot-apache

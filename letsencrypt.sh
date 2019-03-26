@@ -40,9 +40,12 @@ Your certificate will be automatically renewed every month"
 
   # Do it
   #
+  chmod +x *-hook.sh
+  ./pre-hook.sh
 #  certbot certonly -n --webroot -w $NCDIR --hsts --agree-tos -m $EMAIL_ -d $DOMAIN_ && {
   certbot certonly -n --apache --hsts --agree-tos --rsa-key-size 4096 -m $EMAIL_ -d $DOMAIN_ && {
-
+  ./pre-hook.sh
+  
     # Configure Apache
     sed -i "s|SSLCertificateFile.*|SSLCertificateFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/fullchain.pem|" $VHOSTCFG
     sed -i "s|SSLCertificateKeyFile.*|SSLCertificateKeyFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/privkey.pem|" $VHOSTCFG

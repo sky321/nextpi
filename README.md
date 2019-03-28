@@ -17,4 +17,6 @@
 	- sudo ./install.sh
 - login to nextcloud and change your password
 - reboot (after reboot the ssh port is changed -> see syscfg.sh)
-- if needed use nc-restore.sh and letsencrypt.sh
+- optional use nc-restore.sh to restore your data
+- optional use letsencrypt.sh for automated certificates
+	- edit and copy fritz.cnf to /root/.fritz.cnf

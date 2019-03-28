@@ -2,10 +2,10 @@
 
 echo "delete port 80 mapping ...."
 
-IPS="192.168.0.1"
+IPS=$( grep IPS /root/.fritz.cnf | sed 's|IPS=||' )
 
-FRITZUSER="dslf-config"
-FRITZPW="passwort-weboberflaeche"
+FRITZUSER=$( grep FRITZUSER /root/.fritz.cnf | sed 's|FRITZUSER=||' )
+FRITZPW=$( grep FRITZPW /root/.fritz.cnf | sed 's|FRITZPW=||' )
 
 location="/upnp/control/wanpppconn1"
 uri="urn:dslforum-org:service:WANPPPConnection:1"

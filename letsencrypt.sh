@@ -11,6 +11,9 @@
 #
 # tested with certbot 0.28.0
 #
+# for automated open/close port 80 with the help of pre & post hook
+# edit and copy fritz.cnf /root/.fritz.cnf
+#
 
 DOMAIN_=mycloud.ownyourbits.com  # replace with your own domain
 EMAIL_=mycloud@ownyourbits.com   # replace with your own email
@@ -22,7 +25,7 @@ INFOTITLE="Warning"
 INFO="Internet access is required for this configuration to complete
 Both ports 80 and 443 need to be accessible from the internet
  
-Your certificate will be automatically renewed every month"
+Your certificate will be automatically renewed"
 
 
 #  cd /etc || exit 1

@@ -11,13 +11,15 @@
 #
 # tested with certbot 0.28.0
 #
-# for automated open/close port 80 with the help of pre & post hook
+# for automated open/close port 80 with the help of pre & post hook,
 # edit and copy fritz.cnf /root/.fritz.cnf
 #
 
 DOMAIN_=mycloud.ownyourbits.com  # replace with your own domain
 EMAIL_=mycloud@ownyourbits.com   # replace with your own email
 
+NCDIR=/var/www/nextcloud
+OCC="$NCDIR/occ"
 VHOSTCFG=/etc/apache2/sites-available/nextcloud.conf
 DESCRIPTION="Automatic signed SSL certificates"
 
@@ -28,11 +30,8 @@ Both ports 80 and 443 need to be accessible from the internet
 Your certificate will be automatically renewed"
 
 
-#  cd /etc || exit 1
   apt-get update
-#  apt-get install --no-install-recommends -y certbot
   apt-get install --no-install-recommends -y certbot python3-certbot-apache
-#  mkdir -p /etc/letsencrypt/live
 
   DOMAIN_LOWERCASE="${DOMAIN_,,}"
   

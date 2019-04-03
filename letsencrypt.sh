@@ -45,11 +45,11 @@ Your certificate will be automatically renewed"
       sed -i "s|ServerName .*|ServerName $DOMAIN_|" $VHOSTCFG || \
       sed -i "/DocumentRoot/aServerName $DOMAIN_" $VHOSTCFG   
   
-#   DOMAIN_LOWERCASE="${DOMAIN_,,}"    
+    DOMAIN_LOWERCASE="${DOMAIN_,,}"    
     
     # Configure Apache
-#    sed -i "s|SSLCertificateFile.*|SSLCertificateFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/fullchain.pem|" $VHOSTCFG
-#    sed -i "s|SSLCertificateKeyFile.*|SSLCertificateKeyFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/privkey.pem|" $VHOSTCFG
+    sed -i "s|SSLCertificateFile.*|SSLCertificateFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/fullchain.pem|" $VHOSTCFG
+    sed -i "s|SSLCertificateKeyFile.*|SSLCertificateKeyFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/privkey.pem|" $VHOSTCFG
 
     # Configure Nextcloud
     sudo -u www-data php $OCC config:system:set trusted_domains 0 --value=$DOMAIN_

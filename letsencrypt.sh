@@ -10,7 +10,7 @@
 # https://certbot.eff.org/docs/using.html
 #
 # tested with certbot 0.28.0
-#
+# this script is optimised for fritzbox router with fritz OS 7.01
 # for automated open/close port 80 with the help of pre & post hook,
 # edit and copy fritz.cnf /root/.fritz.cnf
 #

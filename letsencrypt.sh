@@ -72,7 +72,8 @@ Your certificate will be automatically renewed"
     exit 0
   }
 #  rm -rf $NCDIR/.well-known
-  echo "something went wrong with the cert"
+  ./post-hook.sh
+  echo "something went wrong at getting a certificate"
   exit 1
 
 # License

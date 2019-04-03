@@ -33,7 +33,7 @@ Your certificate will be automatically renewed"
   apt-get update
   apt-get install --no-install-recommends -y certbot python3-certbot-apache
 
-  DOMAIN_LOWERCASE="${DOMAIN_,,}"
+#  DOMAIN_LOWERCASE="${DOMAIN_,,}"
   
   # Configure Apache
   grep -q ServerName $VHOSTCFG && \

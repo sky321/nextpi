@@ -42,12 +42,12 @@ Your certificate will be automatically renewed"
   
     DOMAIN_LOWERCASE="${DOMAIN_,,}"
     
-    # Configure Apache
+    # Configure Apache Host
     grep -q ServerName $VHOSTCFG && \
       sed -i "s|ServerName .*|ServerName $DOMAIN_|" $VHOSTCFG || \
       sed -i "/DocumentRoot/aServerName $DOMAIN_" $VHOSTCFG   
   
-    # Configure Apache
+    # Configure Apache Cert
     sed -i "s|SSLCertificateFile.*|SSLCertificateFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/fullchain.pem|" $VHOSTCFG
     sed -i "s|SSLCertificateKeyFile.*|SSLCertificateKeyFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/privkey.pem|" $VHOSTCFG
 

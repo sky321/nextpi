@@ -48,15 +48,15 @@ Your certificate will be automatically renewed"
   ./post-hook.sh
   
     # Configure Apache
-    sed -i "s|SSLCertificateFile.*|SSLCertificateFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/fullchain.pem|" $VHOSTCFG
-    sed -i "s|SSLCertificateKeyFile.*|SSLCertificateKeyFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/privkey.pem|" $VHOSTCFG
+#    sed -i "s|SSLCertificateFile.*|SSLCertificateFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/fullchain.pem|" $VHOSTCFG
+#    sed -i "s|SSLCertificateKeyFile.*|SSLCertificateKeyFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/privkey.pem|" $VHOSTCFG
 
     # Configure Nextcloud
     sudo -u www-data php $OCC config:system:set trusted_domains 0 --value=$DOMAIN_
     sudo -u www-data php $OCC config:system:set overwrite.cli.url --value=https://"$DOMAIN_"/
 
     # delayed in bg so it does not kill the connection, and we get AJAX response
-    bash -c "sleep 2 && service apache2 reload" &>/dev/null &
+#    bash -c "sleep 2 && service apache2 reload" &>/dev/null &
 #    rm -rf $NCDIR/.well-known
 
 #    

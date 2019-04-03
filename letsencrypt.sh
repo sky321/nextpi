@@ -40,13 +40,13 @@ Your certificate will be automatically renewed"
   certbot certonly -n --apache --hsts --agree-tos --rsa-key-size 4096 -m $EMAIL_ -d $DOMAIN_ && {
     ./post-hook.sh
   
+    DOMAIN_LOWERCASE="${DOMAIN_,,}"
+    
     # Configure Apache
     grep -q ServerName $VHOSTCFG && \
       sed -i "s|ServerName .*|ServerName $DOMAIN_|" $VHOSTCFG || \
       sed -i "/DocumentRoot/aServerName $DOMAIN_" $VHOSTCFG   
   
-    DOMAIN_LOWERCASE="${DOMAIN_,,}"    
-    
     # Configure Apache
     sed -i "s|SSLCertificateFile.*|SSLCertificateFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/fullchain.pem|" $VHOSTCFG
     sed -i "s|SSLCertificateKeyFile.*|SSLCertificateKeyFile /etc/letsencrypt/live/$DOMAIN_LOWERCASE/privkey.pem|" $VHOSTCFG
@@ -56,7 +56,7 @@ Your certificate will be automatically renewed"
     sudo -u www-data php $OCC config:system:set overwrite.cli.url --value=https://"$DOMAIN_"/
 
     # delayed in bg so it does not kill the connection, and we get AJAX response
-#    bash -c "sleep 2 && service apache2 reload" &>/dev/null &
+    bash -c "sleep 2 && service apache2 reload" &>/dev/null &
 #    rm -rf $NCDIR/.well-known
 
 #    

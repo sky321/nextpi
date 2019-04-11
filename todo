@@ -1,6 +1,5 @@
 - update nextcloud version in nc-nextcloud.sh (VER_)
 - change backupdir nc-restore.sh
 - check if convert-filecache-bigint (nc-init) is needed
-- enable pre & post hooks for letsencrypt
 - enable firewall 
 - add mailconfig to config.php

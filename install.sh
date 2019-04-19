@@ -43,11 +43,14 @@ install_script  lamp.sh
 install_script  nc-nextcloud.sh
 install_script  unattended-upgrades.sh
 install_script  fail2ban.sh
+install_script  ufw.sh
 activate_script nc-nextcloud.sh
 activate_script nc-init.sh
 activate_script unattended-upgrades.sh
 activate_script fail2ban.sh
 activate_script syscfg.sh
+activate_script ufw.sh
+
 
 # post install
 chmod +x ncp-provisioning.sh 

@@ -7,6 +7,9 @@
 #
 # More at https://ownyourbits.com/2017/02/13/nextcloud-ready-raspberry-pi-image/
 #
+#
+# https://linuxize.com/post/how-to-setup-a-firewall-with-ufw-on-debian-9/
+#
 
 
 
@@ -41,7 +44,7 @@ configure()
 #  ufw allow 4443/tcp
 
   echo -e "\n# SSH rules"
-  ufw allow 10317
+  ufw allow from 192.168.0.0/24 to any port 10317
 
 #  echo -e "\n# DNS rules"
 #  ufw allow dns

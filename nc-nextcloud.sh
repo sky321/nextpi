@@ -8,7 +8,7 @@
 # More at https://ownyourbits.com/2017/02/13/nextcloud-ready-raspberry-pi-image/
 #
 
-VER_=14.0.7
+VER_=$( grep NEXTVER /root/.nextpi.cnf | sed 's|NEXTVER=||' )
 BETA_=no
 MAXFILESIZE_=2G
 MEMORYLIMIT_=768M

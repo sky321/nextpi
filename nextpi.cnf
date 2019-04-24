@@ -1,5 +1,5 @@
 PHPVER=7.2
-NEXTVER=14.0.7
+NEXTVER=14.0.10
 RESTOREDIR=/mnt/usbstick/next-backup_##
 DATADIR=/home/nextcloud/data
 LETSDOMAIN=mycloud.ownyourbits.com

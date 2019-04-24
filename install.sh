@@ -11,8 +11,6 @@
 
 BRANCH=master
 
-#set -e$DBG
-
 
 [[ ${EUID} -ne 0 ]] && {
   printf "Must be run as root. Try 'sudo $0'\n"
@@ -33,6 +31,9 @@ echo "Getting build code..."
 apt-get update
 apt-get install --no-install-recommends -y wget ca-certificates sudo
 
+# put config file in place
+rm /root/.nextpi.cnf
+cp nextpi.cnf /root/.nextpi.cnf
 
 # install NCP
 echo -e "\nInstalling NextPi"

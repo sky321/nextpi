@@ -34,6 +34,7 @@ apt-get install --no-install-recommends -y wget ca-certificates sudo
 # put config file in place
 rm /root/.nextpi.cnf
 cp nextpi.cnf /root/.nextpi.cnf
+chmod 600 /root/.nextpi.cnf
 
 # install NCP
 echo -e "\nInstalling NextPi"

@@ -1,10 +1,17 @@
 PHPVER=7.2
 NEXTVER=14.0.10
 RESTOREDIR=/mnt/usbstick/next-backup_##
-DATADIR=/home/nextcloud/data
+---------------------------------------
 LETSDOMAIN=mycloud.ownyourbits.com
 LETSEMAIL=mycloud@ownyourbits.com
 HOST=meltdown1
+CHGDATADIR=/home/nextcloud/data
 FAIL2EMAIL=sky@localhost
 PIUSER=pi
 PINEWUSER=sky
+DBADMIN=ncadmin
+ADMINUSER=ncp
+ADMINPASS=ownyourbits
+SSHPORT=10317
+RELEASE=stretch # inconsistend
+DBNAME=nextcloud # inconsistend

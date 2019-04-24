@@ -17,7 +17,7 @@
 
 user='pi'
 newuser='sky'
-rootuser='root'
+#rootuser='root'
 
 # rename pi user 
 usermod -l $newuser -d /home/${newuser} -m $user

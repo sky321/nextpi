@@ -1,6 +1,7 @@
 - update nextcloud version in nc-nextcloud.sh (VER_)
 - change backupdir nc-restore.sh
 - check if ufw.sh and no postfix works
+- check if some nextver, phpver, restoredir cnf work
 - check if letsencrypt.sh works
 - work with config file for variable (nextcloud version, php version, ssh port, etc)
 - check if convert-filecache-bigint (nc-init) is needed

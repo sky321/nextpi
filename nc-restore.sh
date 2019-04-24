@@ -20,7 +20,7 @@ NextCloud instance, including files and database.
 
 
 NCDIR=/var/www/nextcloud
-BACKUPDIR=/mnt/usbstick/next-backup_## # replace ## with right numbers
+BACKUPDIR=$( grep RESTOREDIR /root/.nextpi.cnf | sed 's|RESTOREDIR=||' )
 USRNME=admin
 DBNAME=nextcloud
 DBADMIN=ncadmin

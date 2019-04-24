@@ -16,7 +16,7 @@
 #
 #####
 
-PHPVER=7.2
+PHPVER=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
 DATADIR=/home/nextcloud/data    
 BASEDIR=$( dirname "$DATADIR" )
 

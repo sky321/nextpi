@@ -25,7 +25,7 @@ USRNME=admin
 DBNAME=nextcloud
 DBADMIN=ncadmin
 DBPASSWD="$( grep password /root/.my.cnf | sed 's|password=||' )"
-PHPVER=7.2
+PHPVER=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
 
 cd "$NCDIR"
 sudo -u www-data php occ maintenance:mode --on

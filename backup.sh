@@ -8,7 +8,7 @@ DBADMIN=ncadmin
 DBPASSWD="$( grep password /root/.my.cnf | sed 's|password=||' )"
 BACKUPDIR=/mnt/usbstick/next-backup_`date +"%m"`/
 CLEANBACK=/mnt/usbstick/next-backup_`date +"%m" --date='3 month ago'`/
-PHPVER=7.2
+PHPVER=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
 
 echo "----------------------------------"
 echo $( date "+%d.%m.%y" )

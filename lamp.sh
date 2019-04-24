@@ -19,7 +19,7 @@
 # More at https://ownyourbits.com/2017/02/13/nextcloud-ready-raspberry-pi-image/
 #
 
-PHPVER=7.2
+PHPVER=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
 APTINSTALL="apt-get install -y --no-install-recommends"
 export DEBIAN_FRONTEND=noninteractive
 

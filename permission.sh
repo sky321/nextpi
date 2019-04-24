@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PHPVER=7.2
+PHPVER=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
 
   ## CONFIGURE FILE PERMISSIONS
    ocpath='/var/www/nextcloud'

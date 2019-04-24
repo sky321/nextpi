@@ -20,7 +20,9 @@ INFO="This action will configure NextCloud to NextCloudPi defaults.
 
 "
 
-PHPVER=7.2
+#PHPVER=7.2
+PHPVER=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
+
 
 configure()
 {

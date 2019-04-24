@@ -15,7 +15,7 @@ MEMORYLIMIT_=768M
 MAXTRANSFERTIME_=3600
 DBADMIN=ncadmin
 REDIS_MEM=3gb
-PHPVER=7.2
+PHPVER=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
 DESCRIPTION="Install any NextCloud version"
 
 APTINSTALL="apt-get install -y --no-install-recommends"

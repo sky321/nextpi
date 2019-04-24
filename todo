@@ -1,5 +1,3 @@
-- update nextcloud version in nc-nextcloud.sh (VER_)
-- change backupdir nc-restore.sh
 - check if ufw.sh and no postfix works
 - check if some nextver, phpver, restoredir cnf work
 - check if letsencrypt.sh works

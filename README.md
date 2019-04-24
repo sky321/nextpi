@@ -12,6 +12,7 @@
 	- cd nextpi
 	- chmod +x *.sh
 - optional change standard PI user with chgusr.sh (!!! check inline comments !!!)
+- change nextpi.cnf (only var above the line are currently used)
 - install nextcloud
 	- cd nextpi	
 	- sudo ./install.sh

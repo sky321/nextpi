@@ -21,7 +21,7 @@ NextCloud instance, including files and database.
 
 NCDIR=/var/www/nextcloud
 BACKUPDIR=$( grep RESTOREDIR /root/.nextpi.cnf | sed 's|RESTOREDIR=||' )
-USRNME=admin
+#USRNME=admin
 DBNAME=nextcloud
 DBADMIN=ncadmin
 DBPASSWD="$( grep password /root/.my.cnf | sed 's|password=||' )"

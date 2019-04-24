@@ -47,15 +47,16 @@ install()
 
 
   # POSTFIX
-  $APTINSTALL postfix || {
+  #$APTINSTALL postfix || {
     # [armbian] workaround for bug - https://bugs.launchpad.net/ubuntu/+source/postfix/+bug/1531299
-    echo "[NCP] Please, ignore the previous postfix installation error ..."
-    mv /usr/bin/newaliases /
-    ln -s /bin/true /usr/bin/newaliases
-    $APTINSTALL postfix
-    rm /usr/bin/newaliases
-    mv /newaliases /usr/bin/newaliases
-  }
+  # echo "[NCP] Please, ignore the previous postfix installation error ..."
+  #  mv /usr/bin/newaliases /
+  #  ln -s /bin/true /usr/bin/newaliases
+  #  $APTINSTALL postfix
+  #  rm /usr/bin/newaliases
+  #  mv /newaliases /usr/bin/newaliases
+  #}
+  
   $APTINSTALL mailutils  
 
   $APTINSTALL redis-server

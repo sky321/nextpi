@@ -2,5 +2,4 @@
 - change backupdir nc-restore.sh
 - check if convert-filecache-bigint (nc-init) is needed
 - add mailconfig to config.php
-- don't install postfix?
 - work with config file for variable (nextcloud version, php version, ssh port, etc)

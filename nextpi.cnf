@@ -13,5 +13,6 @@ DBADMIN=ncadmin
 ADMINUSER=ncp
 ADMINPASS=ownyourbits
 SSHPORT=10317
-RELEASE=stretch # inconsistend
+RELEASE=stretch # little inconsistend
 DBNAME=nextcloud # inconsistend
+NCDIR=/var/www/nextcloud # absolut inconsistend

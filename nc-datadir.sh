@@ -93,7 +93,11 @@ BASEDIR=$( dirname "$DATADIR" )
   sudo -u www-data php occ maintenance:mode --off
 
   rm -r $SRCDIR
-  echo "Edit the database: In oc_storages delete the path on the local::/old-data-dir/ entry."
+  echo "Edit the database: In oc_storages delete the path on the local::/old-data-dir/ entry.
+  sudo mysql;
+  use nextcloud;
+  select * from oc_storages;
+  delete from oc_storages where numeric_id=###;"
   echo "Reboot the server!"
 
 # License

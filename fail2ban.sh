@@ -24,7 +24,7 @@ MAXRETRY_=5
 MAILALERTS_=yes
 
 # email to send notifications to
-EMAIL_=sky@localhost
+EMAIL_=$( grep FAIL2EMAIL /root/.nextpi.cnf | sed 's|FAIL2EMAIL=||' )
 
 DESCRIPTION="Brute force protection for SSH and NextCloud"
 

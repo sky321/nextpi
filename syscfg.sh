@@ -9,7 +9,7 @@
 #
 
 export DEBIAN_FRONTEND=noninteractive
-HOST='meltdown1'
+HOST=$( grep HOST /root/.nextpi.cnf | sed 's|HOST=||' )
 
 configure()
 {

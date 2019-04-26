@@ -15,8 +15,8 @@
 # edit and copy fritz.cnf /root/.fritz.cnf
 #
 
-DOMAIN_=mycloud.ownyourbits.com  # replace with your own domain
-EMAIL_=mycloud@ownyourbits.com   # replace with your own email
+DOMAIN_=$( grep LETSDOMAIN /root/.nextpi.cnf | sed 's|LETSDOMAIN=||' )
+EMAIL_=$( grep LETSEMAIL /root/.nextpi.cnf | sed 's|LETSEMAIL=||' )
 
 NCDIR=/var/www/nextcloud
 OCC="$NCDIR/occ"

@@ -15,9 +15,8 @@
 #
 ##
 
-user='pi'
-newuser='sky'
-#rootuser='root'
+user=$( grep PIUSER /root/.nextpi.cnf | sed 's|PIUSER=||' )
+newuser=$( grep PINEWUSER /root/.nextpi.cnf | sed 's|PINEWUSER=||' )
 
 # rename pi user 
 usermod -l $newuser -d /home/${newuser} -m $user

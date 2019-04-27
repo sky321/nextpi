@@ -1,3 +1,4 @@
+- revert piuser cnf change because timing dont fit
 - check if letsencrypt.sh works
 - step by step change config file for variable (ssh port, etc)
 - check if convert-filecache-bigint (nc-init) is needed

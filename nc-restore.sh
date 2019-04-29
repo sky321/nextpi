@@ -127,6 +127,8 @@ chown -R www-data:www-data "$DATADIR"/appdata_${IDNEW}
 
 echo "Nextcloud restore finish.
 
+If all is fine you could remove $DATADIR-$( date "+%y-%m-%d" ) 
+
 Please reboot the server!"
 
 

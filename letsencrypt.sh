@@ -33,6 +33,11 @@ Your certificate will be automatically renewed"
   apt-get update
   apt-get install --no-install-recommends -y certbot python3-certbot-apache
 
+  # put config file in place
+  rm /root/.fritz.cnf
+  cp fritz.cnf /root/.fritz.cnf
+  chmod 600 /root/.fritz.cnf
+
   # Do it
   #
   ./pre-hook.sh

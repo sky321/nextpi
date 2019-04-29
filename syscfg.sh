@@ -10,6 +10,7 @@
 
 export DEBIAN_FRONTEND=noninteractive
 HOST=$( grep HOST /root/.nextpi.cnf | sed 's|HOST=||' )
+SSHPORT=$( grep SSHPORT /root/.nextpi.cnf | sed 's|SSHPORT=||' )
 
 configure()
 {
@@ -65,8 +66,8 @@ EOF
       sed -i 's|^#LogLevel .*|LogLevel VERBOSE|'                    /etc/ssh/sshd_config
       sed -i 's|^#Compression .*|Compression no|'                   /etc/ssh/sshd_config
       sed -i 's|^#AllowAgentForwarding .*|AllowAgentForwarding no|' /etc/ssh/sshd_config
-      sed -i 's|^#Port .*|Port 10317|'                              /etc/ssh/sshd_config
-      sed -i 's|^#PermitRootLogin .*|PermitRootLogin no|'          /etc/ssh/sshd_config
+      sed -i 's|^#Port .*|Port $SSHPORT|'                           /etc/ssh/sshd_config
+      sed -i 's|^#PermitRootLogin .*|PermitRootLogin no|'           /etc/ssh/sshd_config
     fi
 
     ## kernel hardening

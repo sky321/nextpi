@@ -1,6 +1,8 @@
 PHPVER=7.2
 NEXTVER=14.0.10
 HOST=meltdown1
+SSHPORT=10317
+SSHSUBNET=192.168.0.0/24
 FAIL2EMAIL=sky@localhost
 ADMINUSER=ncp
 ADMINPASS=ownyourbits
@@ -10,7 +12,6 @@ LETSDOMAIN=mycloud.ownyourbits.com
 LETSEMAIL=mycloud@ownyourbits.com
 ---------------------------------------
 DBADMIN=ncadmin
-SSHPORT=10317
 PIUSER=pi
 PINEWUSER=sky
 RELEASE=stretch # little inconsistend

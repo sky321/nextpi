@@ -11,7 +11,8 @@
 # https://linuxize.com/post/how-to-setup-a-firewall-with-ufw-on-debian-9/
 #
 
-
+SSHPORT=$( grep SSHPORT /root/.nextpi.cnf | sed 's|SSHPORT=||' )
+SSHSUBNET=$( grep SSHSUBNET /root/.nextpi.cnf | sed 's|SSHSUBNET=||' )
 
 install()
 {
@@ -27,13 +28,7 @@ install()
 
 configure()
 {
-#  [[ "$ACTIVE" != yes ]] && {
-#    ufw --force reset
-#    systemctl disable ufw
-#    systemctl stop ufw
-#    echo "UFW disabled"
-#    return 0
-#  }
+
   ufw --force enable
   systemctl enable ufw
   systemctl start ufw
@@ -41,10 +36,9 @@ configure()
   echo -e "\n# web server rules"
   ufw allow 80/tcp
   ufw allow 443/tcp
-#  ufw allow 4443/tcp
 
   echo -e "\n# SSH rules"
-  ufw allow from 192.168.0.0/24 to any port 10317
+  ufw allow from $SSHSUBNET to any port $SSHPORT
 
 #  echo -e "\n# DNS rules"
 #  ufw allow dns

@@ -16,7 +16,7 @@
 - install nextcloud
 	- cd nextpi	
 	- sudo ./install.sh
-- reboot (after reboot the ssh port is changed -> see syscfg.sh)
+- reboot (after reboot the ssh port is changed -> nextpi.cnf)
 - optional use nc-restore.sh to restore your data
 - optional use nc-datadir.sh to move data to a different dir
 - optional use letsencrypt.sh for automated certificates

@@ -13,7 +13,7 @@ CHGDATADIR=/home/nextcloud/data
 LETSDOMAIN=mycloud.ownyourbits.com
 LETSEMAIL=mycloud@ownyourbits.com
 ---------------------------------------
-PIUSER=pi
-PINEWUSER=sky
+PIUSER=pi # needed before
+PINEWUSER=sky # needed before
 DBNAME=nextcloud # inconsistend
 NCDIR=/var/www/nextcloud # absolut inconsistend

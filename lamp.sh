@@ -28,10 +28,10 @@ install()
     # GET PHP 7.2 SOURCES
     ##########################################
 
-    local RELEASE=stretch
+    local RELEASE=$( grep RELEASE /root/.nextpi.cnf | sed 's|RELEASE=||' )
     apt-get update
     $APTINSTALL apt-transport-https gnupg2 wget ca-certificates
-    echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list
+    echo "deb https://packages.sury.org/php/ $RELEASE main" > /etc/apt/sources.list.d/php.list
     wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add -
 
     # INSTALL 

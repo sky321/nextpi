@@ -37,7 +37,7 @@ install()
 {
   # During build, this step is run before ncp.sh. Avoid executing twice
 
-  local RELEASE=stretch
+  local RELEASE=$( grep RELEASE /root/.nextpi.cnf | sed 's|RELEASE=||' )
 
   # Optional packets for Nextcloud and Apps
   apt-get update

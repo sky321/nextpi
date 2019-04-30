@@ -24,6 +24,8 @@ configure()
   [[ $ACTIVE_     == "yes" ]] && local AUTOUPGRADE=1   || local AUTOUPGRADE=0
   [[ $AUTOREBOOT_ == "yes" ]] && local AUTOREBOOT=true || local AUTOREBOOT=false
 
+  local RELEASE=$( grep RELEASE /root/.nextpi.cnf | sed 's|RELEASE=||' )
+
   # Raspbian case
   grep -q Raspbian /etc/issue && {
 
@@ -37,7 +39,7 @@ APT::Periodic::AutocleanInterval "7";
 Unattended-Upgrade::Automatic-Reboot "$AUTOREBOOT";
 Unattended-Upgrade::Automatic-Reboot-Time "02:00";
 Unattended-Upgrade::Origins-Pattern {
-o=Raspbian,n=stretch,l=Raspbian;
+o=Raspbian,n="$RELEASE",l=Raspbian;
 }
 Dpkg::Options {
    "--force-confdef";
@@ -55,7 +57,7 @@ APT::Periodic::AutocleanInterval "7";
 Unattended-Upgrade::Automatic-Reboot "$AUTOREBOOT";
 Unattended-Upgrade::Automatic-Reboot-Time "04:00";
 Unattended-Upgrade::Origins-Pattern {
-o=Debian,n=stretch,l=Debian;
+o=Debian,n="$RELEASE",l=Debian;
 }
 Dpkg::Options {
    "--force-confdef";

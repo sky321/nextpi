@@ -66,7 +66,7 @@ EOF
       sed -i 's|^#LogLevel .*|LogLevel VERBOSE|'                    /etc/ssh/sshd_config
       sed -i 's|^#Compression .*|Compression no|'                   /etc/ssh/sshd_config
       sed -i 's|^#AllowAgentForwarding .*|AllowAgentForwarding no|' /etc/ssh/sshd_config
-      sed -i 's|^#Port .*|Port $SSHPORT|'                           /etc/ssh/sshd_config
+      sed -i "s|^#Port .*|Port $SSHPORT|"                           /etc/ssh/sshd_config
       sed -i 's|^#PermitRootLogin .*|PermitRootLogin no|'           /etc/ssh/sshd_config
     fi
 

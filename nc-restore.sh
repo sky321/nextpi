@@ -23,7 +23,7 @@ NCDIR=/var/www/nextcloud
 BACKUPDIR=$( grep RESTOREDIR /root/.nextpi.cnf | sed 's|RESTOREDIR=||' )
 #USRNME=admin
 DBNAME=nextcloud
-DBADMIN=ncadmin
+DBADMIN=$( grep DBADMIN /root/.nextpi.cnf | sed 's|DBADMIN=||' )
 DBPASSWD="$( grep password /root/.my.cnf | sed 's|password=||' )"
 PHPVER=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
 

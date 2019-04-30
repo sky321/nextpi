@@ -10,7 +10,7 @@
 
 ADMINUSER_=$( grep ADMINUSER /root/.nextpi.cnf | sed 's|ADMINUSER=||' )
 ADMINPASS_=$( grep ADMINPASS /root/.nextpi.cnf | sed 's|ADMINPASS=||' )
-DBADMIN=ncadmin
+DBADMIN=$( grep DBADMIN /root/.nextpi.cnf | sed 's|DBADMIN=||' )
 DESCRIPTION="(Re)initiate Nextcloud to a clean configuration"
 
 INFOTITLE="Clean NextCloud configuration"

@@ -13,7 +13,7 @@ BETA_=no
 MAXFILESIZE_=2G
 MEMORYLIMIT_=768M
 MAXTRANSFERTIME_=3600
-DBADMIN=ncadmin
+DBADMIN=$( grep DBADMIN /root/.nextpi.cnf | sed 's|DBADMIN=||' )
 REDIS_MEM=3gb
 PHPVER=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
 DESCRIPTION="Install any NextCloud version"

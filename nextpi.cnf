@@ -6,12 +6,12 @@ SSHSUBNET=192.168.0.0/24
 FAIL2EMAIL=sky@localhost
 ADMINUSER=ncp
 ADMINPASS=ownyourbits
+DBADMIN=ncadmin
 RESTOREDIR=/mnt/usbstick/next-backup_##
 CHGDATADIR=/home/nextcloud/data
 LETSDOMAIN=mycloud.ownyourbits.com
 LETSEMAIL=mycloud@ownyourbits.com
 ---------------------------------------
-DBADMIN=ncadmin
 PIUSER=pi
 PINEWUSER=sky
 RELEASE=stretch # little inconsistend

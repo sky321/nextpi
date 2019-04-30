@@ -25,7 +25,7 @@ REDISPASS="$( grep "^requirepass" /etc/redis/redis.conf | cut -f2 -d' ' )"
 
 ## mariaDB provisioning
 
-DBADMIN=ncadmin
+DBADMIN=$( grep DBADMIN /root/.nextpi.cnf | sed 's|DBADMIN=||' )
 DBPASSWD=$( grep password /root/.my.cnf | sed 's|password=||' )
 
 [[ "$DBPASSWD" == "default" ]] && {

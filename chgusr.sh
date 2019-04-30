@@ -15,8 +15,13 @@
 #
 ##
 
-user='pi'
-newuser='sky'
+# put config file in place
+rm /root/.nextpi.cnf
+cp nextpi.cnf /root/.nextpi.cnf
+chmod 600 /root/.nextpi.cnf
+
+user=$( grep PIUSER /root/.nextpi.cnf | sed 's|PIUSER=||' )
+newuser=$( grep PINEWUSER /root/.nextpi.cnf | sed 's|PINEWUSER=||' )
 
 # rename pi user 
 usermod -l $newuser -d /home/${newuser} -m $user

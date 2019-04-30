@@ -1,10 +1,11 @@
+PIUSER=pi
+PINEWUSER=sky
 PHPVER=7.2
 NEXTVER=14.0.10
 RELEASE=stretch
 HOST=meltdown1
 SSHPORT=10317
 SSHSUBNET=192.168.0.0/24
-FAIL2EMAIL=sky@localhost
 ADMINUSER=ncp
 ADMINPASS=ownyourbits
 DBADMIN=ncadmin
@@ -13,7 +14,5 @@ CHGDATADIR=/home/nextcloud/data
 LETSDOMAIN=mycloud.ownyourbits.com
 LETSEMAIL=mycloud@ownyourbits.com
 ---------------------------------------
-PIUSER=pi # needed before
-PINEWUSER=sky # needed before
 DBNAME=nextcloud # inconsistend
 NCDIR=/var/www/nextcloud # absolut inconsistend

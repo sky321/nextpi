@@ -2,7 +2,7 @@
 
 ## Change standard PI user - https://raspberrypi.stackexchange.com/questions/12827/change-default-username
 #
-# Keep in mind that you need to change standard user in fail2ban.sh and syscfg.sh also
+# !!!Keep in mind that you need to change also user for FAIL2EMAIL (nextpi.cnf) and backup cron (syscfg.sh)!!!
 #
 # before do: sudo passwd root
 # 				change /etc/ssh/sshd_config for PermitRootLogin yes

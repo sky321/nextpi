@@ -1,12 +1,12 @@
 - Download Raspbian Image from https://downloads.raspberrypi.org/raspbian_lite_latest
 - use Etcher to flash img on SD card https://www.balena.io/etcher/
-- boot with display and keyboard
-- login with pi/raspberry
+- place a file named ssh onto the boot partition of the SD card to make ssh availeble
+- login via ssh with pi/raspberry
 - change standard password with "passwd"
 - start raspi-config
-	- change language
-	- make ssh available (generate new key)
-- login with ssh
+	- change language and keyboard
+- generate new keys
+	- https://www.cyberciti.biz/faq/howto-regenerate-openssh-host-keys/
 - install git with "sudo apt-get install git"
 	- git clone https://github.com/sky321/nextpi.git
 	- cd nextpi

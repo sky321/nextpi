@@ -1,6 +1,6 @@
 - Download Raspbian Image from https://downloads.raspberrypi.org/raspbian_lite_latest
 - use Etcher to flash img on SD card https://www.balena.io/etcher/
-- place a file named ssh onto the boot partition of the SD card to make ssh availeble
+- place a file named ssh onto the boot partition of the SD card to make ssh available
 - login via ssh with pi/raspberry
 - change standard password with "passwd"
 - start raspi-config

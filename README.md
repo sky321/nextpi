@@ -2,9 +2,9 @@
 - use Etcher to flash img on SD card https://www.balena.io/etcher/
 - place a file named ssh onto the boot partition of the SD card to make ssh available
 - login via ssh with pi/raspberry
-- change standard password with "passwd"
 - start raspi-config
 	- change language and keyboard
+- change standard password with "passwd"
 - install git with "sudo apt-get install git"
 	- git clone https://github.com/sky321/nextpi.git
 	- cd nextpi

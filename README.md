@@ -5,12 +5,12 @@
 - change standard password with "passwd"
 - start raspi-config
 	- change language and keyboard
-- generate new keys
-	- https://www.cyberciti.biz/faq/howto-regenerate-openssh-host-keys/
 - install git with "sudo apt-get install git"
 	- git clone https://github.com/sky321/nextpi.git
 	- cd nextpi
 	- chmod +x *.sh
+- generate new keys
+	- sudo ./genhostkey.sh
 - change nextpi.cnf (only var above the line are currently used)
 - change standard PI user
 	- sudo ./chgusr1.sh

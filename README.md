@@ -3,7 +3,7 @@
 - place a file named ssh onto the boot partition of the SD card to make ssh available
 - login via ssh with pi/raspberry
 - start raspi-config
-	- change language and keyboard
+	- change language, timezone and keyboard
 - change standard password with "passwd"
 - install git with "sudo apt-get install git"
 	- git clone https://github.com/sky321/nextpi.git

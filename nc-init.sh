@@ -56,7 +56,7 @@ configure()
 DROP DATABASE IF EXISTS nextcloud;
 CREATE DATABASE nextcloud;
 #    CHARACTER SET utf8mb4
-#    COLLATE utf8mb4_unicode_ci;
+#    COLLATE utf8mb4_general_ci;
 GRANT USAGE ON *.* TO '$DBADMIN'@'localhost' IDENTIFIED BY '$DBPASSWD';
 DROP USER '$DBADMIN'@'localhost';
 CREATE USER '$DBADMIN'@'localhost' IDENTIFIED BY '$DBPASSWD';
@@ -114,7 +114,8 @@ EOF
   sed -i "s|^;\?upload_tmp_dir =.*$|upload_tmp_dir = $UPLOADTMPDIR|" /etc/php/${PHPVER}/fpm/php.ini
   sed -i "s|^;\?sys_temp_dir =.*$|sys_temp_dir = $UPLOADTMPDIR|"     /etc/php/${PHPVER}/fpm/php.ini
 
-
+  # 4 Byte UTF8 support
+  #sudo -u www-data php occ config:system:set mysql.utf8mb4 --type boolean --value="true"
   
   IFACE="$( ip r | grep "default via" | awk '{ print $5 }' | head -1 )"
   IP="$( ip a show dev "$IFACE" | grep global | grep -oP '\d{1,3}(.\d{1,3}){3}' | head -1 )" 

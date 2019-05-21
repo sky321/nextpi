@@ -43,6 +43,8 @@ echo "restore database..."
 mysql -u root <<EOFMYSQL
 DROP DATABASE IF EXISTS nextcloud;
 CREATE DATABASE nextcloud;
+#    CHARACTER SET utf8mb4
+#    COLLATE utf8mb4_general_ci;
 GRANT USAGE ON *.* TO '$DBADMIN'@'localhost' IDENTIFIED BY '$DBPASSWD';
 DROP USER '$DBADMIN'@'localhost';
 CREATE USER '$DBADMIN'@'localhost' IDENTIFIED BY '$DBPASSWD';

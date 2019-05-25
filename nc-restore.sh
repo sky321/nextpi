@@ -21,7 +21,6 @@ NextCloud instance, including files and database.
 
 NCDIR=/var/www/nextcloud
 BACKUPDIR=$( grep RESTOREDIR /root/.nextpi.cnf | sed 's|RESTOREDIR=||' )
-#USRNME=admin
 DBNAME=nextcloud
 DBADMIN=$( grep DBADMIN /root/.nextpi.cnf | sed 's|DBADMIN=||' )
 DBPASSWD="$( grep password /root/.my.cnf | sed 's|password=||' )"
@@ -32,10 +31,8 @@ sudo -u www-data php occ maintenance:mode --on
 
 ## BACKUP OLD FILES and DB FILES
 echo "backup active files and db..."
-#sudo rsync -Aax /var/www/nextcloud ~/next-backup_`date +"%m"`/
 sudo rsync -Aax "$NCDIR" ~/next-backup_$( date "+%y-%m-%d" ) || { echo "Error backup active files"; exit 1; }
-#sudo mysqldump --lock-tables nextcloud > ~/next-backup_$( date "+%y-%m-%d" )/nextcloud-mysql-dump.sql
-sudo mysqldump --lock-tables "$DBNAME" > ~/nextcloud-mysql-$( date "+%y-%m-%d" ).sql || { echo "Error backup active db"; exit 1; }
+sudo mysqldump --lock-tables --default-character-set=utf8mb4 "$DBNAME" > ~/nextcloud-mysql-$( date "+%y-%m-%d" ).sql || { echo "Error backup active db"; exit 1; }
 
 ## RE-CREATE DATABASE TABLE
 
@@ -87,8 +84,6 @@ cd "$NCDIR"
   
   echo "restore .opcache to $DATADIR..."
 
-# !!!!!!hier unbedingt das gesicherte .opcache dir aus dem ersten Backup der aktiven installation in datadir syncen!!!!!
-#sudo rsync -Aax  ~/next-backup_$( date "+%y-%m-%d" )/nextcloud/data/.opcache "$DATADIR" || { echo "Error restoring nextcloud .opcache dir"; exit 1; }
 sudo rsync -Aax  "$DATADIR-$( date "+%y-%m-%d" )"/.opcache "$DATADIR" || { echo "Error restoring nextcloud .opcache dir"; exit 1; }
 
 # Just in case we moved the opcache dir
@@ -120,9 +115,6 @@ IDNEW=$( grep instanceid "$NCDIR"/config/config.php | awk -F "=> " '{ print $2 }
 mkdir -p "$DATADIR"/appdata_${IDNEW}/theming/images
 cp "$BACKUPDIR"/data/appdata_${IDOLD}/theming/images/logo "$BACKUPDIR"/data/appdata_${IDOLD}/theming/images/background "$DATADIR"/appdata_${IDNEW}/theming/images
 chown -R www-data:www-data "$DATADIR"/appdata_${IDNEW}
-
-#chmod +x permission.sh
-#./permission.sh
 
 #sudo -u www-data php /var/www/nextcloud/occ app:disable twofactor_totp
 #sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME

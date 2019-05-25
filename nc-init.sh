@@ -54,7 +54,7 @@ configure()
   local DBPASSWD=$( grep password /root/.my.cnf | sed 's|password=||' )
   mysql <<EOF
 DROP DATABASE IF EXISTS nextcloud;
-CREATE DATABASE nextcloud;
+CREATE DATABASE nextcloud
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_general_ci;
 GRANT USAGE ON *.* TO '$DBADMIN'@'localhost' IDENTIFIED BY '$DBPASSWD';

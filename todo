@@ -1,4 +1,4 @@
 - check if new letsencrypt.sh works
-- step by step change config file for variable (etc)
+- change nextpi.cnf for variable (dbname)
 - add mailconfig to config.php
 

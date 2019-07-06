@@ -1,3 +1,8 @@
+- buster change
+    - split branch stretch
+    - remove survy repo , php7.2 sources
+    - imagemagic needed in nc-nextcloud.sh?
+    
 - check if new letsencrypt.sh works
 - change nextpi.cnf for variable (dbname)
 - add mailconfig to config.php

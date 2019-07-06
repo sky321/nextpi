@@ -10,7 +10,8 @@
 # more details at https://ownyourbits.com
 
 BRANCH=master
-
+DISTRO_1=$( grep DISTRO_1 /root/.nextpi.cnf | sed 's|DISTRO_1=||' )
+DISTRO_2=$( grep DISTRO_2 /root/.nextpi.cnf | sed 's|DISTRO_2=||' )
 
 [[ ${EUID} -ne 0 ]] && {
   printf "Must be run as root. Try 'sudo $0'\n"
@@ -18,7 +19,7 @@ BRANCH=master
 }
 
 # check_distro 
-grep -q -e "Debian GNU/Linux 9" -e "Raspbian GNU/Linux 9" /etc/issue || {
+grep -q -e $DISTRO_1 -e $DISTRO_2 /etc/issue || {
   echo "distro not supported"; 
   exit 1; 
 }

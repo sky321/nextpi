@@ -43,8 +43,7 @@ install()
   apt-get update
   $APTINSTALL lbzip2 iputils-ping
   $APTINSTALL -t $RELEASE php-smbclient                                         # for external storage
-  #$APTINSTALL -t $RELEASE imagemagick php${PHPVER}-imagick php${PHPVER}-exif    # for gallery
-  $APTINSTALL -t $RELEASE php${PHPVER}-exif    									# for gallery
+  $APTINSTALL -t $RELEASE imagemagick php${PHPVER}-imagick php${PHPVER}-exif    # for gallery
 
 
   # POSTFIX

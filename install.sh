@@ -19,7 +19,7 @@ DISTRO_2=$( grep DISTRO_2 /root/.nextpi.cnf | sed 's|DISTRO_2=||' )
 }
 
 # check_distro 
-grep -q -e $DISTRO_1 -e $DISTRO_2 /etc/issue || {
+grep -q -e "${DISTRO_1}" -e "${DISTRO_2}" /etc/issue || {
   echo "distro not supported"; 
   exit 1; 
 }

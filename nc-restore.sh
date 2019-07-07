@@ -98,8 +98,8 @@ sed -i "s|^;\?upload_tmp_dir =.*$|upload_tmp_dir = $DATADIR/tmp|" /etc/php/${PHP
 sed -i "s|^;\?sys_temp_dir =.*$|sys_temp_dir = $DATADIR/tmp|"     /etc/php/${PHPVER}/fpm/php.ini
 
 # restore secret for TWO factor auth
-SECRETOLD="$( grep "secret" "$NCDIR"/config/config.php )"
-SECRETNEW="$( grep "secret" "$BACKUPDIR"/owncloud/config/config.php)"
+SECRETOLD="$( grep "'secret'" "$NCDIR"/config/config.php )"
+SECRETNEW="$( grep "'secret'" "$BACKUPDIR"/owncloud/config/config.php)"
 sed -i "s|$SECRETOLD|$SECRETNEW|"  "$NCDIR"/config/config.php
 
 sudo -u www-data php occ maintenance:mode --off

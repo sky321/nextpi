@@ -57,7 +57,8 @@ install()
   #  mv /newaliases /usr/bin/newaliases
   #}
   
-  $APTINSTALL mailutils  
+  # Install Mailutils with dependencys
+  apt-get install -y mailutils  
 
   $APTINSTALL redis-server
   $APTINSTALL -t $RELEASE php${PHPVER}-redis

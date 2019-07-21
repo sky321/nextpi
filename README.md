@@ -6,7 +6,7 @@
 	- change language, timezone and keyboard
 - change standard password with "passwd"
 - sudo apt-get update && sudo apt-get upgrade
-- install git with "sudo apt-get install git"
+- install git with "sudo apt-get install -y git"
 	- git clone https://github.com/sky321/nextpi.git
 	- cd nextpi
 	- chmod +x *.sh

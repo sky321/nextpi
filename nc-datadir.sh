@@ -31,26 +31,7 @@ BASEDIR=$( dirname "$DATADIR" )
 
   [ -d "$BASEDIR" ] || { echo "$BASEDIR does not exist"; exit 1; }
 
-  # If the user chooses the root of the mountpoint, force a folder
-  #mountpoint -q "$DATADIR" && {
-  #  BASEDIR="$DATADIR"
-  #}
-
-  #grep -q -e ext -e btrfs <( stat -fc%T "$BASEDIR" ) || {
-  #  echo -e "Only ext/btrfs filesystems can hold the data directory"
-  #  return 1
-  #}
-
-  #sudo -u www-data test -x "$BASEDIR" || {
-  #  echo -e "ERROR: the user www-data does not have access permissions over $BASEDIR"
-  #  return 1
-  #}
-
-  #[[ "$DATADIR" != "/var/www/nextcloud/data" ]] && \
-  #[[ $( stat -fc%d / ) == $( stat -fc%d "$BASEDIR" ) ]] && {
-  #  echo "Refusing to move to the SD card. Abort"
-  #  return 1
-  #}
+# start
 
   cd /var/www/nextcloud
   sudo -u www-data php occ maintenance:mode --on  
@@ -84,8 +65,6 @@ BASEDIR=$( dirname "$DATADIR" )
 
   # update fail2ban logpath
   sed -i "s|logpath  =.*nextcloud.log|logpath  = $DATADIR/nextcloud.log|" /etc/fail2ban/jail.local
-
-#  sudo -u www-data php occ maintenance:mode --off
 
   # datadir & tmp
   sudo -u www-data php occ config:system:set datadirectory --value="$DATADIR"

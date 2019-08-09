@@ -45,20 +45,12 @@ install()
   $APTINSTALL -t $RELEASE php-smbclient                                         # for external storage
   $APTINSTALL -t $RELEASE imagemagick php${PHPVER}-imagick php${PHPVER}-exif    # for gallery
 
-
-  # POSTFIX
-  #$APTINSTALL postfix || {
-    # [armbian] workaround for bug - https://bugs.launchpad.net/ubuntu/+source/postfix/+bug/1531299
-  # echo "[NCP] Please, ignore the previous postfix installation error ..."
-  #  mv /usr/bin/newaliases /
-  #  ln -s /bin/true /usr/bin/newaliases
-  #  $APTINSTALL postfix
-  #  rm /usr/bin/newaliases
-  #  mv /newaliases /usr/bin/newaliases
-  #}
+  # mail
   
   # Install Mailutils with dependencys
   apt-get install -y mailutils  
+
+  # redis
 
   $APTINSTALL redis-server
   $APTINSTALL -t $RELEASE php${PHPVER}-redis
@@ -200,15 +192,6 @@ EOF
   sed -i 's|^ServerTokens .*|ServerTokens Prod|'      /etc/apache2/conf-enabled/security.conf
 
   echo "Setting up system..."
-
-  ## SET LIMITS
-#  sed -i "s/post_max_size=.*/post_max_size=$MAXFILESIZE_/"             /var/www/nextcloud/.user.ini 
-#  sed -i "s/upload_max_filesize=.*/upload_max_filesize=$MAXFILESIZE_/" /var/www/nextcloud/.user.ini 
-#  sed -i "s/memory_limit=.*/memory_limit=$MEMORYLIMIT_/"               /var/www/nextcloud/.user.ini 
-
-  # slow transfers will be killed after this time
-#  cat >> /var/www/nextcloud/.user.ini <<< "max_execution_time=$MAXTRANSFERTIME_"
-#  cat >> /var/www/nextcloud/.user.ini <<< "max_input_time=$MAXTRANSFERTIME_"
 
   ## SET CRON
   echo "*/15  *  *  *  * php -f /var/www/nextcloud/cron.php" > /tmp/crontab_http

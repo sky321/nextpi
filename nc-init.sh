@@ -20,7 +20,6 @@ INFO="This action will configure NextCloud to NextCloudPi defaults.
 
 "
 
-#PHPVER=7.2
 PHPVER=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
 
 
@@ -123,12 +122,10 @@ EOF
   
   IFACE="$( ip r | grep "default via" | awk '{ print $5 }' | head -1 )"
   IP="$( ip a show dev "$IFACE" | grep global | grep -oP '\d{1,3}(.\d{1,3}){3}' | head -1 )" 
+  
+  # trusted domain
   sudo -u www-data php occ config:system:set trusted_domains 1 --value=$IP
-  #sudo -u www-data php occ config:system:set trusted_domains 5 --value="nextcloudpi.local"
-  # trusted_domains 6 used by docker
-  #sudo -u www-data php occ config:system:set trusted_domains 7 --value="nextcloudpi"
-  #sudo -u www-data php occ config:system:set trusted_domains 8 --value="nextcloudpi.lan"
-
+  
   # email
   sudo -u www-data php occ config:system:set mail_smtpmode     --value="sendmail"
   sudo -u www-data php occ config:system:set mail_smtpauthtype --value="LOGIN"
@@ -141,18 +138,12 @@ EOF
   sudo -u www-data php /var/www/nextcloud/occ app:install notes
   sudo -u www-data php /var/www/nextcloud/occ app:install tasks
   sudo -u www-data php /var/www/nextcloud/occ app:install twofactor_totp
-#  sudo -u www-data php /var/www/nextcloud/occ app:install news
-#  sudo -u www-data php /var/www/nextcloud/occ app:install admin_notifications
-#  sudo -u www-data php /var/www/nextcloud/occ app:install previewgenerator
 
   sudo -u www-data php /var/www/nextcloud/occ app:enable calendar
   sudo -u www-data php /var/www/nextcloud/occ app:enable contacts
   sudo -u www-data php /var/www/nextcloud/occ app:enable notes
   sudo -u www-data php /var/www/nextcloud/occ app:enable tasks
   sudo -u www-data php /var/www/nextcloud/occ app:enable twofactor_totp
-#  sudo -u www-data php /var/www/nextcloud/occ app:enable news
-#  sudo -u www-data php /var/www/nextcloud/occ app:enable admin_notifications
-#  sudo -u www-data php /var/www/nextcloud/occ app:enable previewgenerator
 
   # other
   sudo -u www-data php /var/www/nextcloud/occ config:system:set overwriteprotocol --value=https

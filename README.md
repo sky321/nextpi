@@ -1,4 +1,4 @@
-- Download Raspbian Image from https://downloads.raspberrypi.org/raspbian_lite_latest
+- Download latest stretch Raspbian Image from http://downloads.raspberrypi.org/raspbian/images/raspbian-2019-04-09/2019-04-08-raspbian-stretch.zip
 - use Etcher to flash img on SD card https://www.balena.io/etcher/
 - place a file named ssh onto the boot partition of the SD card to make ssh available
 - login via ssh with pi/raspberry
@@ -6,7 +6,7 @@
 	- change language, timezone and keyboard
 - change standard password with "passwd"
 - install git with "sudo apt-get install git"
-	- git clone https://github.com/sky321/nextpi.git
+	- git clone -b stretch --single-branch https://github.com/sky321/nextpi.git
 	- cd nextpi
 	- chmod +x *.sh
 - generate new keys

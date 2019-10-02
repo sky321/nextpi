@@ -116,6 +116,10 @@ EOF
   # memory limit php
   sed -i "s|^;\?memory_limit =.*$|memory_limit = 512M|"     /etc/php/${PHPVER}/cli/php.ini
   sed -i "s|^;\?memory_limit =.*$|memory_limit = 512M|"     /etc/php/${PHPVER}/fpm/php.ini
+  
+  # upload limit php
+  sed -i "s|^;\?upload_max_filesize =.*$|upload_max_filesize = 20M|"     /etc/php/${PHPVER}/cli/php.ini
+  sed -i "s|^;\?upload_max_filesize =.*$|upload_max_filesize = 20M|"     /etc/php/${PHPVER}/fpm/php.ini
 
   # 4 Byte UTF8 support
   sudo -u www-data php occ config:system:set mysql.utf8mb4 --type boolean --value="true"

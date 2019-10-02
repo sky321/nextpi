@@ -9,7 +9,7 @@
 #
 # https://certbot.eff.org/docs/using.html
 #
-# tested with certbot 0.28.0
+# tested with certbot 0.31.0
 # this script is optimised for fritzbox router with fritz OS 7.01
 # for automated open/close port 80 with the help of pre & post hook,
 # edit and copy fritz.cnf /root/.fritz.cnf
@@ -66,7 +66,7 @@ Your certificate will be automatically renewed"
 
 #    
 # pre and post hooks see https://github.com/certbot/certbot/issues/1706
-	echo "pre-hook = /bin/run-parts /etc/letsencrypt/renewal-hooks/pre/" >> /etc/letsencrypt/cli.ini
+	echo -e "\r\npre-hook = /bin/run-parts /etc/letsencrypt/renewal-hooks/pre/" >> /etc/letsencrypt/cli.ini
 	echo "post-hook = /bin/run-parts /etc/letsencrypt/renewal-hooks/post/" >> /etc/letsencrypt/cli.ini
 	cp pre-hook.sh /etc/letsencrypt/renewal-hooks/pre
 	cp post-hook.sh /etc/letsencrypt/renewal-hooks/post

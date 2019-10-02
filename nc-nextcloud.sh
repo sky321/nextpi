@@ -157,8 +157,8 @@ configure()
 <IfModule mod_ssl.c>
   <VirtualHost _default_:443>
     DocumentRoot /var/www/nextcloud
-    CustomLog /var/log/apache2/nc-access.log combined
-    ErrorLog  /var/log/apache2/nc-error.log
+    CustomLog /var/log/apache2/access.log combined
+    ErrorLog  /var/log/apache2/error.log
     SSLEngine on
     SSLCertificateFile      /etc/ssl/certs/ssl-cert-snakeoil.pem
     SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key

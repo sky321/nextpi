@@ -24,7 +24,6 @@ sudo rsync -Aax /etc/apache2/sites-available $BACKUPDIR
 sudo rsync -Aax /etc/letsencrypt $BACKUPDIR
 sudo rsync -Aax /etc/php/${PHPVER}/fpm/php.ini $BACKUPDIR
 
-#sudo mysqldump --lock-tables -p$DBPASSWD -u root $DBNAME > "${BACKUPDIR}"/nextcloud-mysql-dump.sql
 sudo mysqldump --lock-tables --default-character-set=utf8mb4 -p$DBPASSWD -u root $DBNAME > "${BACKUPDIR}"/nextcloud-mysql-dump.sql
 
 

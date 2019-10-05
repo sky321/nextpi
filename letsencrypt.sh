@@ -10,7 +10,7 @@
 # https://certbot.eff.org/docs/using.html
 #
 # tested with certbot 0.31.0
-# this script is optimised for fritzbox router with fritz OS 7.01
+# this script is optimised for fritzbox router with fritz OS >= 7.01
 # for automated open/close port 80 with the help of pre & post hook,
 # edit and copy fritz.cnf /root/.fritz.cnf
 #
@@ -41,7 +41,6 @@ Your certificate will be automatically renewed"
   # Do it
   #
   ./pre-hook.sh
-#  certbot certonly -n --webroot -w $NCDIR --hsts --agree-tos -m $EMAIL_ -d $DOMAIN_ && {
   certbot certonly -n --apache --hsts --agree-tos --rsa-key-size 4096 -m $EMAIL_ -d $DOMAIN_ && {
     ./post-hook.sh
   
@@ -62,7 +61,6 @@ Your certificate will be automatically renewed"
 
     # delayed in bg so it does not kill the connection, and we get AJAX response
     bash -c "sleep 2 && service apache2 reload" &>/dev/null &
-#    rm -rf $NCDIR/.well-known
 
 #    
 # pre and post hooks see https://github.com/certbot/certbot/issues/1706
@@ -76,7 +74,7 @@ Your certificate will be automatically renewed"
 	to see if it's OK"
     exit 0
   }
-#  rm -rf $NCDIR/.well-known
+
   ./post-hook.sh
   echo "!!! getting a certificate failed !!!"
   exit 1

@@ -104,7 +104,7 @@ EOF
 );
 EOF
 
-  # tmp upload dir
+  # tmp upload dir PHP
   local UPLOADTMPDIR=/var/www/nextcloud/data/tmp
   mkdir -p "$UPLOADTMPDIR"
   chown www-data:www-data "$UPLOADTMPDIR"
@@ -118,10 +118,14 @@ EOF
   sed -i "s|^;\?memory_limit =.*$|memory_limit = 512M|"     /etc/php/${PHPVER}/fpm/php.ini
   
   # upload limit php
-  sed -i "s|^;\?upload_max_filesize =.*$|upload_max_filesize = 20M|"     /etc/php/${PHPVER}/cli/php.ini
-  sed -i "s|^;\?upload_max_filesize =.*$|upload_max_filesize = 20M|"     /etc/php/${PHPVER}/fpm/php.ini
+  sed -i "s|^;\?upload_max_filesize =.*$|upload_max_filesize = 512M|"     /etc/php/${PHPVER}/cli/php.ini
+  sed -i "s|^;\?upload_max_filesize =.*$|upload_max_filesize = 512M|"     /etc/php/${PHPVER}/fpm/php.ini
+  
+  # session cockie secure PHP
+  sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/7.3/cli/php.ini
+  sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/7.3/fpm/php.ini
 
-  # 4 Byte UTF8 support
+  # 4 Byte UTF8 support nextcloud
   sudo -u www-data php occ config:system:set mysql.utf8mb4 --type boolean --value="true"
   
   IFACE="$( ip r | grep "default via" | awk '{ print $5 }' | head -1 )"

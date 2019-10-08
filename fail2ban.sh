@@ -62,12 +62,8 @@ configure()
   sudo -u www-data php occ config:system:set log_type --value=file
 
   cat > /etc/fail2ban/filter.d/nextcloud.conf <<'EOF'
-[INCLUDES]
-before = common.conf
-
 [Definition]
-failregex = Login failed.*Remote IP.*'<HOST>'
-ignoreregex =
+failregex = ^.*Login failed: '.*' \(Remote IP: '<HOST>'.*$
 EOF
 
   [[ "$MAILALERTS_" == "yes" ]] && local ACTION=action_mwl || local ACTION=action_

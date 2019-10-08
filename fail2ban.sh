@@ -63,7 +63,8 @@ configure()
 
   cat > /etc/fail2ban/filter.d/nextcloud.conf <<'EOF'
 [Definition]
-failregex = ^.*Login failed: '.*' \(Remote IP: '<HOST>'.*$
+failregex = ^{.*Login failed: '.*' \(Remote IP: '<HOST>'.*}$
+            ^{.*Login failed: .* \(Remote IP: '<HOST>'.*}$
 EOF
 
   [[ "$MAILALERTS_" == "yes" ]] && local ACTION=action_mwl || local ACTION=action_

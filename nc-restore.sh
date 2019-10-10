@@ -91,6 +91,7 @@ sed -i "s|^opcache.file_cache=.*|opcache.file_cache=$DATADIR/.opcache|" /etc/php
 
 
 # tmp upload dir
+echo "setting tmp dir...."
 mkdir -p "$DATADIR/tmp" 
 chown www-data:www-data "$DATADIR/tmp"
 sed -i "s|^;\?upload_tmp_dir =.*$|upload_tmp_dir = $DATADIR/tmp|" /etc/php/${PHPVER}/cli/php.ini
@@ -98,6 +99,7 @@ sed -i "s|^;\?upload_tmp_dir =.*$|upload_tmp_dir = $DATADIR/tmp|" /etc/php/${PHP
 sed -i "s|^;\?sys_temp_dir =.*$|sys_temp_dir = $DATADIR/tmp|"     /etc/php/${PHPVER}/fpm/php.ini
 
 # restore secret for TWO factor auth
+echo "setting up 2FA..."
 SECRETOLD="$( grep "'secret'" "$NCDIR"/config/config.php )"
 SECRETNEW="$( grep "'secret'" "$BACKUPDIR"/owncloud/config/config.php)"
 sed -i "s|$SECRETOLD|$SECRETNEW|"  "$NCDIR"/config/config.php
@@ -109,12 +111,38 @@ sudo -u www-data php occ maintenance:mode --off
 #
 
 # NC theme
+echo "restore theme..."
 IDOLD=$( grep instanceid "$BACKUPDIR"/owncloud/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
 IDNEW=$( grep instanceid "$NCDIR"/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
 
 mkdir -p "$DATADIR"/appdata_${IDNEW}/theming/images
 cp "$BACKUPDIR"/data/appdata_${IDOLD}/theming/images/logo "$BACKUPDIR"/data/appdata_${IDOLD}/theming/images/background "$DATADIR"/appdata_${IDNEW}/theming/images
 chown -R www-data:www-data "$DATADIR"/appdata_${IDNEW}
+
+# Mail config
+echo "restore mail config..."
+
+MAILMODE=$( grep mail_smtpmode "$BACKUPDIR"/nextcloud/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
+MAILATYP=$( grep mail_smtpauthtype "$BACKUPDIR"/nextcloud/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
+MAILADD=$( grep mail_from_address "$BACKUPDIR"/nextcloud/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
+MAILDOM=$( grep mail_domain "$BACKUPDIR"/nextcloud/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
+MAILAUTH=$( grep mail_smtpauth "$BACKUPDIR"/nextcloud/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
+MAILHOST=$( grep mail_smtphost "$BACKUPDIR"/nextcloud/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
+MAILSEC=$( grep mail_smtpsecure "$BACKUPDIR"/nextcloud/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
+MAILPORT=$( grep mail_smtpport "$BACKUPDIR"/nextcloud/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
+MAILNAME=$( grep mail_smtpname "$BACKUPDIR"/nextcloud/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
+MAILPASS=$( grep mail_smtppassword "$BACKUPDIR"/nextcloud/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
+
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtpmode --value="$MAILMODE"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtpauthtype --value="$MAILATYP"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_from_address --value="$MAILADD"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_domain       --value="$MAILDOM"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_domain       --value="$MAILAUTH"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_domain       --value="$MAILHOST"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_domain       --value="$MAILSEC"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_domain       --value="$MAILPORT"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_domain       --value="$MAILNAME"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_domain       --value="$MAILPASS"
 
 #sudo -u www-data php /var/www/nextcloud/occ app:disable twofactor_totp
 #sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME

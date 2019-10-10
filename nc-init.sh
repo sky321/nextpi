@@ -122,8 +122,8 @@ EOF
   sed -i "s|^;\?upload_max_filesize =.*$|upload_max_filesize = 512M|"     /etc/php/${PHPVER}/fpm/php.ini
   
   # session cockie secure PHP
-  sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/7.3/cli/php.ini
-  sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/7.3/fpm/php.ini
+  sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/cli/php.ini
+  sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/fpm/php.ini
 
   # 4 Byte UTF8 support nextcloud
   sudo -u www-data php occ config:system:set mysql.utf8mb4 --type boolean --value="true"

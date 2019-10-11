@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
 # Nextcloud restore backup
 #
 # Copyleft 2017 by Ignacio Nunez Hernanz <nacho _a_t_ ownyourbits _d_o_t_ com>
@@ -9,15 +8,11 @@
 # More at https://ownyourbits.com/2017/02/13/nextcloud-ready-raspberry-pi-image/
 #
 
-
 DESCRIPTION="Restore a previously backuped NC instance"
 
 INFOTITLE="Restore NextCloud backup"
 INFO="This new installation will cleanup current
-NextCloud instance, including files and database.
-
-"
-
+NextCloud instance, including files and database."
 
 NCDIR=/var/www/nextcloud
 BACKUPDIR=$( grep RESTOREDIR /root/.nextpi.cnf | sed 's|RESTOREDIR=||' )
@@ -60,7 +55,7 @@ cd "$NCDIR"
   
 #    echo "restore ${NCDIR}/apps"
 #    rm -r "${NCDIR}"/apps
-#    sudo rsync -Aax "${BACKUPDIR}"/owncloud/apps/ "$NCDIR"/apps || { echo "Error restoring nextcloud apps"; exit 1; }
+#    sudo rsync -Aax "${BACKUPDIR}"/nextcloud/apps/ "$NCDIR"/apps || { echo "Error restoring nextcloud apps"; exit 1; }
 
 	
 # Restore Data  
@@ -101,7 +96,7 @@ sed -i "s|^;\?sys_temp_dir =.*$|sys_temp_dir = $DATADIR/tmp|"     /etc/php/${PHP
 # restore secret for TWO factor auth
 echo "setting up 2FA..."
 SECRETOLD="$( grep "'secret'" "$NCDIR"/config/config.php )"
-SECRETNEW="$( grep "'secret'" "$BACKUPDIR"/owncloud/config/config.php)"
+SECRETNEW="$( grep "'secret'" "$BACKUPDIR"/nextcloud/config/config.php)"
 sed -i "s|$SECRETOLD|$SECRETNEW|"  "$NCDIR"/config/config.php
 
 sudo -u www-data php occ maintenance:mode --off
@@ -112,7 +107,7 @@ sudo -u www-data php occ maintenance:mode --off
 
 # NC theme
 echo "restore theme..."
-IDOLD=$( grep instanceid "$BACKUPDIR"/owncloud/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
+IDOLD=$( grep instanceid "$BACKUPDIR"/nextcloud/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
 IDNEW=$( grep instanceid "$NCDIR"/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
 
 mkdir -p "$DATADIR"/appdata_${IDNEW}/theming/images

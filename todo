@@ -1,5 +1,3 @@
-- replace owncloud in nc-restore.sh
-- add mailconfig to config.php
 - change nextpi.cnf for variable (dbname)
 
 

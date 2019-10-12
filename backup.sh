@@ -2,7 +2,6 @@
 
 NCDIR=/var/www/nextcloud
 DATADIR=$( grep datadirectory "$NCDIR"/config/config.php | awk '{ print $3 }' | grep -oP "[^']*[^']" | head -1 ) 
-  [[ "$DATADIR" == "" ]] && { echo "Error reading data directory"; exit 1; }
 DBNAME=nextcloud
 DBADMIN=$( grep DBADMIN /root/.nextpi.cnf | sed 's|DBADMIN=||' )
 DBPASSWD="$( grep password /root/.my.cnf | sed 's|password=||' )"

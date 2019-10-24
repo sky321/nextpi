@@ -12,15 +12,18 @@ export DEBIAN_FRONTEND=noninteractive
 HOST=$( grep HOST /root/.nextpi.cnf | sed 's|HOST=||' )
 SSHPORT=$( grep SSHPORT /root/.nextpi.cnf | sed 's|SSHPORT=||' )
 PINEWUSER=$( grep PINEWUSER /root/.nextpi.cnf | sed 's|PINEWUSER=||' )
+ENV=$( grep ENV /root/.nextpi.cnf | sed 's|ENV=||' )
 
 configure()
 {
   
-## SET CRON for Backup Job
+## If prod environment SET CRON for Backup Job
+[[ "$ENV" == "prod" ]] && {
   echo "init backup cronjob...."
   echo "0 22 * * * sh /home/$PINEWUSER/nextpi/backup.sh >> /var/log/backup.log 2>&1" > /tmp/crontab_backup
   crontab -u root /tmp/crontab_backup
   rm /tmp/crontab_backup
+}
 
   # automount USB drive after reboot
   echo "automount USB...."

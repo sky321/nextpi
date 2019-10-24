@@ -128,16 +128,16 @@ MAILPORT=$( grep mail_smtpport "$BACKUPDIR"/nextcloud/config/config.php | awk -F
 MAILNAME=$( grep mail_smtpname "$BACKUPDIR"/nextcloud/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
 MAILPASS=$( grep mail_smtppassword "$BACKUPDIR"/nextcloud/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
 
-sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtpmode --value="$MAILMODE"
-sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtpauthtype --value="$MAILATYP"
-sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_from_address --value="$MAILADD"
-sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_domain       --value="$MAILDOM"
-sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_domain       --value="$MAILAUTH"
-sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_domain       --value="$MAILHOST"
-sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_domain       --value="$MAILSEC"
-sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_domain       --value="$MAILPORT"
-sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_domain       --value="$MAILNAME"
-sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_domain       --value="$MAILPASS"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtpmode      --value="$MAILMODE"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtpauthtype  --value="$MAILATYP"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_from_address  --value="$MAILADD"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_domain        --value="$MAILDOM"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtpauth      --value="$MAILAUTH"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtphost      --value="$MAILHOST"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtpsecure    --value="$MAILSEC"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtpport      --value="$MAILPORT"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtpname      --value="$MAILNAME"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtppassword  --value="$MAILPASS"
 
 #sudo -u www-data php /var/www/nextcloud/occ app:disable twofactor_totp
 #sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME

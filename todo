@@ -1,3 +1,2 @@
+- switch of backup in a dev/test environment
 - change nextpi.cnf for variable (dbname)
-
-

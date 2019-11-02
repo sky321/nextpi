@@ -79,7 +79,6 @@ SSLOpenSSLConfCmd Curves X25519:secp521r1:secp384r1:prime256v1
 #SSLOpenSSLConfCmd DHParameters "/etc/ssl/certs/dhparam.pem"
 SSLHonorCipherOrder     on
 SSLCompression          off
-#SSLSessionTickets       on
 SSLSessionTickets       off
 
 # OCSP Stapling

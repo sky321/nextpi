@@ -4,7 +4,8 @@
 - login via ssh with pi/raspberry
 - sudo raspi-config
 	- change language, timezone and keyboard
-- change standard password with "passwd"
+- change standard password 
+	- passwd
 - prepare some things upfront
 	- curl -s https://raw.githubusercontent.com/sky321/nextpi/master/prep.sh | /bin/bash
 - cd nextpi

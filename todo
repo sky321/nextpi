@@ -1,1 +1,6 @@
+#Generate the parameters
+openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
+# Add the following to your Apache config.
+SSLOpenSSLConfCmd DHParameters "/etc/ssl/certs/dhparam.pem"
+
 - change nextpi.cnf for variable (dbname)

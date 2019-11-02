@@ -73,11 +73,10 @@ H2PushPriority  image/png               after   32
 H2PushPriority  application/javascript  interleaved
 
 # SSL/TLS Configuration
-#SSLProtocol -all +TLSv1.2
 SSLProtocol -all +TLSv1.2 +TLSv1.3
-#SSLCipherSuite 'EECDH+AESGCM EDH+AESGCM AES256+EECDH AES256+EDH !aNULL !eNULL !EXPORT !LOW !MEDIUM !DES !3DES !RC4 !SEED !CAMELLIA !MD5 !PSK !DSS'
 SSLCipherSuite EECDH+AESGCM:EDH+AESGCM
 SSLOpenSSLConfCmd Curves X25519:secp521r1:secp384r1:prime256v1
+#SSLOpenSSLConfCmd DHParameters "/etc/ssl/certs/dhparam.pem"
 SSLHonorCipherOrder     on
 SSLCompression          off
 #SSLSessionTickets       on

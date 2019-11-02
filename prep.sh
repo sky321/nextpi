@@ -9,12 +9,6 @@
 
 echo
 echo
-echo "----- change standard password for PI -----"
-echo
-echo
-passwd
-echo
-echo
 echo "----- update the OS -----"
 echo
 echo

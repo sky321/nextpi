@@ -36,3 +36,10 @@ echo "----- generate new keys -----"
 echo
 echo
 sudo ./genhostkey.sh
+
+echo
+echo
+echo "----- change standard password for PI -----"
+echo
+echo
+passwd

@@ -1,6 +1,6 @@
 #Generate the parameters
 openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
-chmod 600 /etc/ssl/certs/dhparam.pem
+chmod 644 /etc/ssl/certs/dhparam.pem
 # Add the following to your Apache config.
 SSLOpenSSLConfCmd DHParameters "/etc/ssl/certs/dhparam.pem"
 

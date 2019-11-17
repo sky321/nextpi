@@ -5,5 +5,3 @@ chmod 644 /etc/ssl/certs/dhparam.pem
 SSLOpenSSLConfCmd DHParameters "/etc/ssl/certs/dhparam.pem"
 
 - change nextpi.cnf for variable (dbname)
-
-- prep script testen

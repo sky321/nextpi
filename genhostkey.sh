@@ -16,4 +16,8 @@ dpkg-reconfigure openssh-server
 # restart ssh server
 systemctl restart ssh
 
-echo "New host keys generated, login again!"
+#Generate the DH parameters
+cp dhparam.pem /etc/ssl/certs/
+chmod 644 /etc/ssl/certs/dhparam.pem
+
+echo "New host keys generated!"

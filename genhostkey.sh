@@ -17,6 +17,7 @@ dpkg-reconfigure openssh-server
 systemctl restart ssh
 
 #Generate the DH parameters
+rm -f /etc/ssl/certs/dhparam.pem
 cp dhparam.pem /etc/ssl/certs/
 chmod 644 /etc/ssl/certs/dhparam.pem
 

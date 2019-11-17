@@ -76,7 +76,7 @@ H2PushPriority  application/javascript  interleaved
 SSLProtocol -all +TLSv1.2 +TLSv1.3
 SSLCipherSuite EECDH+AESGCM:EDH+AESGCM
 SSLOpenSSLConfCmd Curves X25519:secp521r1:secp384r1:prime256v1
-#SSLOpenSSLConfCmd DHParameters "/etc/ssl/certs/dhparam.pem"
+SSLOpenSSLConfCmd DHParameters "/etc/ssl/certs/dhparam.pem"
 SSLHonorCipherOrder     on
 SSLCompression          off
 SSLSessionTickets       off

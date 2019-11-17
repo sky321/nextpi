@@ -1,0 +1,5 @@
+https://scan.nextcloud.com/
+https://observatory.mozilla.org/
+--# includes #---
+https://www.ssllabs.com/ssltest/index.html
+https://securityheaders.com/

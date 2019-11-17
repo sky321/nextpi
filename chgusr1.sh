@@ -19,7 +19,7 @@ sed -i 's|^#PermitRootLogin .*|PermitRootLogin yes|' /etc/ssh/sshd_config
 /etc/init.d/ssh restart
 
 # put config file in place
-rm /root/.nextpi.cnf
+rm -f /root/.nextpi.cnf
 cp nextpi.cnf /root/.nextpi.cnf
 chmod 600 /root/.nextpi.cnf
 

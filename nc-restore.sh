@@ -24,6 +24,8 @@ PHPVER=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
 cd "$NCDIR"
 sudo -u www-data php occ maintenance:mode --on
 
+sudo mount /dev/sda1 /mnt/usbstick/
+
 ## BACKUP OLD FILES and DB FILES
 echo "backup active files and db..."
 sudo rsync -Aax "$NCDIR" ~/next-backup_$( date "+%y-%m-%d" ) || { echo "Error backup active files"; exit 1; }
@@ -141,6 +143,8 @@ sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtppassword 
 
 #sudo -u www-data php /var/www/nextcloud/occ app:disable twofactor_totp
 #sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME
+
+sudo umount /mnt/usbstick/
 
 echo "Nextcloud restore finish.
 

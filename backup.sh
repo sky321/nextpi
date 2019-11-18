@@ -9,6 +9,8 @@ BACKUPDIR=/mnt/usbstick/next-backup_`date +"%m"`/
 CLEANBACK=/mnt/usbstick/next-backup_`date +"%m" --date='3 month ago'`/
 PHPVER=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
 NEWUSER=$( grep PINEWUSER /root/.nextpi.cnf | sed 's|PINEWUSER=||' )
+USBDEV=$( grep USBDEV /root/.nextpi.cnf | sed 's|USBDEV=||' )
+USBDIR=$( grep USBDIR /root/.nextpi.cnf | sed 's|USBDIR=||' )
 
 echo "----------------------------------"
 echo $( date "+%d.%m.%y" )
@@ -17,7 +19,7 @@ cd $NCDIR
 
 sudo -u www-data php occ maintenance:mode --on
 
-sudo mount /dev/sda1 /mnt/usbstick/
+sudo mount $USBDEV $USBDIR
 
 sudo rsync -Aax $NCDIR $BACKUPDIR
 sudo rsync -Aax $DATADIR $BACKUPDIR
@@ -32,6 +34,6 @@ sudo mysqldump --lock-tables --default-character-set=utf8mb4 -p$DBPASSWD -u root
 
 sudo rm -R -f $CLEANBACK
 
-sudo umount /mnt/usbstick/
+sudo umount $USBDIR
 
 sudo -u www-data php occ maintenance:mode --off

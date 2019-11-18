@@ -20,11 +20,13 @@ DBNAME=nextcloud
 DBADMIN=$( grep DBADMIN /root/.nextpi.cnf | sed 's|DBADMIN=||' )
 DBPASSWD="$( grep password /root/.my.cnf | sed 's|password=||' )"
 PHPVER=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
+USBDEV=$( grep USBDEV /root/.nextpi.cnf | sed 's|USBDEV=||' )
+USBDIR=$( grep USBDIR /root/.nextpi.cnf | sed 's|USBDIR=||' )
 
 cd "$NCDIR"
 sudo -u www-data php occ maintenance:mode --on
 
-sudo mount /dev/sda1 /mnt/usbstick/
+sudo mount $USBDEV $USBDIR
 
 ## BACKUP OLD FILES and DB FILES
 echo "backup active files and db..."
@@ -144,7 +146,7 @@ sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtppassword 
 #sudo -u www-data php /var/www/nextcloud/occ app:disable twofactor_totp
 #sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME
 
-sudo umount /mnt/usbstick/
+sudo umount $USBDIR
 
 echo "Nextcloud restore finish.
 

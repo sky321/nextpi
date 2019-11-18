@@ -13,6 +13,7 @@ HOST=$( grep HOST /root/.nextpi.cnf | sed 's|HOST=||' )
 SSHPORT=$( grep SSHPORT /root/.nextpi.cnf | sed 's|SSHPORT=||' )
 PINEWUSER=$( grep PINEWUSER /root/.nextpi.cnf | sed 's|PINEWUSER=||' )
 ENV=$( grep ENV /root/.nextpi.cnf | sed 's|ENV=||' )
+USBDIR=$( grep USBDIR /root/.nextpi.cnf | sed 's|USBDIR=||' )
 
 configure()
 {
@@ -29,7 +30,7 @@ configure()
 #  echo "automount USB...."
 #  echo "UUID=1b18feab-3afd-46f8-8fa0-9b2c45ab0abe /mnt/usbstick ext4 defaults,rw 0    0" >> /etc/fstab
   echo "mount dir USB generated...."
-  mkdir /mnt/usbstick
+  mkdir $USBDIR
 
   # Initiat logrotate
   echo "init logrotate...."

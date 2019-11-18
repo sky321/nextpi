@@ -17,6 +17,8 @@ cd $NCDIR
 
 sudo -u www-data php occ maintenance:mode --on
 
+sudo mount /dev/sda1 /mnt/usbstick/
+
 sudo rsync -Aax $NCDIR $BACKUPDIR
 sudo rsync -Aax $DATADIR $BACKUPDIR
 
@@ -28,6 +30,8 @@ sudo rsync -Aax /home/${NEWUSER} $BACKUPDIR
 sudo mysqldump --lock-tables --default-character-set=utf8mb4 -p$DBPASSWD -u root $DBNAME > "${BACKUPDIR}"/nextcloud-mysql-dump.sql
 
 
-sudo rm -R $CLEANBACK
+sudo rm -R -f $CLEANBACK
+
+sudo umount /mnt/usbstick/
 
 sudo -u www-data php occ maintenance:mode --off

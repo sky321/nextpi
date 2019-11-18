@@ -1,2 +1,3 @@
-- backup mount / unmount
+- backup mount / unmount parameter/variable
+- generate new DH parameter
 - change nextpi.cnf for variable (dbname)

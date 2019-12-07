@@ -5,7 +5,7 @@ echo "open port 80 ...."
 IPS=$( grep IPS /root/.fritz.cnf | sed 's|IPS=||' )
 
 FRITZUSER=$( grep FRITZUSER /root/.fritz.cnf | sed 's|FRITZUSER=||' )
-FRITZPW=$( grep FRITZPW /root/.fritz.cnf | sed 's|FRITZPW=||' )
+FRITZPW=$( grep FRITZPW /root/.fritz.cnf | sed 's|FRITZPW=||'  | base64 -d )
 
 location="/upnp/control/wanpppconn1"
 uri="urn:dslforum-org:service:WANPPPConnection:1"

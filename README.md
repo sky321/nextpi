@@ -23,3 +23,4 @@
 - optional use nc-datadir.sh to move data to a different dir
 - optional use letsencrypt.sh for automated certificates
 	- edit fritz.cnf before running the script
+	- use base64 for passphrase

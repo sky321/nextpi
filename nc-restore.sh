@@ -81,9 +81,9 @@ cd "$NCDIR"
 
 # Restore opcache
   
-  echo "restore .opcache to $DATADIR..."
+#  echo "restore .opcache to $DATADIR..."
 
-sudo rsync -Aax  "$DATADIR-$( date "+%y-%m-%d" )"/.opcache "$DATADIR" || { echo "Error restoring nextcloud .opcache dir"; exit 1; }
+#  sudo rsync -Aax  "$DATADIR-$( date "+%y-%m-%d" )"/.opcache "$DATADIR" || { echo "Error restoring nextcloud .opcache dir"; exit 1; }
 
 # Just in case we moved the opcache dir
 sed -i "s|^opcache.file_cache=.*|opcache.file_cache=$DATADIR/.opcache|" /etc/php/${PHPVER}/mods-available/opcache.ini

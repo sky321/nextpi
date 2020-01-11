@@ -29,7 +29,8 @@ BASEDIR=$( dirname "$DATADIR" )
 
   [[ "$SRCDIR" == "$DATADIR" ]] && { echo -e "INFO: data already there"; exit 1; }
 
-  [ -d "$BASEDIR" ] || { echo "$BASEDIR does not exist"; exit 1; }
+#  [ -d "$BASEDIR" ] || { echo "$BASEDIR does not exist"; exit 1; }
+  mkdir -p $BASEDIR
 
 # start
 

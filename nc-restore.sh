@@ -31,12 +31,13 @@ sudo mount $USBDEV $USBDIR
 ## BACKUP OLD FILES and DB FILES
 echo "backup active files and db..."
 sudo rsync -Aax "$NCDIR" ~/next-backup_$( date "+%y-%m-%d" ) || { echo "Error backup active files"; exit 1; }
-sudo mysqldump --lock-tables --default-character-set=utf8mb4 "$DBNAME" > ~/nextcloud-mysql-$( date "+%y-%m-%d" ).sql || { echo "Error backup active db"; exit 1; }
+sudo mysqldump --single-transaction --default-character-set=utf8mb4 "$DBNAME" > ~/nextcloud-mysql-$( date "+%y-%m-%d" ).sql || { echo "Error backup active db"; exit 1; }
 
 ## RE-CREATE DATABASE TABLE
 
 echo "restore database..."
-mysql -u root <<EOFMYSQL
+#mysql -u root <<EOFMYSQL
+mysql <<EOF
 DROP DATABASE IF EXISTS nextcloud;
 CREATE DATABASE nextcloud
     CHARACTER SET utf8mb4
@@ -46,7 +47,7 @@ DROP USER '$DBADMIN'@'localhost';
 CREATE USER '$DBADMIN'@'localhost' IDENTIFIED BY '$DBPASSWD';
 GRANT ALL PRIVILEGES ON nextcloud.* TO $DBADMIN@localhost;
 EXIT
-EOFMYSQL
+EOF
 [ $? -ne 0 ] && { echo "Error configuring nextcloud database"; exit 1; }
 
 mysql -u root "$DBNAME" <  "$BACKUPDIR"/nextcloud-mysql-dump.sql || { echo "Error restoring nextcloud database"; exit 1; }

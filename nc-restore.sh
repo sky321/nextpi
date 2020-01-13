@@ -144,7 +144,7 @@ sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtppassword 
 
 sudo umount $USBDIR
 
-sudo -u www-data php occ upgrade
+#sudo -u www-data php occ upgrade
 
 echo "Nextcloud restore finish.
 

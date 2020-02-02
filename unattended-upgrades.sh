@@ -40,6 +40,7 @@ Unattended-Upgrade::Automatic-Reboot "$AUTOREBOOT";
 Unattended-Upgrade::Automatic-Reboot-Time "02:00";
 Unattended-Upgrade::Origins-Pattern {
 o=Raspbian,n="$RELEASE",l=Raspbian;
+o=Raspberry Pi Foundation,n="$RELEASE",l=Raspberry Pi Foundation";
 }
 Dpkg::Options {
    "--force-confdef";
@@ -58,6 +59,7 @@ Unattended-Upgrade::Automatic-Reboot "$AUTOREBOOT";
 Unattended-Upgrade::Automatic-Reboot-Time "04:00";
 Unattended-Upgrade::Origins-Pattern {
 o=Debian,n="$RELEASE",l=Debian;
+o=Raspberry Pi Foundation,n="$RELEASE",l=Raspberry Pi Foundation";
 }
 Dpkg::Options {
    "--force-confdef";

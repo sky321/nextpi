@@ -1,2 +1,3 @@
+- change letsencrypt to certbot snap install
 - generate new DH parameter
 - change nextpi.cnf for variable (dbname)

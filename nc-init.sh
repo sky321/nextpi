@@ -150,13 +150,13 @@ EOF
   sudo -u www-data php /var/www/nextcloud/occ app:install contacts
   #sudo -u www-data php /var/www/nextcloud/occ app:install notes
   sudo -u www-data php /var/www/nextcloud/occ app:install tasks
-  sudo -u www-data php /var/www/nextcloud/occ app:install twofactor_totp
+  #sudo -u www-data php /var/www/nextcloud/occ app:install twofactor_totp
 
   sudo -u www-data php /var/www/nextcloud/occ app:enable calendar
   sudo -u www-data php /var/www/nextcloud/occ app:enable contacts
   #sudo -u www-data php /var/www/nextcloud/occ app:enable notes
   sudo -u www-data php /var/www/nextcloud/occ app:enable tasks
-  sudo -u www-data php /var/www/nextcloud/occ app:enable twofactor_totp
+  #sudo -u www-data php /var/www/nextcloud/occ app:enable twofactor_totp
 
   # other
   sudo -u www-data php /var/www/nextcloud/occ config:system:set overwriteprotocol --value=https
@@ -164,6 +164,7 @@ EOF
   sudo -u www-data php /var/www/nextcloud/occ config:system:set auth.bruteforce.protection.enabled --value=false --type=boolean
   sudo -u www-data php /var/www/nextcloud/occ config:system:set trashbin_retention_obligation --value="auto, 30"
   sudo -u www-data php /var/www/nextcloud/occ config:system:set log_rotate_size --value=262144 --type=integer
+  sudo -u www-data php /var/www/nextcloud/occ config:system:set default_phone_region --value="GB"
 #  sudo -u www-data php /var/www/nextcloud/occ -n db:convert-filecache-bigint
 
   echo "NC init done

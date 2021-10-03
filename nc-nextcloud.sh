@@ -41,7 +41,7 @@ install()
   apt-get update
   $APTINSTALL lbzip2 iputils-ping
   $APTINSTALL -t $RELEASE php-smbclient                                         # for external storage
-  $APTINSTALL -t $RELEASE imagemagick php${PHPVER}-imagick php${PHPVER}-exif    # for gallery
+  $APTINSTALL -t $RELEASE imagemagick libmagickcore-6.q16-6-extra php${PHPVER}-imagick php${PHPVER}-exif    # for gallery
 
   # mail
   

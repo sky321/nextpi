@@ -7,6 +7,7 @@
 - change standard password for PI user
 	- passwd
 - prepare some things upfront
+	- generate your own dhparam.pem file
 	- curl -s https://raw.githubusercontent.com/sky321/nextpi/master/prep.sh | /bin/bash
 - cd nextpi
 - change nextpi.cnf (only var above the line are currently used)

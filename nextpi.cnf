@@ -1,8 +1,8 @@
 PIUSER=pi
 PINEWUSER=sky
 PHPVER=7.4
-NEXTVER=23.0.1
-ENV=prod
+NEXTVER=22.2.3
+ENV=test
 USBDEV=/dev/sda1
 USBDIR=/mnt/usbstick/
 RELEASE=bullseye

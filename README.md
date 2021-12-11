@@ -1,4 +1,4 @@
-- Download Raspbian Image from https://downloads.raspberrypi.org/raspbian_lite_latest
+- Download Raspbian Image from https://downloads.raspberrypi.org/raspios_lite_armhf/images/
 - use Etcher to flash img on SD card https://www.balena.io/etcher/
 - place a file named "ssh" onto the boot partition of the SD card to make ssh available
 - login via ssh with pi/raspberry
@@ -7,7 +7,6 @@
 - change standard password for PI user
 	- passwd
 - prepare some things upfront
-	- generate your own dhparam.pem file
 	- curl -s https://raw.githubusercontent.com/sky321/nextpi/master/prep.sh | /bin/bash
 - cd nextpi
 - change nextpi.cnf (only var above the line are currently used)
@@ -25,3 +24,6 @@
 - optional use letsencrypt.sh for automated certificates
 	- edit fritz.cnf before running the script
 	- use base64 for passphrase
+- optional replace dhparam.pem with your own one
+	- openssl dhparam -out dhparam.pem 4096
+	- insert the key in /etc/ssl/cert/dhparam.pem

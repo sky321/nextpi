@@ -29,10 +29,10 @@ install()
     ##########################################
 
     local RELEASE=$( grep RELEASE /root/.nextpi.cnf | sed 's|RELEASE=||' )
-    #apt-get update
-    #$APTINSTALL apt-transport-https gnupg2 wget ca-certificates
-    #echo "deb https://packages.sury.org/php/ $RELEASE main" > /etc/apt/sources.list.d/php.list
-    #wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add -
+    apt-get update
+    $APTINSTALL apt-transport-https gnupg2 wget ca-certificates
+    echo "deb https://packages.sury.org/php/ $RELEASE main" > /etc/apt/sources.list.d/php.list
+    wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add -
 
     # INSTALL 
     ##########################################

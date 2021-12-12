@@ -1,3 +1,10 @@
-- change letsencrypt to certbot snap install
-- generate new DH parameter
+- check loglevel / logrotate clean install vs. restore
+- check install logs in detail for small error
+- check installed apps after restore
+- check config.php diff clean vs restore
+- check permissions
+- try php8.0 ?
+- in lamp.sh check debconf-set-selections maria5.5 value
+- totp deactivated but app incompatible after restore???
+- test letsencrypt to certbot snap install
 - change nextpi.cnf for variable (dbname)

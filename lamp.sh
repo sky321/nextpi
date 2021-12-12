@@ -25,7 +25,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 install()
 {
-    # GET PHP 7.2 SOURCES
+    # GET PHP SOURCES
     ##########################################
 
     local RELEASE=$( grep RELEASE /root/.nextpi.cnf | sed 's|RELEASE=||' )

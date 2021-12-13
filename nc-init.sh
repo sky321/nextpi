@@ -139,6 +139,11 @@ EOF
   # trusted domain
   sudo -u www-data php occ config:system:set trusted_domains 1 --value=$IP
   
+  # blacklist
+  sudo -u www-data php occ config:system:set blacklisted_files 0 --value=".htaccess"
+  sudo -u www-data php occ config:system:set blacklisted_files 0 --value="Thumbs.db"
+  sudo -u www-data php occ config:system:set blacklisted_files 0 --value="thumbs.db"
+  
   # email
   sudo -u www-data php occ config:system:set mail_smtpmode     --value="sendmail"
   sudo -u www-data php occ config:system:set mail_smtpauthtype --value="LOGIN"
@@ -165,7 +170,7 @@ EOF
   # other
   sudo -u www-data php /var/www/nextcloud/occ config:system:set overwriteprotocol --value=https
   sudo -u www-data php /var/www/nextcloud/occ config:system:set lost_password_link --value=disabled
-  sudo -u www-data php /var/www/nextcloud/occ config:system:set auth.bruteforce.protection.enabled --value=false --type=boolean
+  sudo -u www-data php /var/www/nextcloud/occ config:system:set auth.bruteforce.protection.enabled --value=true --type=boolean
   sudo -u www-data php /var/www/nextcloud/occ config:system:set trashbin_retention_obligation --value="auto, 30"
   sudo -u www-data php /var/www/nextcloud/occ config:system:set log_rotate_size --value=10485760 --type=integer
   sudo -u www-data php /var/www/nextcloud/occ config:system:set default_phone_region --value="DE"

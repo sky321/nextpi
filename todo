@@ -3,8 +3,9 @@
 # check installed apps after restore
 - check config.php diff clean vs restore
 # check permissions
-- test php8.0
+- test php8.0, parameter check
 - in lamp.sh check debconf-set-selections maria5.5 value
 - totp deactivated but app incompatible after restore???
 - test letsencrypt to certbot snap install
+- security check
 - change nextpi.cnf for variable (dbname)

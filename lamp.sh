@@ -32,7 +32,6 @@ install()
     apt-get update
     $APTINSTALL apt-transport-https ca-certificates software-properties-common
     echo "deb https://packages.sury.org/php/ $RELEASE main" > /etc/apt/sources.list.d/php.list
-    #wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add -
 	wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 
     # INSTALL 
@@ -134,7 +133,7 @@ EOF
     cp /etc/mysql/mariadb.conf.d/50-server.cnf         /etc/mysql/mariadb.conf.d/90-ncp.cnf
     sed -i '/\[mysqld\]/ainnodb_large_prefix=true'     /etc/mysql/mariadb.conf.d/90-ncp.cnf
     sed -i '/\[mysqld\]/ainnodb_file_per_table=1'      /etc/mysql/mariadb.conf.d/90-ncp.cnf
-    sed -i '/\[mysqld\]/ainnodb_file_format=barracuda' /etc/mysql/mariadb.conf.d/90-ncp.cnf
+    #sed -i '/\[mysqld\]/ainnodb_file_format=barracuda' /etc/mysql/mariadb.conf.d/90-ncp.cnf
 
 
   # launch mariadb if not already running

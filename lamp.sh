@@ -43,8 +43,8 @@ install()
     $APTINSTALL apache2
 
     $APTINSTALL -t $RELEASE php${PHPVER} libapache2-mod-php${PHPVER} php${PHPVER}-curl php${PHPVER}-gd php${PHPVER}-fpm libapache2-mod-fcgid php${PHPVER}-cli php${PHPVER}-opcache \
-                            php${PHPVER}-mbstring php${PHPVER}-xml php${PHPVER}-zip php${PHPVER}-fileinfo php${PHPVER}-ldap \
-                            php${PHPVER}-intl php${PHPVER}-bz2 php${PHPVER}-json php${PHPVER}-gmp php${PHPVER}-bcmath 
+                            php${PHPVER}-mbstring php${PHPVER}-xml php${PHPVER}-zip php${PHPVER}-common php${PHPVER}-ldap \
+                            php${PHPVER}-intl php${PHPVER}-bz2 php${PHPVER}-gmp php${PHPVER}-bcmath 
 
     mkdir -p /run/php
 

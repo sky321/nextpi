@@ -30,9 +30,10 @@ install()
 
     local RELEASE=$( grep RELEASE /root/.nextpi.cnf | sed 's|RELEASE=||' )
     apt-get update
-    $APTINSTALL apt-transport-https gnupg2 wget ca-certificates
+    $APTINSTALL apt-transport-https ca-certificates software-properties-common
     echo "deb https://packages.sury.org/php/ $RELEASE main" > /etc/apt/sources.list.d/php.list
-    wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add -
+    #wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add -
+	wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 
     # INSTALL 
     ##########################################
@@ -41,9 +42,9 @@ install()
     $APTINSTALL apt-utils cron curl ip2host
     $APTINSTALL apache2
 
-    $APTINSTALL -t $RELEASE php${PHPVER} php${PHPVER}-curl php${PHPVER}-gd php${PHPVER}-fpm php${PHPVER}-cli php${PHPVER}-opcache \
+    $APTINSTALL -t $RELEASE php${PHPVER} libapache2-mod-php${PHPVER} php${PHPVER}-curl php${PHPVER}-gd php${PHPVER}-fpm libapache2-mod-fcgid php${PHPVER}-cli php${PHPVER}-opcache \
                             php${PHPVER}-mbstring php${PHPVER}-xml php${PHPVER}-zip php${PHPVER}-fileinfo php${PHPVER}-ldap \
-                            php${PHPVER}-intl php${PHPVER}-bz2 php${PHPVER}-json php${PHPVER}-gmp php${PHPVER}-bcmath
+                            php${PHPVER}-intl php${PHPVER}-bz2 php${PHPVER}-json php${PHPVER}-gmp php${PHPVER}-bcmath 
 
     mkdir -p /run/php
 
@@ -52,8 +53,8 @@ install()
     echo -e "[client]\npassword=$DBPASSWD" > /root/.my.cnf
     chmod 600 /root/.my.cnf
 
-    debconf-set-selections <<< "mariadb-server-5.5 mysql-server/root_password password $DBPASSWD"
-    debconf-set-selections <<< "mariadb-server-5.5 mysql-server/root_password_again password $DBPASSWD"
+    #debconf-set-selections <<< "mariadb-server-5.5 mysql-server/root_password password $DBPASSWD"
+    #debconf-set-selections <<< "mariadb-server-5.5 mysql-server/root_password_again password $DBPASSWD"
     $APTINSTALL mariadb-server php${PHPVER}-mysql
     mkdir -p /run/mysqld
     chown mysql /run/mysqld
@@ -95,7 +96,7 @@ EOF
 </IfModule>
 EOF
 
-    # CONFIGURE PHP7
+    # CONFIGURE PHP
     ##########################################
 
     cat > /etc/php/${PHPVER}/mods-available/opcache.ini <<EOF

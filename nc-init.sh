@@ -141,8 +141,8 @@ EOF
   
   # blacklist
   sudo -u www-data php occ config:system:set blacklisted_files 0 --value=".htaccess"
-  sudo -u www-data php occ config:system:set blacklisted_files 0 --value="Thumbs.db"
-  sudo -u www-data php occ config:system:set blacklisted_files 0 --value="thumbs.db"
+  sudo -u www-data php occ config:system:set blacklisted_files 1 --value="Thumbs.db"
+  sudo -u www-data php occ config:system:set blacklisted_files 2 --value="thumbs.db"
   
   # email
   sudo -u www-data php occ config:system:set mail_smtpmode     --value="sendmail"

@@ -1,5 +1,5 @@
 # check loglevel / logrotate clean install vs. restore
-- check install logs in detail for small error
+# check install logs in detail for small error
 # check installed apps after restore
 - check config.php diff clean vs restore
 # check permissions
@@ -7,6 +7,7 @@
 - in lamp.sh check debconf-set-selections maria5.5 value
 - totp deactivated but app incompatible after restore???
 - test letsencrypt to certbot snap install
+- test unattended update (sury repo)
 - security check
 - MariaDB 10.5: Can't lock aria control file '/var/lib/mysql/aria_log_control' for exclusive use, error: 11
 	- https://jira.mariadb.org/browse/MDEV-24788

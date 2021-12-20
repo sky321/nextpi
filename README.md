@@ -21,10 +21,11 @@
 	- sudo ./install.sh
 - reboot (after reboot the ssh port is changed -> nextpi.cnf)
 - optional use nc-restore.sh to restore your data
+	- cleanup old data, appdata, update dir
 - optional use nc-datadir.sh to move data to a different dir
 - optional use letsencrypt.sh for automated certificates
 	- edit fritz.cnf before running the script
 	- use base64 for passphrase
-- optional replace dhparam.pem with your own one
+- optional replace dhparam.pem with your own values
 	- openssl dhparam -out dhparam.pem 4096
 	- insert the key in /etc/ssl/cert/dhparam.pem

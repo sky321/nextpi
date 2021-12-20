@@ -40,7 +40,7 @@ install()
   # Optional packets for Nextcloud and Apps
   apt-get update
   $APTINSTALL lbzip2 iputils-ping
-  $APTINSTALL -t $RELEASE php-smbclient                                         # for external storage
+  $APTINSTALL -t $RELEASE php${PHPVER}-smbclient                                         # for external storage
   $APTINSTALL -t $RELEASE imagemagick libmagickcore-6.q16-6-extra php${PHPVER}-imagick php${PHPVER}-exif    # for gallery
 
   # mail

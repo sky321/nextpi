@@ -1,9 +1,9 @@
-- totp deactivated but app incompatible after restore???
+# totp deactivated but app incompatible after restore???
 # test letsencrypt to certbot snap install
 # test unattended update (sury repo)
-	- sudo unattended-upgrade -d
+#	- sudo unattended-upgrade -d
 # MariaDB 10.5: Can't lock aria control file '/var/lib/mysql/aria_log_control' for exclusive use, error: 11
-	- https://jira.mariadb.org/browse/MDEV-24788
+#	- https://jira.mariadb.org/browse/MDEV-24788
 - security check
 - cleanup of comments
 - change nextpi.cnf for variable (dbname)

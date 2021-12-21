@@ -139,12 +139,14 @@ sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtpport     
 sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtpname      --value="$MAILNAME"
 sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtppassword  --value="$MAILPASS"
 
-#sudo -u www-data php /var/www/nextcloud/occ app:disable twofactor_totp
+# drop incompatible old 2Fact App if needed
+sudo -u www-data php /var/www/nextcloud/occ app:disable twofactor_totp
+sudo -u www-data php /var/www/nextcloud/occ app:enable twofactor_totp
 #sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME
 
 sudo umount $USBDIR
 
-#sudo -u www-data php occ upgrade
+#sudo -u www-data php /var/www/nextcloud/occ upgrade
 
 echo "Nextcloud restore finish.
 

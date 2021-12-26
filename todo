@@ -4,6 +4,7 @@
 #	- sudo unattended-upgrade -d
 # MariaDB 10.5: Can't lock aria control file '/var/lib/mysql/aria_log_control' for exclusive use, error: 11
 #	- https://jira.mariadb.org/browse/MDEV-24788
+- check mysql hardening
 - security check
 - cleanup of comments
 - change nextpi.cnf for variable (dbname)

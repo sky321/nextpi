@@ -110,13 +110,13 @@ configure()
   chown -R www-data:www-data $OPCACHEDIR
 
   # launch mariadb if not already running (for docker build)
-  if ! pgrep -c mysqld &>/dev/null; then
+  if ! pgrep -c mariadbd &>/dev/null; then
     echo "Starting mariaDB"
-    mysqld & 
+    service mysql start 
   fi
 
   # wait for mariadb
-  pgrep -x mysqld &>/dev/null || echo "mariaDB process not found"
+  pgrep -x mariadbd &>/dev/null || echo "mariaDB process not found"
 
   while :; do
     [[ -S /var/run/mysqld/mysqld.sock ]] && break

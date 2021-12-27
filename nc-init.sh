@@ -39,12 +39,12 @@ configure()
   echo "Setting up database..."
 
   # launch mariadb if not already running
-  if ! pgrep -c mysqld &>/dev/null; then
-    mysqld & 
+  if ! pgrep -c mariadbd &>/dev/null; then
+    service mysql start 
   fi
 
   # wait for mariadb
-  pgrep -x mysqld &>/dev/null || { 
+  pgrep -x mariadb &>/dev/null || { 
     echo "mariaDB process not found. Waiting..."
     while :; do
       [[ -S /run/mysqld/mysqld.sock ]] && break

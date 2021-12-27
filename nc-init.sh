@@ -44,7 +44,7 @@ configure()
   fi
 
   # wait for mariadb
-  pgrep -x mariadb &>/dev/null || { 
+  pgrep -x mariadbd &>/dev/null || { 
     echo "mariaDB process not found. Waiting..."
     while :; do
       [[ -S /run/mysqld/mysqld.sock ]] && break

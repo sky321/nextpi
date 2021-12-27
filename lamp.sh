@@ -137,8 +137,8 @@ EOF
 
 
   # launch mariadb if not already running
-  if ! pgrep -c mysqld &>/dev/null; then
-    mysqld & 
+  if ! pgrep -c mariadbd &>/dev/null; then
+	service mysql start 
   fi
 
   # wait for mariadb

@@ -140,8 +140,8 @@ sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtpname     
 sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtppassword  --value="$MAILPASS"
 
 # drop incompatible old 2Fact App if needed
-sudo -u www-data php /var/www/nextcloud/occ app:disable twofactor_totp
-sudo -u www-data php /var/www/nextcloud/occ app:enable twofactor_totp
+#sudo -u www-data php /var/www/nextcloud/occ app:disable twofactor_totp
+#sudo -u www-data php /var/www/nextcloud/occ app:enable twofactor_totp
 #sudo -u www-data php /var/www/nextcloud/occ twofactorauth:disable $USRNME
 
 sudo umount $USBDIR

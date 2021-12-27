@@ -161,7 +161,7 @@ EOF
   sudo -u www-data php /var/www/nextcloud/occ app:enable contacts
   #sudo -u www-data php /var/www/nextcloud/occ app:enable notes
   sudo -u www-data php /var/www/nextcloud/occ app:enable tasks
-  #sudo -u www-data php /var/www/nextcloud/occ app:enable twofactor_totp
+  sudo -u www-data php /var/www/nextcloud/occ app:enable twofactor_totp
   
   #disable some apps by default
   sudo -u www-data php /var/www/nextcloud/occ app:disable survey_client

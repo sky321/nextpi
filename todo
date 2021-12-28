@@ -1,3 +1,3 @@
 - security check
-- cleanup of comments
+- fail2ban test
 - change nextpi.cnf for variable (dbname)

@@ -49,16 +49,6 @@ configure()
 }
 EOF
 
-#  cat >> /etc/logrotate.d/letsencrypt <<'EOF'
-#/var/log/letsencrypt/letsencrypt.log
-#{
-#  rotate 14 
-#  daily
-#  compress
-#  missingok
-#  notifempty
-#}
-#EOF
 
     # SSH hardening
     echo "SSH hardnening...."

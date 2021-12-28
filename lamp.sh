@@ -52,8 +52,7 @@ install()
     echo -e "[client]\npassword=$DBPASSWD" > /root/.my.cnf
     chmod 600 /root/.my.cnf
 
-    #debconf-set-selections <<< "mariadb-server-5.5 mysql-server/root_password password $DBPASSWD"
-    #debconf-set-selections <<< "mariadb-server-5.5 mysql-server/root_password_again password $DBPASSWD"
+    # mariadb install
     $APTINSTALL mariadb-server php${PHPVER}-mysql
     mkdir -p /run/mysqld
     chown mysql /run/mysqld

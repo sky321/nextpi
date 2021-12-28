@@ -9,10 +9,7 @@ PHPVER=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
    htuser='www-data'
    htgroup='www-data'
    rootuser='root'
-   
-#  printf "Creating possible missing Directories\n"
-#  mkdir -p $ocpath/data
-#  mkdir -p $ocpath/updater
+
 
   printf "chmod Files and Directories\n"
   find ${ocpath}/ -type f -print0 | xargs -0 chmod 0640

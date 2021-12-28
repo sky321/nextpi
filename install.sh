@@ -60,7 +60,7 @@ chmod +x ncp-provisioning.sh
 ./ncp-provisioning.sh 
 systemctl reload apache2
 
-#popd
+# get IP
 
 IFACE="$( ip r | grep "default via" | awk '{ print $5 }' | head -1 )"
 IP="$( ip a show dev "$IFACE" | grep global | grep -oP '\d{1,3}(.\d{1,3}){3}' | head -1 )" 

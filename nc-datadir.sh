@@ -29,9 +29,6 @@ BASEDIR=$( dirname "$DATADIR" )
 
   [[ "$SRCDIR" == "$DATADIR" ]] && { echo -e "INFO: data already there"; exit 1; }
 
-#  [ -d "$BASEDIR" ] || { echo "$BASEDIR does not exist"; exit 1; }
-#  mkdir -p $BASEDIR
-
 # start
 
   cd /var/www/nextcloud
@@ -50,7 +47,6 @@ BASEDIR=$( dirname "$DATADIR" )
   mkdir -p $BASEDIR 
   chown www-data:www-data $BASEDIR 
   rsync -Aax "$SRCDIR" "$BASEDIR" || exit 1
-#  cp -r "$SRCDIR" "$BASEDIR" || exit
   chown www-data:www-data "$DATADIR"
  
   # tmp upload dir

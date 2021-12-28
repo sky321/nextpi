@@ -52,15 +52,9 @@ EOF
 
 mysql -u root "$DBNAME" <  "$BACKUPDIR"/nextcloud-mysql-dump.sql || { echo "Error restoring nextcloud database"; exit 1; }
 
-## RESTORE DATADIR & FILES
+## RESTORE DATADIR
 
 cd "$NCDIR"
-
-# Restore files  
-  
-#    echo "restore ${NCDIR}/apps"
-#    rm -r "${NCDIR}"/apps
-#    sudo rsync -Aax "${BACKUPDIR}"/nextcloud/apps/ "$NCDIR"/apps || { echo "Error restoring nextcloud apps"; exit 1; }
 
 	
 # Restore Data  

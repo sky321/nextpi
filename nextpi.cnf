@@ -1,7 +1,7 @@
 PIUSER=pi
 PINEWUSER=sky
 PHPVER=8.0
-NEXTVER=22.2.3
+NEXTVER=22.2.4
 ENV=test
 USBDEV=/dev/sda1
 USBDIR=/mnt/usbstick/

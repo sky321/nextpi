@@ -1,7 +1,7 @@
 - Download Raspbian Image from https://downloads.raspberrypi.org/raspios_lite_armhf/images/
 - use Etcher to flash img on SD card https://www.balena.io/etcher/
 - place a file named "ssh" onto the boot partition of the SD card to make ssh available
-- for installation via ssh you need to put also a userconf file on the card to create a new standard user
+- for installation via ssh you need to put also a "userconf" file on the card to create a new standard user
 	- https://www.raspberrypi.com/news/raspberry-pi-bullseye-update-april-2022/
 - boot sd card
 - login via ssh with user/password from wizzard or userconf
@@ -28,11 +28,13 @@
 - reboot (after reboot the ssh port is changed -> nextpi.cnf)
 
 - optional use nc-restore.sh to restore your data
+	- reboot
 	- cleanup old data, appdata, update dir
 - optional use nc-datadir.sh to move data to a different dir
+	- reboot
 - optional use letsencrypt.sh for automated certificates
 	- edit fritz.cnf before running the script
 	- use base64 for passphrase
 - optional replace dhparam.pem with your own values
 	- openssl dhparam -out dhparam.pem 4096
-	- insert the key in /etc/ssl/cert/dhparam.pem
+	- insert the key in /etc/ssl/certs/dhparam.pem

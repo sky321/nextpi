@@ -7,7 +7,7 @@
 - login via ssh with user/password from wizzard or userconf
 - change language, timezone and keyboard
 	- sudo raspi-config
-- change standard password
+- optional change standard password
 	- passwd
 - prepare some things upfront
 	- curl -s https://raw.githubusercontent.com/sky321/nextpi/master/prep.sh | /bin/bash
@@ -26,6 +26,7 @@
 	- cd nextpi	
 	- sudo ./install.sh
 - reboot (after reboot the ssh port is changed -> nextpi.cnf)
+
 - optional use nc-restore.sh to restore your data
 	- cleanup old data, appdata, update dir
 - optional use nc-datadir.sh to move data to a different dir

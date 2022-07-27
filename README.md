@@ -4,7 +4,7 @@
 - for installation via ssh you need to put also a "userconf" file on the card to create a new standard user
 	- https://www.raspberrypi.com/news/raspberry-pi-bullseye-update-april-2022/
 - boot sd card
-- login via ssh with user/password from wizzard or userconf
+- login via ssh with user/password from wizard or userconf
 - change language, timezone and keyboard
 	- sudo raspi-config
 - optional change standard password

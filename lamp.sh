@@ -61,7 +61,7 @@ install()
     ##########################################
 
   cat >/etc/apache2/conf-available/http2.conf <<EOF
-Protocols h2 h2c http/1.1
+Protocols h2 http/1.1
 
 # HTTP2 configuration
 H2Push          on
@@ -72,11 +72,11 @@ H2PushPriority  image/png               after   32
 H2PushPriority  application/javascript  interleaved
 
 # SSL/TLS Configuration
-SSLProtocol -all +TLSv1.2 +TLSv1.3
-SSLCipherSuite EECDH+AESGCM:EDH+AESGCM
-SSLOpenSSLConfCmd Curves X25519:secp521r1:secp384r1:prime256v1
+SSLProtocol all -SSLv3 -TLSv1 -TLSv1.1 -TLSv1.2
+SSLCipherSuite TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
+SSLOpenSSLConfCmd Curves X25519:prime256v1:secp384r1
 SSLOpenSSLConfCmd DHParameters "/etc/ssl/certs/dhparam.pem"
-SSLHonorCipherOrder     on
+SSLHonorCipherOrder     off
 SSLCompression          off
 SSLSessionTickets       off
 
@@ -84,12 +84,13 @@ SSLSessionTickets       off
 SSLUseStapling          on
 SSLStaplingResponderTimeout 5
 SSLStaplingReturnResponderErrors off
-SSLStaplingCache        shmcb:/var/run/ocsp(128000)
+# SSLStaplingCache        shmcb:/var/run/ocsp(128000)
+SSLStaplingCache        shmcb:logs/ssl_stapling(32768)
 EOF
 
     cat >> /etc/apache2/apache2.conf <<EOF
 <IfModule mod_headers.c>
-  Header always set Strict-Transport-Security "max-age=15768000; includeSubDomains; preload"
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
   Header always set Feature-Policy "accelerometer 'none'; autoplay 'self'; geolocation 'none'; midi 'none'; notifications 'self'; push 'self'; sync-xhr 'self'; microphone 'self'; camera 'self'; magnetometer 'none'; gyroscope 'none'; speaker 'self'; vibrate 'self'; fullscreen 'self'; payment 'none'; usb 'none'"
 </IfModule>
 EOF

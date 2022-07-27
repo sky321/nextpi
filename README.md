@@ -1,21 +1,27 @@
 - Download Raspbian Image from https://downloads.raspberrypi.org/raspios_lite_armhf/images/
 - use Etcher to flash img on SD card https://www.balena.io/etcher/
 - place a file named "ssh" onto the boot partition of the SD card to make ssh available
+- for installation via ssh you need to put also a userconf file on the card to create a new standard user
+	- https://www.raspberrypi.com/news/raspberry-pi-bullseye-update-april-2022/
 - boot sd card
-- login via ssh with pi/raspberry
+- login via ssh with user/password from wizzard or userconf
 - change language, timezone and keyboard
 	- sudo raspi-config
-- change standard password for PI user
+- change standard password
 	- passwd
 - prepare some things upfront
 	- curl -s https://raw.githubusercontent.com/sky321/nextpi/master/prep.sh | /bin/bash
 - cd nextpi
 - change nextpi.cnf (only var above the line are currently used)
+
+------------not needed for newer bullseye versions --------------
 - change standard PI user
 	- sudo ./chgusr1.sh
 	- login as root
 	- /home/pi/nextpi/chgusr2.sh
 	- login as new user
+------------not needed for newer bullseye versions --------------
+	
 - install nextcloud
 	- cd nextpi	
 	- sudo ./install.sh

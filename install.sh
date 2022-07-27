@@ -9,6 +9,11 @@
 #
 # more details at https://ownyourbits.com
 
+# put config file in place
+rm -f /root/.nextpi.cnf
+cp nextpi.cnf /root/.nextpi.cnf
+chmod 600 /root/.nextpi.cnf
+
 BRANCH=master
 DISTRO_1=$( grep DISTRO_1 /root/.nextpi.cnf | sed 's|DISTRO_1=||' )
 DISTRO_2=$( grep DISTRO_2 /root/.nextpi.cnf | sed 's|DISTRO_2=||' )

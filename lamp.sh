@@ -73,7 +73,7 @@ H2PushPriority  image/png               after   32
 H2PushPriority  application/javascript  interleaved
 
 # SSL/TLS Configuration
-SSLProtocol all -SSLv3 -TLSv1 -TLSv1.1 -TLSv1.2
+SSLProtocol -all +TLSv1.3 +TLSv1.2
 SSLCipherSuite EECDH+AESGCM:EDH+AESGCM
 SSLOpenSSLConfCmd Curves X25519:secp384r1:prime256v1
 SSLOpenSSLConfCmd DHParameters "/etc/ssl/certs/dhparam.pem"

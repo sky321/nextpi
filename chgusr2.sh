@@ -22,7 +22,7 @@ groupmod --new-name $newuser $user
 
 # update sudo  
 mv /etc/sudoers.d/010_pi-nopasswd /home/${newuser}
-echo "Defaults        !tty_tickets" > /etc/sudoers.d/01_file
+#echo "Defaults        !tty_tickets" > /etc/sudoers.d/01_file
 
 # disable ssh root login and password
 sed -i 's|^PermitRootLogin .*|#PermitRootLogin yes|' /etc/ssh/sshd_config

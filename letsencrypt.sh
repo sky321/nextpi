@@ -46,7 +46,7 @@ Your certificate will be automatically renewed"
   # Do it
   #
   ./pre-hook.sh
-  certbot certonly -n --apache --hsts --agree-tos --rsa-key-size 4096 -m $EMAIL_ -d $DOMAIN_ && {
+  certbot certonly -n --apache --hsts --agree-tos --key-type ecdsa -m $EMAIL_ -d $DOMAIN_ && {
     ./post-hook.sh
   
     DOMAIN_LOWERCASE="${DOMAIN_,,}"

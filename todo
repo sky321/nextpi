@@ -1,4 +1,3 @@
 - check php update 8.0 suvry repo, 8.1 is not recom.
-- fail2ban test
 - add comments to nextpi.cnf
 - change nextpi.cnf for variable (dbname)

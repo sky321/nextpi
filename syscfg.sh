@@ -99,6 +99,13 @@ mv /etc/sudoers.d/010_pi-nopasswd /home/${newuser}
   echo $HOST > /etc/hostname
   sed -i "s|raspberrypi|$HOST|"  /etc/hosts
   
+## Alias for nextcloud occ cmd
+if [ ! -f /root/.bashrc ]; then touch /root/.bashrc; fi
+
+cat <<EOF >> /root/.bashrc
+alias nocc="sudo -u www-data /usr/bin/php /var/www/nextcloud/occ"
+EOF
+  
 }
 
 install() { :; }

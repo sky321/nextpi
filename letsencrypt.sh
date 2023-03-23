@@ -74,6 +74,21 @@ Your certificate will be automatically renewed"
 	cp pre-hook.sh /etc/letsencrypt/renewal-hooks/pre
 	cp post-hook.sh /etc/letsencrypt/renewal-hooks/post
 	
+# logrotate replace std in certbot
+	echo "max-log-backups = 0" >> /etc/letsencrypt/cli.ini
+	
+	cat >> /etc/logrotate.d/certbot <<'EOF'
+/var/log/letsencrypt/letsencrypt.log
+{
+  rotate 14
+  daily
+  compress
+  missingok
+  notifempty
+}
+EOF
+
+	
     echo "Letsencrypt is finished successful
 	run sudo certbot renew --dry-run 
 	to see if it's OK"

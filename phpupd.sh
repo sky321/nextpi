@@ -5,16 +5,13 @@
 # Copyleft 2017 by Ignacio Nunez Hernanz <nacho _a_t_ ownyourbits _d_o_t_ com>
 # GPL licensed (see end of file) * Use at your own risk!
 #
-# Usage:
+# Usage: Before you start!
 # 
-#   ./installer.sh lamp.sh <IP> (<img>)
+#   dpkg -l | grep php | tee php.txt
 #
-# See installer.sh instructions for details
+#   php -v
 #
-# Notes:
-#   Upon each necessary restart, the system will cut the SSH session, therefore
-#   it is required to save the state of the installation. See variable $STATE_FILE
-#   It will be necessary to invoke this a number of times for a complete installation
+# Nachher evtl. apt purge '^php8.0*'
 #
 # More at https://ownyourbits.com/2017/02/13/nextcloud-ready-raspberry-pi-image/
 #
@@ -32,8 +29,10 @@ MEMORYLIMIT=768M
 MAXTRANSFERTIME=3600
 
 apt-get update
-service php${PHPALT}-fpm stop
+
 service apache2 stop
+service mysql stop
+service php${PHPALT}-fpm stop
 
     # INSTALL 
     ##########################################
@@ -81,14 +80,14 @@ EOF
   sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/cli/php.ini
   sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/fpm/php.ini
   
+a2dismod php${PHPALT}-fpm
+a2enmod php${PHPVER}-fpm
 
-a2disconf php${PHPALT}-fpm
-a2enconf php${PHPVER}-fpm
 service php${PHPVER}-fpm start
 service apache2 start
+service mysql start
 
-update-alternatives --all
-    
+#update-alternatives --config  php
 
 
 # License

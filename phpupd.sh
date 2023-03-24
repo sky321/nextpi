@@ -5,16 +5,14 @@
 # Copyleft 2017 by Ignacio Nunez Hernanz <nacho _a_t_ ownyourbits _d_o_t_ com>
 # GPL licensed (see end of file) * Use at your own risk!
 #
-# Usage: Before you start!
+# Usage: Before you start check and refine what is to be installed
 # 
 #   dpkg -l | grep php | tee php.txt
-#
 #   php -v
 #
 # Nachher evtl. apt purge '^php8.0*'
 #
-# More at https://ownyourbits.com/2017/02/13/nextcloud-ready-raspberry-pi-image/
-#
+# 
 
 PHPALT=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
 PHPVER=8.1
@@ -83,9 +81,9 @@ EOF
 a2dismod php${PHPALT}-fpm
 a2enmod php${PHPVER}-fpm
 
+service mysql start
 service php${PHPVER}-fpm start
 service apache2 start
-service mysql start
 
 #update-alternatives --config  php
 

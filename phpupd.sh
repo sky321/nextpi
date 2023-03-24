@@ -35,7 +35,7 @@ service php${PHPALT}-fpm stop
     # INSTALL 
     ##########################################
 
-    $APTINSTALL -t $RELEASE php${PHPVER} libapache2-mod-php${PHPVER} php${PHPVER}-curl php${PHPVER}-gd php${PHPVER}-fpm libapache2-mod-fcgid php${PHPVER}-cli php${PHPVER}-opcache php${PHPVER}-mbstring php${PHPVER}-xml php${PHPVER}-zip php${PHPVER}-common php${PHPVER}-ldap php${PHPVER}-intl php${PHPVER}-bz2 php${PHPVER}-gmp php${PHPVER}-bcmath php${PHPVER}-mysql php${PHPVER}-smbclient php${PHPVER}-imagick php${PHPVER}-exif php${PHPVER}-redis 
+    $APTINSTALL -t $RELEASE php${PHPVER} libapache2-mod-php${PHPVER} php${PHPVER}-curl php${PHPVER}-gd php${PHPVER}-fpm libapache2-mod-fcgid php${PHPVER}-cli php${PHPVER}-opcache php${PHPVER}-mbstring php${PHPVER}-xml php${PHPVER}-zip php${PHPVER}-common php${PHPVER}-ldap php${PHPVER}-intl php${PHPVER}-bz2 php${PHPVER}-gmp php${PHPVER}-bcmath php${PHPVER}-mysql php${PHPVER}-smbclient php${PHPVER}-imagick php${PHPVER}-exif php${PHPVER}-redis php${PHPVER}-igbinary php${PHPVER}-readline
 
     # CONFIGURE PHP
     ##########################################

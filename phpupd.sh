@@ -36,7 +36,7 @@ apt-get update && sudo apt-get dist-upgrade
     # INSTALL 
     ##########################################
 
-packages="$(echo $(dpkg -l | awk '/^ii/ {print $2}' | grep -i $PHPALT | sed 's/$PHPALT/$PHPVER/g'))"
+packages="$(echo $(dpkg -l | awk '/^ii/ {print $2}' | grep -i php$PHPALT | sed 's/php'$PHPALT'/php'$PHPVER'/g'))"
 apt-get install $packages
 
 #    $APTINSTALL -t $RELEASE php${PHPVER} libapache2-mod-php${PHPVER} php${PHPVER}-curl php${PHPVER}-gd php${PHPVER}-fpm libapache2-mod-fcgid php${PHPVER}-cli php${PHPVER}-opcache php${PHPVER}-mbstring php${PHPVER}-xml php${PHPVER}-zip php${PHPVER}-common php${PHPVER}-ldap php${PHPVER}-intl php${PHPVER}-bz2 php${PHPVER}-gmp php${PHPVER}-bcmath php${PHPVER}-mysql php${PHPVER}-smbclient php${PHPVER}-imagick php${PHPVER}-exif php${PHPVER}-redis php${PHPVER}-igbinary php${PHPVER}-readline

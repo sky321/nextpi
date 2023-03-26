@@ -81,7 +81,7 @@ EOF
   # session cockie secure PHP
   sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/cli/php.ini
   sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/fpm/php.ini
-  
+
 a2disconf php${PHPALT}-fpm
 a2enconf php${PHPVER}-fpm
 systemctl reload apache2
@@ -91,6 +91,12 @@ systemctl reload apache2
 #service apache2 start
 
 #update-alternatives --config  php
+
+  # Nextcloud Server update:
+
+#sudo -u www-data php -f /var/www/nextcloud/occ app:update --all
+#sudo -u www-data php -f /var/www/nextcloud/updater/updater.phar
+
 
 
 # License

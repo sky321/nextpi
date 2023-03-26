@@ -10,7 +10,7 @@
 #   dpkg -l | grep php | tee php.txt
 #   php -v
 #
-# Nachher evtl. apt purge '^php8.0*'
+# Nachher evtl. apt-get remove --purge ${PHPALT}*
 #
 # 
 
@@ -26,16 +26,20 @@ MAXFILESIZE=2G
 MEMORYLIMIT=768M
 MAXTRANSFERTIME=3600
 
-apt-get update
+apt-get update && sudo apt-get dist-upgrade
+[ -f /var/run/reboot-required ] && { echo "Reboot required"; read -p "Press ENTER to reboot or ^C to cancel" dummy; sudo systemctl reboot; exit; } || echo "No reboot required"
 
-service apache2 stop
-service mysql stop
-service php${PHPALT}-fpm stop
+#service apache2 stop
+#service mysql stop
+#service php${PHPALT}-fpm stop
 
     # INSTALL 
     ##########################################
 
-    $APTINSTALL -t $RELEASE php${PHPVER} libapache2-mod-php${PHPVER} php${PHPVER}-curl php${PHPVER}-gd php${PHPVER}-fpm libapache2-mod-fcgid php${PHPVER}-cli php${PHPVER}-opcache php${PHPVER}-mbstring php${PHPVER}-xml php${PHPVER}-zip php${PHPVER}-common php${PHPVER}-ldap php${PHPVER}-intl php${PHPVER}-bz2 php${PHPVER}-gmp php${PHPVER}-bcmath php${PHPVER}-mysql php${PHPVER}-smbclient php${PHPVER}-imagick php${PHPVER}-exif php${PHPVER}-redis php${PHPVER}-igbinary php${PHPVER}-readline
+packages="$(echo $(dpkg -l | awk '/^ii/ {print $2}' | grep -i $PHPALT | sed 's/$PHPALT/$PHPVER/g'))"
+apt-get install $packages
+
+#    $APTINSTALL -t $RELEASE php${PHPVER} libapache2-mod-php${PHPVER} php${PHPVER}-curl php${PHPVER}-gd php${PHPVER}-fpm libapache2-mod-fcgid php${PHPVER}-cli php${PHPVER}-opcache php${PHPVER}-mbstring php${PHPVER}-xml php${PHPVER}-zip php${PHPVER}-common php${PHPVER}-ldap php${PHPVER}-intl php${PHPVER}-bz2 php${PHPVER}-gmp php${PHPVER}-bcmath php${PHPVER}-mysql php${PHPVER}-smbclient php${PHPVER}-imagick php${PHPVER}-exif php${PHPVER}-redis php${PHPVER}-igbinary php${PHPVER}-readline
 
     # CONFIGURE PHP
     ##########################################
@@ -78,12 +82,13 @@ EOF
   sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/cli/php.ini
   sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/fpm/php.ini
   
-a2dismod php${PHPALT}-fpm
-a2enmod php${PHPVER}-fpm
+a2disconf php${PHPALT}-fpm
+a2enconf php${PHPVER}-fpm
+systemctl reload apache2
 
-service mysql start
-service php${PHPVER}-fpm start
-service apache2 start
+#service mysql start
+#service php${PHPVER}-fpm start
+#service apache2 start
 
 #update-alternatives --config  php
 

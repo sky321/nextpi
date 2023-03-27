@@ -82,9 +82,11 @@ EOF
   sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/cli/php.ini
   sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/fpm/php.ini
 
+a2dismod php${PHPALT}-fpm
+a2enmod php${PHPVER}-fpm
 a2disconf php${PHPALT}-fpm
 a2enconf php${PHPVER}-fpm
-systemctl reload apache2
+systemctl restart apache2
 
 #service mysql start
 #service php${PHPVER}-fpm start

@@ -2,6 +2,8 @@
 
 #
 # Usage: Before you start check and refine what is to be installed
+# 
+# https://help.nextcloud.com/t/howto-upgrade-to-nextcloud-26-on-debian-bullseye/156602
 #
 # 
 

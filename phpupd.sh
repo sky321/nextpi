@@ -15,7 +15,7 @@
 # 
 
 PHPALT=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
-PHPVER=8.1
+PHPVER=8.2
 DATADIR=$( grep CHGDATADIR /root/.nextpi.cnf | sed 's|CHGDATADIR=||' )
 RELEASE=$( grep RELEASE /root/.nextpi.cnf | sed 's|RELEASE=||' )
 

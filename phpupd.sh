@@ -92,7 +92,8 @@ systemctl restart apache2
 #service php${PHPVER}-fpm start
 #service apache2 start
 
-#update-alternatives --config  php
+# update-alternatives --config  php
+# for linkgroup in `ls /var/lib/dpkg/alternatives/ | grep -E "ph(ar|p)"`; do sudo update-alternatives --config $linkgroup; done
 
   # Nextcloud Server update:
 

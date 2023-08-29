@@ -35,7 +35,7 @@ type mysqld  &>/dev/null && echo ">>> WARNING: existing mysqld configuration wil
 # get install code
 echo "Getting build code..."
 apt-get update
-apt-get install --no-install-recommends -y wget ca-certificates sudo
+apt-get install --no-install-recommends -y wget ca-certificates sudo jq
 
 # put config file in place
 rm -f /root/.nextpi.cnf

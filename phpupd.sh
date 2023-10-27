@@ -37,7 +37,13 @@ apt-get update && sudo apt-get dist-upgrade
     ##########################################
 
 packages="$(echo $(dpkg -l | awk '/^ii/ {print $2}' | grep -i php$PHPALT | sed 's/php'$PHPALT'/php'$PHPVER'/g'))"
+
+echo $packages
+read -p "PACK - Press ENTER to proceed or ^C to cancel"
+
 apt-get install $packages
+
+read -p "INST - Press ENTER to proceed or ^C to cancel"
 
 #    $APTINSTALL -t $RELEASE php${PHPVER} libapache2-mod-php${PHPVER} php${PHPVER}-curl php${PHPVER}-gd php${PHPVER}-fpm libapache2-mod-fcgid php${PHPVER}-cli php${PHPVER}-opcache php${PHPVER}-mbstring php${PHPVER}-xml php${PHPVER}-zip php${PHPVER}-common php${PHPVER}-ldap php${PHPVER}-intl php${PHPVER}-bz2 php${PHPVER}-gmp php${PHPVER}-bcmath php${PHPVER}-mysql php${PHPVER}-smbclient php${PHPVER}-imagick php${PHPVER}-exif php${PHPVER}-redis php${PHPVER}-igbinary php${PHPVER}-readline
 
@@ -81,6 +87,8 @@ EOF
   # session cockie secure PHP
   sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/cli/php.ini
   sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/fpm/php.ini
+
+read -p "CONF - Press ENTER to proceed or ^C to cancel"
 
 a2dismod php${PHPALT}-fpm
 a2enmod php${PHPVER}-fpm

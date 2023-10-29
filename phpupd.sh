@@ -36,7 +36,7 @@ apt-get update && sudo apt-get dist-upgrade
     # INSTALL 
     ##########################################
 
-packages="$(echo $(dpkg -l | awk '/^ii/ {print $2}' | grep -i php$PHPALT | sed 's/php'$PHPALT'/php'$PHPVER'/g'))"
+packages="$(echo $(dpkg -l | awk '/^ii/ {print $2}' | grep -i php${PHPALT} | sed 's/php'$PHPALT'/php'$PHPVER'/g'))"
 
 echo $packages
 read -p "PACK - Press ENTER to proceed or ^C to cancel"

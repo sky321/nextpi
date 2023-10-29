@@ -67,9 +67,9 @@ EOF
   sed -i "s|^opcache.file_cache=.*|opcache.file_cache=$DATADIR/.opcache|" /etc/php/${PHPVER}/mods-available/opcache.ini
 
 # tmp upload dir
-  mkdir -p "$DATADIR/tmp" 
-  chown www-data:www-data "$DATADIR/tmp"
-  sudo -u www-data php occ config:system:set tempdirectory --value "$DATADIR/tmp"
+#  mkdir -p "$DATADIR/tmp" 
+#  chown www-data:www-data "$DATADIR/tmp"
+#  sudo -u www-data php occ config:system:set tempdirectory --value "$DATADIR/tmp"
   sed -i "s|^;\?upload_tmp_dir =.*$|uploadtmp_dir = $DATADIR/tmp|" /etc/php/${PHPVER}/cli/php.ini
   sed -i "s|^;\?upload_tmp_dir =.*$|upload_tmp_dir = $DATADIR/tmp|" /etc/php/${PHPVER}/fpm/php.ini
   sed -i "s|^;\?sys_temp_dir =.*$|sys_temp_dir = $DATADIR/tmp|"     /etc/php/${PHPVER}/fpm/php.ini
@@ -90,9 +90,10 @@ EOF
 
 read -p "CONF - Press ENTER to proceed or ^C to cancel"
 
-a2dismod php${PHPALT}-fpm
-a2enmod php${PHPVER}-fpm
+#a2dismod php${PHPALT}-fpm
+#a2enmod php${PHPVER}-fpm
 a2disconf php${PHPALT}-fpm
+a2enmod proxy_fcgi setenvif
 a2enconf php${PHPVER}-fpm
 systemctl restart apache2
 

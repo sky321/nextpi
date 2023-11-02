@@ -1,4 +1,4 @@
-- Download Raspbian Image from https://downloads.raspberrypi.org/raspios_lite_armhf/images/
+- Download Raspbian Image from https://downloads.raspberrypi.org/raspios_lite_arm64/images/
 - use Etcher to flash img on SD card https://www.balena.io/etcher/
 - place a file named "ssh" onto the boot partition of the SD card to make ssh available
 - for installation via ssh you need to put also a "userconf" file on the card to create a new standard user
@@ -15,11 +15,13 @@
 - change nextpi.cnf (only var above the line are currently used)
 
 ------------not needed for newer bullseye versions --------------
+
 - change standard PI user
 	- sudo ./chgusr1.sh
 	- login as root
 	- /home/pi/nextpi/chgusr2.sh
 	- login as new user
+	
 ------------not needed for newer bullseye versions --------------
 	
 - install nextcloud

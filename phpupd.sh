@@ -22,7 +22,7 @@ RELEASE=$( grep RELEASE /root/.nextpi.cnf | sed 's|RELEASE=||' )
 APTINSTALL="apt-get install -y --no-install-recommends"
 export DEBIAN_FRONTEND=noninteractive
 
-MAXFILESIZE=2G
+MAXFILESIZE=512M
 MEMORYLIMIT=768M
 MAXTRANSFERTIME=3600
 

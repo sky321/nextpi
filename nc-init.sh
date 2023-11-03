@@ -11,7 +11,7 @@
 ADMINUSER_=$( grep ADMINUSER /root/.nextpi.cnf | sed 's|ADMINUSER=||' )
 ADMINPASS_=$( grep ADMINPASS /root/.nextpi.cnf | sed 's|ADMINPASS=||' )
 DBADMIN=$( grep DBADMIN /root/.nextpi.cnf | sed 's|DBADMIN=||' )
-MAXFILESIZE=2G
+MAXFILESIZE=512M
 MEMORYLIMIT=768M
 MAXTRANSFERTIME=3600
 

@@ -6,6 +6,10 @@
 # Carsten Rieger IT-Services (https://www.c-rieger.de)
 ##########################################################################################
 
+# get IP
+IFACE="$( ip r | grep "default via" | awk '{ print $5 }' | head -1 )"
+IP="$( ip a show dev "$IFACE" | grep global | grep -oP '\d{1,3}(.\d{1,3}){3}' | head -1 )" 
+
 install()
 {
 echo ""
@@ -49,6 +53,17 @@ labels:
   type: Nextcloud
 ---
 EOF
+
+cat > /etc/crowdsec/parsers/s02-enrich/personal-whitelist.yaml <<'EOF'
+name: crowdsecurity/whitelists
+description: "Whitelist events from my personal ips"
+whitelist:
+  reason: "internal traffic from my personal ips"
+  ip:
+    - "$IP"
+    - "127.0.0.1/8"
+EOF
+
 
 systemctl reload crowdsec && systemctl restart crowdsec.service crowdsec-firewall-bouncer.service
 

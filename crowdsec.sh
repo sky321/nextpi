@@ -54,6 +54,10 @@ labels:
 ---
 EOF
 
+# get IP
+IFACE="$( ip r | grep "default via" | awk '{ print $5 }' | head -1 )"
+IP="$( ip a show dev "$IFACE" | grep global | grep -oP '\d{1,3}(.\d{1,3}){3}' | head -1 )"
+
 cat > /etc/crowdsec/parsers/s02-enrich/personal-whitelist.yaml <<'EOF'
 name: crowdsecurity/whitelists
 description: "Whitelist events from my personal ips"

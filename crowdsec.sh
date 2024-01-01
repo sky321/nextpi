@@ -12,14 +12,14 @@ IP="$( ip a show dev "$IFACE" | grep global | grep -oP '\d{1,3}(.\d{1,3}){3}' | 
 
 install()
 {
-echo ""
-echo " » fail2ban wird entfernt  // remove fail2ban"
-echo ""
+#echo ""
+#echo " » fail2ban wird entfernt  // remove fail2ban"
+#echo ""
 
-systemctl stop fail2ban.service
-systemctl disable fail2ban.service
-systemctl mask fail2ban.service
-apt-get remove fail2ban --purge -y
+#systemctl stop fail2ban.service
+#systemctl disable fail2ban.service
+#systemctl mask fail2ban.service
+#apt-get remove fail2ban --purge -y
 
 echo ""
 echo " » Crowdsec wird heruntergeladen+installiert // crowdsec will be downloaded+installed"

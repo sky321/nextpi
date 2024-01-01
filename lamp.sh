@@ -31,8 +31,8 @@ install()
     local RELEASE=$( grep RELEASE /root/.nextpi.cnf | sed 's|RELEASE=||' )
     apt-get update
     $APTINSTALL apt-transport-https ca-certificates software-properties-common
-    echo "deb https://packages.sury.org/php/ $RELEASE main" > /etc/apt/sources.list.d/php.list
-	wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+#    echo "deb https://packages.sury.org/php/ $RELEASE main" > /etc/apt/sources.list.d/php.list
+#	 wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 
     # INSTALL 
     ##########################################

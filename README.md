@@ -1,5 +1,5 @@
 - Download Raspbian Image from https://downloads.raspberrypi.org/raspios_lite_arm64/images/
-- use Etcher to flash img on SD card https://www.balena.io/etcher/
+- use Etcher to flash img on SD card https://github.com/balena-io/etcher
 - place a file named "ssh" onto the boot partition of the SD card to make ssh available
 - for installation via ssh you need to put also a "userconf" file on the card to create a new standard user
 	- https://www.raspberrypi.com/news/raspberry-pi-bullseye-update-april-2022/

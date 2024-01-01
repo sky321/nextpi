@@ -1,3 +1,2 @@
-- change fail2ban to crowdsec for initial install
 - add comments to nextpi.cnf
 - change nextpi.cnf for variable (dbname)

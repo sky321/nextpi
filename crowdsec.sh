@@ -6,10 +6,6 @@
 # Carsten Rieger IT-Services (https://www.c-rieger.de)
 ##########################################################################################
 
-# get IP
-IFACE="$( ip r | grep "default via" | awk '{ print $5 }' | head -1 )"
-IP="$( ip a show dev "$IFACE" | grep global | grep -oP '\d{1,3}(.\d{1,3}){3}' | head -1 )" 
-
 install()
 {
 #echo ""
@@ -37,6 +33,11 @@ echo ""
 echo " » Crowdsec wird konfiguriert // crowdsec will be configured"
 echo ""
 
+SRCDIR=$( cd /var/www/nextcloud; sudo -u www-data php occ config:system:get datadirectory ) || {
+    echo -e "Error reading data directory. Is NextCloud running and configured?"; 
+    exit 1;
+  }
+
 systemctl enable --now crowdsec.service
 
 cscli collections install crowdsecurity/nextcloud
@@ -48,7 +49,7 @@ cp /etc/crowdsec/acquis.yaml /etc/crowdsec/acquis.yaml.bak
 cat <<EOF >>/etc/crowdsec/acquis.yaml
 #Nextcloud by c-rieger.de
 filenames:
- - /var/www/nextcloud/data/nextcloud.log
+ - "$SRCDIR"/nextcloud.log
 labels:
   type: Nextcloud
 ---

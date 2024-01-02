@@ -60,8 +60,9 @@ BASEDIR=$( dirname "$DATADIR" )
   # opcache dir
   sed -i "s|^opcache.file_cache=.*|opcache.file_cache=$DATADIR/.opcache|" /etc/php/${PHPVER}/mods-available/opcache.ini
 
-  # update fail2ban logpath
-  sed -i "s|logpath  =.*nextcloud.log|logpath  = $DATADIR/nextcloud.log|" /etc/fail2ban/jail.local
+  # update logpath
+  #sed -i "s|logpath  =.*nextcloud.log|logpath  = $DATADIR/nextcloud.log|" /etc/fail2ban/jail.local
+  sed -i "s|-.*nextcloud.log|- $DATADIR/nextcloud.log|" /etc/crowdsec/acquis.yaml
 
   # datadir & tmp
   sudo -u www-data php occ config:system:set datadirectory --value="$DATADIR"

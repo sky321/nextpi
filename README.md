@@ -33,6 +33,7 @@
 	- reboot
 	- cleanup backupdata, data/appdata, data/update dir
 - optional use nc-datadir.sh to move data to a different dir
+	- cleanup db entries
 	- reboot
 - optional use letsencrypt.sh for automated certificates
 	- edit fritz.cnf before running the script

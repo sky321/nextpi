@@ -104,8 +104,8 @@ echo "restore theme..."
 IDOLD=$( grep instanceid "$BACKUPDIR"/nextcloud/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
 IDNEW=$( grep instanceid "$NCDIR"/config/config.php | awk -F "=> " '{ print $2 }' | sed "s|[,']||g")
 
-mkdir -p "$DATADIR"/appdata_${IDNEW}/theming/images
-cp "$BACKUPDIR"/data/appdata_${IDOLD}/theming/images/logo "$BACKUPDIR"/data/appdata_${IDOLD}/theming/images/background "$DATADIR"/appdata_${IDNEW}/theming/images
+mkdir -p "$DATADIR"/appdata_${IDNEW}/theming/global/images
+cp "$BACKUPDIR"/data/appdata_${IDOLD}/theming/global/images/logo "$BACKUPDIR"/data/appdata_${IDOLD}/theming/global/images/background "$DATADIR"/appdata_${IDNEW}/theming/global/images
 chown -R www-data:www-data "$DATADIR"/appdata_${IDNEW}
 
 # Mail config

@@ -31,7 +31,7 @@
 
 - optional use nc-restore.sh to restore your data
 	- reboot
-	- cleanup old data, appdata, update dir
+	- cleanup backupdata, data/appdata, data/update dir
 - optional use nc-datadir.sh to move data to a different dir
 	- reboot
 - optional use letsencrypt.sh for automated certificates

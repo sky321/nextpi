@@ -14,7 +14,7 @@ SoapParamString="<NewRemoteHost>0.0.0.0</NewRemoteHost>
 <NewExternalPort>80</NewExternalPort>
 <NewProtocol>TCP</NewProtocol>
 <NewInternalPort>80</NewInternalPort>
-<NewInternalClient>192.168.0.213</NewInternalClient>
+<NewInternalClient>192.168.0.228</NewInternalClient>
 <NewEnabled>0</NewEnabled>
 <NewPortMappingDescription>HTTP-Server</NewPortMappingDescription>
 <NewLeaseDuration>0</NewLeaseDuration>"

@@ -73,8 +73,6 @@ EOF
 systemctl reload crowdsec && systemctl restart crowdsec.service crowdsec-firewall-bouncer.service
 
 #cron update job
-sudo -s
-echo "0 2 * * * /usr/bin/cscli hub update && /usr/bin/cscli hub upgrade > /dev/null #2>&1" >> /var/spool/cron/crontabs/root
-exit
+echo "0 2 * * * /usr/bin/cscli hub update && /usr/bin/cscli hub upgrade > /dev/null 2>&1" >> /var/spool/cron/crontabs/root
 
 }

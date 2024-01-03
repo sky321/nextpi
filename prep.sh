@@ -29,6 +29,7 @@ echo
 echo
 git clone https://github.com/sky321/nextpi.git
 cd nextpi
+chmod +x *.sh
 
 echo
 echo

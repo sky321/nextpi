@@ -49,7 +49,7 @@ cp /etc/crowdsec/acquis.yaml /etc/crowdsec/acquis.yaml.bak
 cat <<EOF >>/etc/crowdsec/acquis.yaml
 #Nextcloud by c-rieger.de
 filenames:
- - "$SRCDIR"/nextcloud.log
+ - $SRCDIR/nextcloud.log
 labels:
   type: Nextcloud
 ---
@@ -59,7 +59,7 @@ EOF
 IFACE="$( ip r | grep "default via" | awk '{ print $5 }' | head -1 )"
 IP="$( ip a show dev "$IFACE" | grep global | grep -oP '\d{1,3}(.\d{1,3}){3}' | head -1 )"
 
-cat > /etc/crowdsec/parsers/s02-enrich/personal-whitelist.yaml <<'EOF'
+cat > /etc/crowdsec/parsers/s02-enrich/personal-whitelist.yaml << EOF
 name: crowdsecurity/whitelists
 description: "Whitelist events from my personal ips"
 whitelist:

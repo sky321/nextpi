@@ -69,7 +69,10 @@ whitelist:
     - "127.0.0.1/8"
 EOF
 
+#cron update job
+echo "0 2 * * * /usr/bin/cscli hub update && /usr/bin/cscli hub upgrade > /dev/null 2>&1" >> /var/spool/cron/crontabs/root
 
+#restart services
 systemctl reload crowdsec && systemctl restart crowdsec.service crowdsec-firewall-bouncer.service
 
 }

@@ -33,21 +33,21 @@ configure()
   mkdir $USBDIR
 
   # Initiat logrotate
-  echo "init logrotate...."
+#  echo "init logrotate...."
 
-  cat >> /etc/logrotate.d/unattended-upgrades <<'EOF'
-/var/log/unattended-upgrades/unattended-upgrades.log
-{
-  rotate 6
-  monthly
-  compress
-  missingok
-  notifempty
-	postrotate
-        	rm /var/log/unattended-upgrades/unattended-upgrades-dpkg_*;
-	endscript
-}
-EOF
+#  cat >> /etc/logrotate.d/unattended-upgrades <<'EOF'
+#/var/log/unattended-upgrades/unattended-upgrades.log
+#{
+#  rotate 6
+#  monthly
+#  compress
+#  missingok
+#  notifempty
+#	postrotate
+#        	rm /var/log/unattended-upgrades/unattended-upgrades-dpkg_*;
+#	endscript
+#}
+#EOF
 
 
     # SSH hardening

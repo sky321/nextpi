@@ -1,2 +1,3 @@
+- code cleanup (delete old # stuff)
 - add comments to nextpi.cnf
 - change nextpi.cnf for variable (dbname)

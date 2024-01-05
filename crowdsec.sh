@@ -69,6 +69,9 @@ whitelist:
     - "127.0.0.1/8"
 EOF
 
+# enable WAL for local sqlite db
+grep -q use_wal /etc/crowdsec/config.yaml || sudo sed -i "/db_config:/a\  use_wal: true" /etc/crowdsec/config.yaml
+
 #restart services
 systemctl reload crowdsec && systemctl restart crowdsec.service crowdsec-firewall-bouncer.service
 

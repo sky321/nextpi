@@ -135,17 +135,17 @@ sudo -u www-data php /var/www/nextcloud/occ config:system:set mail_smtppassword 
 
 # update crowdsec email notification
 cp /etc/crowdsec/notifications/email.yaml /etc/crowdsec/notifications/email.yaml.bak
-sed -i 's|^smtp_host: .*|smtp_host: $MAILHOST|' /etc/crowdsec/notifications/email.yaml
-sed -i 's|^smtp_username: .*|smtp_username: $MAILNAME|' /etc/crowdsec/notifications/email.yaml
-sed -i 's|^smtp_password: .*|smtp_password: $MAILPASS|' /etc/crowdsec/notifications/email.yaml
-sed -i 's|^smtp_port: .*|smtp_port: $MAILPORT|' /etc/crowdsec/notifications/email.yaml
-sed -i 's|^auth_type: .*|auth_type: ${MAILATYP,,}|' /etc/crowdsec/notifications/email.yaml
-sed -i 's|^sender_email: .*|sender_email: $MAILADD"@"$MAILDOM|' /etc/crowdsec/notifications/email.yaml
-sed -i 's|^# - email1@gmail.com .*| - $MAILADD"@"$MAILDOM|' /etc/crowdsec/notifications/email.yaml
+sed -i "s|^smtp_host: .*|smtp_host: $MAILHOST|" /etc/crowdsec/notifications/email.yaml
+sed -i "s|^smtp_username: .*|smtp_username: $MAILNAME|" /etc/crowdsec/notifications/email.yaml
+sed -i "s|^smtp_password: .*|smtp_password: $MAILPASS|" /etc/crowdsec/notifications/email.yaml
+sed -i "s|^smtp_port: .*|smtp_port: $MAILPORT|" /etc/crowdsec/notifications/email.yaml
+sed -i "s|^auth_type: .*|auth_type: ${MAILATYP,,}|" /etc/crowdsec/notifications/email.yaml
+sed -i "s|^sender_email: .*|sender_email: $MAILADD\@$MAILDOM|" /etc/crowdsec/notifications/email.yaml
+sed -i "s|# *- email1@gmail.com| - $MAILADD\@$MAILDOM|" /etc/crowdsec/notifications/email.yaml
 
 cp /etc/crowdsec/profiles.yaml /etc/crowdsec/profiles.yaml.bak
-sed -i 's|^#notifications: .*|notifications: |' /etc/crowdsec/profiles.yaml
-sed -i 's|^#   - email_default: .*| - email_default: |' /etc/crowdsec/profiles.yaml
+sed -i 's|^# *notifications:|notifications:|' /etc/crowdsec/profiles.yaml
+sed -i 's|^# *- email_default| - email_default|' /etc/crowdsec/profiles.yaml
 
 systemctl restart crowdsec
 

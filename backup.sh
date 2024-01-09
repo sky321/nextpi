@@ -6,7 +6,7 @@ DBNAME=nextcloud
 DBADMIN=$( grep DBADMIN /root/.nextpi.cnf | sed 's|DBADMIN=||' )
 DBPASSWD="$( grep password /root/.my.cnf | sed 's|password=||' )"
 BACKUPDIR=/mnt/usbstick/next-backup_`date +"%m"`/
-CLEANBACK=/mnt/usbstick/next-backup_`date +"%m" --date='1 month ago'`/
+CLEANBACK=/mnt/usbstick/next-backup_`date +"%m" --date='2 month ago'`/
 PHPVER=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
 NEWUSER=$( grep PINEWUSER /root/.nextpi.cnf | sed 's|PINEWUSER=||' )
 USBDEV=$( grep USBDEV /root/.nextpi.cnf | sed 's|USBDEV=||' )

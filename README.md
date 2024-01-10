@@ -32,7 +32,7 @@
 - optional use nc-restore.sh to restore your data
 	- reboot
 	- start nextcloud webpage to update if needed
-	- cleanup backupdata, data/appdata, data/update dir
+	- cleanup backupdata, data/not_used_appdata, data/not_used_update dir_if_exist
 - optional use nc-datadir.sh to move data to a different dir
 	- cleanup db entries
 	- reboot

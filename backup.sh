@@ -21,6 +21,8 @@ sudo -u www-data php occ maintenance:mode --on
 
 sudo mount $USBDEV $USBDIR
 
+sudo rm -R -f $CLEANBACK
+
 sudo rsync -Aax $NCDIR $BACKUPDIR
 sudo rsync -Aax $DATADIR $BACKUPDIR
 
@@ -30,9 +32,6 @@ sudo rsync -Aax /etc/php/${PHPVER}/fpm/php.ini $BACKUPDIR
 sudo rsync -Aax /home/${NEWUSER} $BACKUPDIR
 
 sudo mysqldump --single-transaction --default-character-set=utf8mb4 -p$DBPASSWD -u root $DBNAME > "${BACKUPDIR}"/nextcloud-mysql-dump.sql
-
-
-sudo rm -R -f $CLEANBACK
 
 sudo umount $USBDIR
 

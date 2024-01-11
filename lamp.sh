@@ -33,7 +33,7 @@ install()
     $APTINSTALL apt-transport-https ca-certificates software-properties-common
     
     # do some apt pinning
-    cat << 'EOF' > /etc/apt/preferences.d/php
+    cat << EOF > /etc/apt/preferences.d/php
 Package: *
 Pin: origin packages.sury.org
 Pin-Priority: -1
@@ -47,7 +47,7 @@ EOF
 #    wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
     
     curl -sSLo /usr/share/keyrings/deb.sury.org-php.gpg https://packages.sury.org/php/apt.gpg
-echo 'deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $RELEASE main' | sudo tee /etc/apt/sources.list.d/php.list
+    echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $RELEASE main" | sudo tee /etc/apt/sources.list.d/php.list
 
     # INSTALL 
     ##########################################

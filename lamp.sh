@@ -31,8 +31,23 @@ install()
     local RELEASE=$( grep RELEASE /root/.nextpi.cnf | sed 's|RELEASE=||' )
     apt-get update
     $APTINSTALL apt-transport-https ca-certificates software-properties-common
-    echo "deb https://packages.sury.org/php/ $RELEASE main" > /etc/apt/sources.list.d/php.list
-    wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+    
+    # do some apt pinning
+    cat << 'EOF' > /etc/apt/preferences.d/php
+Package: *
+Pin: origin packages.sury.org
+Pin-Priority: -1
+
+Package: php${PHPVER}-* libapache2-mod-php${PHPVER} libpcre2-* libgd3 libgd-dev
+Pin: origin packages.sury.org
+Pin-Priority: 500
+EOF
+    
+#    echo "deb https://packages.sury.org/php/ $RELEASE main" > /etc/apt/sources.list.d/php.list
+#    wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+    
+    curl -sSLo /usr/share/keyrings/deb.sury.org-php.gpg https://packages.sury.org/php/apt.gpg
+echo 'deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $RELEASE main' | sudo tee /etc/apt/sources.list.d/php.list
 
     # INSTALL 
     ##########################################

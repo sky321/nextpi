@@ -69,11 +69,24 @@ whitelist:
     - "127.0.0.1/8"
 EOF
 
+# whitelist for sury
+echo "ips:
+  - 169.150.247.37
+  - 169.150.247.38
+  - 169.150.247.39" > /etc/crowdsec/capi_whitelists.yaml
+  
+echo "api:
+  server:
+    capi_whitelists_path: \"/etc/crowdsec/capi_whitelists.yaml\"" > /etc/crowdsec/config.yaml.local 
+
 # enable WAL for local sqlite db
 grep -q use_wal /etc/crowdsec/config.yaml || sudo sed -i "/db_config:/a\  use_wal: true" /etc/crowdsec/config.yaml
 
 #restart services
 systemctl reload crowdsec && systemctl restart crowdsec.service crowdsec-firewall-bouncer.service
+
+# get rid of sury blacklist
+for i in 37 38 39; do cscli decisions delete --ip "169.150.247.$i"; done
 
 #cron update job
 echo "0 2 * * * /usr/bin/cscli hub update && /usr/bin/cscli hub upgrade > /dev/null 2>&1" >> /var/spool/cron/crontabs/root

@@ -142,6 +142,7 @@ sed -i "s|^smtp_port: .*|smtp_port: $MAILPORT|" /etc/crowdsec/notifications/emai
 sed -i "s|^auth_type: .*|auth_type: ${MAILATYP,,}|" /etc/crowdsec/notifications/email.yaml
 sed -i "s|^sender_email: .*|sender_email: $MAILADD\@$MAILDOM|" /etc/crowdsec/notifications/email.yaml
 sed -i "s|# *- email1@gmail.com| - $MAILADD\@$MAILDOM|" /etc/crowdsec/notifications/email.yaml
+sed -i "s|^encryption_type: .*|encryption_type: "starttls"}|" /etc/crowdsec/notifications/email.yaml
 
 cp /etc/crowdsec/profiles.yaml /etc/crowdsec/profiles.yaml.bak
 sed -i 's|^# *notifications:|notifications:|' /etc/crowdsec/profiles.yaml

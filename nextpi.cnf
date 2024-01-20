@@ -18,6 +18,7 @@ RESTOREDIR=/mnt/usbstick/next-backup_xx
 CHGDATADIR=/home/nextcloud/data
 LETSDOMAIN=mycloud.ownyourbits.com
 LETSEMAIL=mycloud@ownyourbits.com
+CROWDEMAIL=mycloud@ownyourbits.com
 ---------------------------------------
 DBNAME=nextcloud # inconsistend
 NCDIR=/var/www/nextcloud # absolut inconsistend

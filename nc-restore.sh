@@ -22,7 +22,6 @@ DBPASSWD="$( grep password /root/.my.cnf | sed 's|password=||' )"
 PHPVER=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
 USBDEV=$( grep USBDEV /root/.nextpi.cnf | sed 's|USBDEV=||' )
 USBDIR=$( grep USBDIR /root/.nextpi.cnf | sed 's|USBDIR=||' )
-CROWDEMAIL=$( grep CROWDEMAIL /root/.nextpi.cnf | sed 's|CROWDEMAIL=||' )
 
 cd "$NCDIR"
 sudo -u www-data php occ maintenance:mode --on
@@ -142,7 +141,7 @@ sed -i "s|^smtp_password: .*|smtp_password: $MAILPASS|" /etc/crowdsec/notificati
 sed -i "s|^smtp_port: .*|smtp_port: $MAILPORT|" /etc/crowdsec/notifications/email.yaml
 sed -i "s|^auth_type: .*|auth_type: ${MAILATYP,,}|" /etc/crowdsec/notifications/email.yaml
 sed -i "s|^sender_email: .*|sender_email: $MAILADD\@$MAILDOM|" /etc/crowdsec/notifications/email.yaml
-sed -i "s|# *- email1@gmail.com| - $CROWDEMAIL|" /etc/crowdsec/notifications/email.yaml
+sed -i "s|# *- email1@gmail.com| - $MAILADD\@$MAILDOM|" /etc/crowdsec/notifications/email.yaml
 sed -i "s|^encryption_type: .*|encryption_type: "starttls"}|" /etc/crowdsec/notifications/email.yaml
 
 cp /etc/crowdsec/profiles.yaml /etc/crowdsec/profiles.yaml.bak

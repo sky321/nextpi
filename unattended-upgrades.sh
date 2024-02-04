@@ -62,6 +62,7 @@ Unattended-Upgrade::Origins-Pattern {
 o=Debian,n="$RELEASE",l=Debian;
 o="Raspberry Pi Foundation",n="$RELEASE",l="Raspberry Pi Foundation";
 o=deb.sury.org,a="$RELEASE",n="$RELEASE";
+o=packagecloud.io/crowdsec/crowdsec,a="$RELEASE",n="$RELEASE";
 }
 Dpkg::Options {
    "--force-confdef";

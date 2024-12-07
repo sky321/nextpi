@@ -1,3 +1,4 @@
+- set php values from https://www.c-rieger.de/nextcloud-installationsanleitung/#c02
 - code cleanup (delete old # stuff)
 - add comments to nextpi.cnf
 - change nextpi.cnf for variable (dbname)

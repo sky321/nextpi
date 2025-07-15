@@ -111,6 +111,7 @@ EOF
 EOF
 
     # CONFIGURE PHP
+	# /etc/php/8.2/cli/conf.d/20-opcache.ini
     ##########################################
 
     cat > /etc/php/${PHPVER}/mods-available/opcache.ini <<EOF
@@ -118,7 +119,7 @@ zend_extension=opcache.so
 opcache.enable=1
 opcache.enable_cli=1
 opcache.fast_shutdown=1
-opcache.interned_strings_buffer=10
+opcache.interned_strings_buffer=64
 opcache.max_accelerated_files=10000
 opcache.memory_consumption=128
 opcache.save_comments=1

@@ -55,19 +55,19 @@ labels:
 ---
 EOF
 
-# personal whitelist Witz own ip
-IFACE="$( ip r | grep "default via" | awk '{ print $5 }' | head -1 )"
-IP="$( ip a show dev "$IFACE" | grep global | grep -oP '\d{1,3}(.\d{1,3}){3}' | head -1 )"
+# personal whitelist with own ip
+#IFACE="$( ip r | grep "default via" | awk '{ print $5 }' | head -1 )"
+#IP="$( ip a show dev "$IFACE" | grep global | grep -oP '\d{1,3}(.\d{1,3}){3}' | head -1 )"
 
-cat > /etc/crowdsec/parsers/s02-enrich/personal-whitelist.yaml << EOF
-name: crowdsecurity/whitelists
-description: "Whitelist events from my personal ips"
-whitelist:
-  reason: "internal traffic from my personal ips"
-  ip:
-    - "$IP"
-    - "127.0.0.1/8"
-EOF
+#cat > /etc/crowdsec/parsers/s02-enrich/personal-whitelist.yaml << EOF
+#name: crowdsecurity/whitelists
+#description: "Whitelist events from my personal ips"
+#whitelist:
+#  reason: "internal traffic from my personal ips"
+#  ip:
+#   - "$IP"
+#    - "127.0.0.1/8"
+#EOF
 
 # whitelist for sury
 echo "ips:

@@ -55,7 +55,7 @@ labels:
 ---
 EOF
 
-# get IP
+# personal whitelist Witz own ip
 IFACE="$( ip r | grep "default via" | awk '{ print $5 }' | head -1 )"
 IP="$( ip a show dev "$IFACE" | grep global | grep -oP '\d{1,3}(.\d{1,3}){3}' | head -1 )"
 

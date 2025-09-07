@@ -45,14 +45,15 @@ cscli collections install crowdsecurity/apache2
 cscli collections install crowdsecurity/sshd
 systemctl reload crowdsec && systemctl restart crowdsec
 
-cp /etc/crowdsec/acquis.yaml /etc/crowdsec/acquis.yaml.bak
-cat <<EOF >>/etc/crowdsec/acquis.yaml
-#Nextcloud by c-rieger.de
+# nextcloud aquisition
+#cp /etc/crowdsec/acquis.yaml /etc/crowdsec/acquis.yaml.bak
+#cat <<EOF >>/etc/crowdsec/acquis.yaml
+
+cat > /etc/crowdsec/acquis.d/nextcloud.yaml << EOF
 filenames:
  - $SRCDIR/nextcloud.log
 labels:
   type: Nextcloud
----
 EOF
 
 # personal whitelist with own ip

@@ -46,8 +46,6 @@ cscli collections install crowdsecurity/sshd
 systemctl reload crowdsec && systemctl restart crowdsec
 
 # nextcloud aquisition
-#cp /etc/crowdsec/acquis.yaml /etc/crowdsec/acquis.yaml.bak
-#cat <<EOF >>/etc/crowdsec/acquis.yaml
 
 cat > /etc/crowdsec/acquis.d/nextcloud.yaml << EOF
 filenames:
@@ -62,29 +60,8 @@ if [[ -f /etc/cowdsec/profiles.yaml ]]; then
       sudo sed -i 's/#duration_expr/duration_expr/' /etc/crowdsec/profiles.yaml
 fi
 
-# personal whitelist with own ip
-#IFACE="$( ip r | grep "default via" | awk '{ print $5 }' | head -1 )"
-#IP="$( ip a show dev "$IFACE" | grep global | grep -oP '\d{1,3}(.\d{1,3}){3}' | head -1 )"
+# Allowlist for SURY IPs
 
-#cat > /etc/crowdsec/parsers/s02-enrich/personal-whitelist.yaml << EOF
-#name: crowdsecurity/whitelists
-#description: "Whitelist events from my personal ips"
-#whitelist:
-#  reason: "internal traffic from my personal ips"
-#  ip:
-#   - "$IP"
-#    - "127.0.0.1/8"
-#EOF
-
-# whitelist for sury
-#echo "ips:
-#  - 169.150.247.37
-#  - 169.150.247.38
-#  - 169.150.247.39" > /etc/crowdsec/capi_whitelists.yaml
-  
-#echo "api:
-#  server:
-#    capi_whitelists_path: \"/etc/crowdsec/capi_whitelists.yaml\"" > /etc/crowdsec/config.yaml.local 
 sudo cscli allowlists create my_allowlist --description "central allowlist"
 sudo cscli allowlists add my_allowlist 169.150.247.37 -d "Sury IP"
 sudo cscli allowlists add my_allowlist 169.150.247.38 -d "Sury IP"

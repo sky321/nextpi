@@ -56,6 +56,12 @@ labels:
   type: Nextcloud
 EOF
 
+# Dynamic Increase of Blocking Time 
+
+if [[ -f /etc/cowdsec/profiles.yaml ]]; then
+      sudo sed -i 's/#duration_expr/duration_expr/' /etc/crowdsec/profiles.yaml
+fi
+
 # personal whitelist with own ip
 #IFACE="$( ip r | grep "default via" | awk '{ print $5 }' | head -1 )"
 #IP="$( ip a show dev "$IFACE" | grep global | grep -oP '\d{1,3}(.\d{1,3}){3}' | head -1 )"

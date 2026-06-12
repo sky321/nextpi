@@ -62,10 +62,10 @@ fi
 
 # Allowlist for SURY IPs
 
-sudo cscli allowlists create my_allowlist --description "central allowlist"
-sudo cscli allowlists add my_allowlist 169.150.247.37 -d "Sury IP"
-sudo cscli allowlists add my_allowlist 169.150.247.38 -d "Sury IP"
-sudo cscli allowlists add my_allowlist 169.150.247.39 -d "Sury IP"
+#sudo cscli allowlists create my_allowlist --description "central allowlist"
+#sudo cscli allowlists add my_allowlist 169.150.247.37 -d "Sury IP"
+#sudo cscli allowlists add my_allowlist 169.150.247.38 -d "Sury IP"
+#sudo cscli allowlists add my_allowlist 169.150.247.39 -d "Sury IP"
 
 # enable WAL for local sqlite db
 grep -q use_wal /etc/crowdsec/config.yaml || sudo sed -i "/db_config:/a\  use_wal: true" /etc/crowdsec/config.yaml

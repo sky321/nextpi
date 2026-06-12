@@ -41,7 +41,14 @@ install()
   apt-get update
   $APTINSTALL lbzip2 iputils-ping
   $APTINSTALL -t $RELEASE php${PHPVER}-smbclient                                         # for external storage
-  $APTINSTALL -t $RELEASE imagemagick libmagickcore-6.q16-6-extra php${PHPVER}-imagick php${PHPVER}-exif    # for gallery
+  $APTINSTALL -t $RELEASE imagemagick libmagickcore-7.q16-10-extra php${PHPVER}-imagick php${PHPVER}-exif    # for gallery
+
+# conf ImageMagick
+cp /etc/ImageMagick-7/policy.xml /etc/ImageMagick-7/policy.xml.bak
+sed -i "s/rights=\"none\" pattern=\"PS\"/rights=\"read|write\" pattern=\"PS\"/" /etc/ImageMagick-7/policy.xml
+sed -i "s/rights=\"none\" pattern=\"EPS\"/rights=\"read|write\" pattern=\"EPS\"/" /etc/ImageMagick-7/policy.xml
+sed -i "s/rights=\"none\" pattern=\"PDF\"/rights=\"read|write\" pattern=\"PDF\"/" /etc/ImageMagick-7/policy.xml
+sed -i "s/rights=\"none\" pattern=\"XPS\"/rights=\"read|write\" pattern=\"XPS\"/" /etc/ImageMagick-7/policy.xml
 
   # mail
   
@@ -55,19 +62,34 @@ install()
 
   local REDIS_CONF=/etc/redis/redis.conf
   local REDISPASS="default"
-  sed -i "s|# unixsocket .*|unixsocket /var/run/redis/redis.sock|" $REDIS_CONF
-  sed -i "s|# unixsocketperm .*|unixsocketperm 770|"               $REDIS_CONF
-  sed -i "s|# requirepass .*|requirepass $REDISPASS|"              $REDIS_CONF
-  sed -i 's|# maxmemory-policy .*|maxmemory-policy allkeys-lru|'   $REDIS_CONF
-  sed -i 's|# rename-command CONFIG ""|rename-command CONFIG ""|'  $REDIS_CONF
-  sed -i "s|^port.*|port 0|"                                       $REDIS_CONF
+
+cp /etc/redis/redis.conf /etc/redis/redis.conf.bak
+sed -i 's/port 6379/port 0/' $REDIS_CONF
+sed -i 's/\# unixsocket\ .*$/unixsocket \/var\/run\/redis\/redis.sock/' $REDIS_CONF
+sed -i 's/\#\ unixsocketperm\ .*$/unixsocketperm 770/g' $REDIS_CONF
+sed -i 's/# maxclients\ .*$/maxclients 10240/' $REDIS_CONF
+sed -i 's/# requirepass foobared/requirepass Redis-Passwort-Bitte-ändern/' $REDIS_CONF
+
+#  sed -i "s|# unixsocket .*|unixsocket /var/run/redis/redis.sock|" $REDIS_CONF
+#  sed -i "s|# unixsocketperm .*|unixsocketperm 770|"               $REDIS_CONF
+#  sed -i "s|# requirepass .*|requirepass $REDISPASS|"              $REDIS_CONF
+#  sed -i 's|# maxmemory-policy .*|maxmemory-policy allkeys-lru|'   $REDIS_CONF
+#  sed -i 's|# rename-command CONFIG ""|rename-command CONFIG ""|'  $REDIS_CONF
+#  sed -i "s|^port.*|port 0|"                                       $REDIS_CONF
   echo "maxmemory $REDIS_MEM" >> $REDIS_CONF
-  echo 'vm.overcommit_memory = 1' >> /etc/sysctl.conf
+#  echo 'vm.overcommit_memory = 1' >> /etc/sysctl.conf
+
+touch /etc/sysctl.d/99-redis.conf
+cat <<EOF >/etc/sysctl.d/99-redis.conf
+vm.overcommit_memory = 1
+EOF
 
   usermod -a -G redis www-data
 
-  service redis-server restart
-  update-rc.d redis-server enable
+systemctl enable --now redis-server.service && systemctl restart redis-server.service
+
+#  service redis-server restart
+#  update-rc.d redis-server enable
   service php${PHPVER}-fpm restart
   
 }

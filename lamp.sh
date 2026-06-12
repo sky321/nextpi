@@ -123,7 +123,7 @@ cp /etc/php/${PHPVER}/fpm/pool.d/www.conf /etc/php/${PHPVER}/fpm/pool.d/www.conf
 cp /etc/php/${PHPVER}/fpm/php-fpm.conf /etc/php/${PHPVER}/fpm/php-fpm.conf.bak
 cp /etc/php/${PHPVER}/cli/php.ini /etc/php/${PHPVER}/cli/php.ini.bak
 cp /etc/php/${PHPVER}/fpm/php.ini /etc/php/${PHPVER}/fpm/php.ini.bak
-cp /etc/php/${PHPVER}/mods-available/apcu.ini /etc/php/${PHPVER}/mods-available/apcu.ini.bak
+#cp /etc/php/${PHPVER}/mods-available/apcu.ini /etc/php/${PHPVER}/mods-available/apcu.ini.bak
 cp /etc/php/${PHPVER}/mods-available/opcache.ini /etc/php/${PHPVER}/mods-available/opcache.ini.bak
 
 # Make conf changes
@@ -173,7 +173,7 @@ sed -i "s|;emergency_restart_threshold.*|emergency_restart_threshold = 10|g" /et
 sed -i "s|;emergency_restart_interval.*|emergency_restart_interval = 1m|g" /etc/php/${PHPVER}/fpm/php-fpm.conf
 sed -i "s|;process_control_timeout.*|process_control_timeout = 10|g" /etc/php/${PHPVER}/fpm/php-fpm.conf
 
-sed -i '$aapc.enable_cli=1' /etc/php/8.4/mods-available/apcu.ini
+#sed -i '$aapc.enable_cli=1' /etc/php/8.4/mods-available/apcu.ini
 
 sed -i 's/opcache.jit=off/opcache.jit=on/' /etc/php/${PHPVER}/mods-available/opcache.ini
 sed -i '$aopcache.jit=1255' /etc/php/${PHPVER}/mods-available/opcache.ini

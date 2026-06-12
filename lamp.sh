@@ -304,7 +304,7 @@ myisam_sort_buffer_size = 512M
 port = 3306
 pid-file = /var/run/mysqld/mysqld.pid
 query_cache_limit = 0
-query_cache_size = 0 
+query_cache_size = 0
 read_buffer_size = 2M
 read_rnd_buffer_size = 2M
 skip-name-resolve

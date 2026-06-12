@@ -1,5 +1,5 @@
-- get rid of sury repo and crowdsec whitelist
 - set php values from https://www.c-rieger.de/nextcloud-installationsanleitung/#c02
+    - parameter ermitteln https://codeberg.org/criegerde/nextcloud/raw/branch/master/skripte/phpcalc.sh
 - code cleanup (delete old # stuff)
 - add comments to nextpi.cnf
 - change nextpi.cnf for variable (dbname)

@@ -110,22 +110,100 @@ EOF
 </IfModule>
 EOF
 
+    echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
+
     # CONFIGURE PHP
-	# /etc/php/8.2/cli/conf.d/20-opcache.ini
     ##########################################
 
-    cat > /etc/php/${PHPVER}/mods-available/opcache.ini <<EOF
-zend_extension=opcache.so
-opcache.enable=1
-opcache.enable_cli=1
-opcache.fast_shutdown=1
-opcache.interned_strings_buffer=64
-opcache.max_accelerated_files=10000
-opcache.memory_consumption=128
-opcache.save_comments=1
-opcache.revalidate_freq=1
-opcache.file_cache=/tmp;
-EOF
+# Backup old conf files PHP
+cp /etc/php/${PHPVER}/fpm/pool.d/www.conf /etc/php/${PHPVER}/fpm/pool.d/www.conf.bak
+cp /etc/php/${PHPVER}/fpm/php-fpm.conf /etc/php/${PHPVER}/fpm/php-fpm.conf.bak
+cp /etc/php/${PHPVER}/cli/php.ini /etc/php/${PHPVER}/cli/php.ini.bak
+cp /etc/php/${PHPVER}/fpm/php.ini /etc/php/${PHPVER}/fpm/php.ini.bak
+cp /etc/php/${PHPVER}/mods-available/apcu.ini /etc/php/${PHPVER}/mods-available/apcu.ini.bak
+cp /etc/php/${PHPVER}/mods-available/opcache.ini /etc/php/${PHPVER}/mods-available/opcache.ini.bak
+
+# Make conf changes
+# https://codeberg.org/criegerde/nextcloud/raw/branch/master/skripte/phpcalc.sh
+
+sed -i "s/;env\[HOSTNAME\] = /env[HOSTNAME] = /" /etc/php/${PHPVER}/fpm/pool.d/www.conf
+sed -i "s/;env\[TMP\] = /env[TMP] = /" /etc/php/${PHPVER}/fpm/pool.d/www.conf
+sed -i "s/;env\[TMPDIR\] = /env[TMPDIR] = /" /etc/php/${PHPVER}/fpm/pool.d/www.conf
+sed -i "s/;env\[TEMP\] = /env[TEMP] = /" /etc/php/${PHPVER}/fpm/pool.d/www.conf
+sed -i "s/;env\[PATH\] = /env[PATH] = /" /etc/php/${PHPVER}/fpm/pool.d/www.conf
+sed -i 's/pm = dynamic/pm = ondemand/' /etc/php/${PHPVER}/fpm/pool.d/www.conf
+sed -i 's/pm.max_children =.*/pm.max_children = 46/' /etc/php/${PHPVER}/fpm/pool.d/www.conf
+sed -i 's/pm.start_servers =.*/pm.start_servers = 22/' /etc/php/${PHPVER}/fpm/pool.d/www.conf
+sed -i 's/pm.min_spare_servers =.*/pm.min_spare_servers = 15/' /etc/php/${PHPVER}/fpm/pool.d/www.conf
+sed -i 's/pm.max_spare_servers =.*/pm.max_spare_servers = 30/' /etc/php/${PHPVER}/fpm/pool.d/www.conf
+sed -i "s/;pm.max_requests =.*/pm.max_requests = 1000/" /etc/php/${PHPVER}/fpm/pool.d/www.conf
+sed -i "s/allow_url_fopen =.*/allow_url_fopen = 1/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/output_buffering =.*/output_buffering = Off/" /etc/php/${PHPVER}/cli/php.ini
+sed -i "s/max_execution_time =.*/max_execution_time = 3600/" /etc/php/${PHPVER}/cli/php.ini
+sed -i "s/max_input_time =.*/max_input_time = 3600/" /etc/php/${PHPVER}/cli/php.ini
+sed -i "s/post_max_size =.*/post_max_size = 10240M/" /etc/php/${PHPVER}/cli/php.ini
+sed -i "s/upload_max_filesize =.*/upload_max_filesize = 10240M/" /etc/php/${PHPVER}/cli/php.ini
+sed -i "s/;date.timezone.*/date.timezone = Europe\/\Berlin/" /etc/php/${PHPVER}/cli/php.ini
+sed -i "s/;cgi.fix_pathinfo.*/cgi.fix_pathinfo=0/" /etc/php/${PHPVER}/cli/php.ini
+
+sed -i "s/memory_limit = 128M/memory_limit = 1G/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/output_buffering =.*/output_buffering = Off/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/max_execution_time =.*/max_execution_time = 3600/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/max_input_time =.*/max_input_time = 3600/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/post_max_size =.*/post_max_size = 10G/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/upload_max_filesize =.*/upload_max_filesize = 10G/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/;date.timezone.*/date.timezone = Europe\/\Berlin/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/;cgi.fix_pathinfo.*/cgi.fix_pathinfo=0/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/;opcache.enable=.*/opcache.enable=1/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/;opcache.validate_timestamps=.*/opcache.validate_timestamps=1/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/;opcache.enable_cli=.*/opcache.enable_cli=1/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/;opcache.memory_consumption=.*/opcache.memory_consumption=256/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/;opcache.interned_strings_buffer=.*/opcache.interned_strings_buffer=64/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/;opcache.max_accelerated_files=.*/opcache.max_accelerated_files=100000/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/;opcache.revalidate_freq=.*/opcache.revalidate_freq=0/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/;opcache.save_comments=.*/opcache.save_comments=1/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/;opcache.huge_code_pages=.*/opcache.huge_code_pages=0/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/session.gc_maxlifetime =.*/session.gc_maxlifetime = 36000/" /etc/php/${PHPVER}/fpm/php.ini
+
+sed -i "s|;emergency_restart_threshold.*|emergency_restart_threshold = 10|g" /etc/php/${PHPVER}/fpm/php-fpm.conf
+sed -i "s|;emergency_restart_interval.*|emergency_restart_interval = 1m|g" /etc/php/${PHPVER}/fpm/php-fpm.conf
+sed -i "s|;process_control_timeout.*|process_control_timeout = 10|g" /etc/php/${PHPVER}/fpm/php-fpm.conf
+
+sed -i '$aapc.enable_cli=1' /etc/php/8.4/mods-available/apcu.ini
+
+sed -i 's/opcache.jit=off/opcache.jit=on/' /etc/php/${PHPVER}/mods-available/opcache.ini
+sed -i '$aopcache.jit=1255' /etc/php/${PHPVER}/mods-available/opcache.ini
+sed -i '$aopcache.jit_buffer_size=256M' /etc/php/${PHPVER}/mods-available/opcache.ini
+
+# conf MariaDB for PHP
+sed -i '$a[mysql]' /etc/php/${PHPVER}/mods-available/mysqli.ini
+sed -i '$amysql.allow_local_infile=On' /etc/php/${PHPVER}/mods-available/mysqli.ini
+sed -i '$amysql.allow_persistent=On' /etc/php/${PHPVER}/mods-available/mysqli.ini
+sed -i '$amysql.cache_size=2000' /etc/php/${PHPVER}/mods-available/mysqli.ini
+sed -i '$amysql.max_persistent=-1' /etc/php/${PHPVER}/mods-available/mysqli.ini
+sed -i '$amysql.max_links=-1' /etc/php/${PHPVER}/mods-available/mysqli.ini
+sed -i '$amysql.default_port=3306' /etc/php/${PHPVER}/mods-available/mysqli.ini
+sed -i '$amysql.connect_timeout=60' /etc/php/${PHPVER}/mods-available/mysqli.ini
+sed -i '$amysql.trace_mode=Off' /etc/php/${PHPVER}/mods-available/mysqli.ini
+
+# old conf
+
+#    cat > /etc/php/${PHPVER}/mods-available/opcache.ini <<EOF
+#zend_extension=opcache.so
+#opcache.enable=1
+#opcache.enable_cli=1
+#opcache.fast_shutdown=1
+#opcache.interned_strings_buffer=64
+#opcache.max_accelerated_files=10000
+#opcache.memory_consumption=128
+#opcache.save_comments=1
+#opcache.revalidate_freq=1
+#opcache.file_cache=/tmp;
+#EOF
+
+# Start modules
 
     a2enmod http2
     a2enconf http2 
@@ -137,19 +215,16 @@ EOF
     a2enmod mime
     a2enmod ssl
     
-    echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-
-    # CONFIGURE LAMP FOR NEXTCLOUD
+    # CONFIGURE MarieDB 
     ##########################################
 
     $APTINSTALL ssl-cert # self signed snakeoil certs
 
-    # configure MariaDB ( UTF8 4 byte support )
-    cp /etc/mysql/mariadb.conf.d/50-server.cnf         /etc/mysql/mariadb.conf.d/90-ncp.cnf
-    #sed -i '/\[mysqld\]/ainnodb_large_prefix=true'     /etc/mysql/mariadb.conf.d/90-ncp.cnf
-    sed -i '/\[mysqld\]/ainnodb_file_per_table=1'      /etc/mysql/mariadb.conf.d/90-ncp.cnf
-    #sed -i '/\[mysqld\]/ainnodb_file_format=barracuda' /etc/mysql/mariadb.conf.d/90-ncp.cnf
+
+# is this needed ???????
+#    cp /etc/mysql/mariadb.conf.d/50-server.cnf         /etc/mysql/mariadb.conf.d/90-ncp.cnf
+#    sed -i '/\[mysqld\]/ainnodb_file_per_table=1'      /etc/mysql/mariadb.conf.d/90-ncp.cnf
 
 
   # launch mariadb if not already running
@@ -175,6 +250,83 @@ y
 y
 y
 EOF
+
+# std conf MariaDB
+
+systemctl stop mariadb
+mkdir -p /var/log/mysql
+chown -R mysql:mysql /var/log/mysql
+mv /etc/mysql/my.cnf /etc/mysql/my.cnf.bak
+touch /etc/mysql/my.cnf
+
+cat > /etc/mysql/my.cnf <<EOF
+[client]
+default-character-set = utf8mb4
+port = 3306
+socket = /var/run/mysqld/mysqld.sock
+[mysqld_safe]
+log_error=/var/log/mysql/mysql_error.log
+nice = 0
+socket = /var/run/mysqld/mysqld.sock
+[mysqld]
+# performance_schema=ON
+basedir = /usr
+bind-address = 127.0.0.1
+binlog_format = ROW
+character-set-server = utf8mb4
+collation-server = utf8mb4_general_ci
+datadir = /var/lib/mysql
+default_storage_engine = InnoDB
+expire_logs_days = 2
+slave_connections_needed_for_purge = 0
+general_log_file = /var/log/mysql/mysql.log
+innodb_buffer_pool_size = 1G
+innodb_log_buffer_size = 32M
+innodb_log_file_size = 512M
+innodb_read_only_compressed=OFF
+join_buffer_size = 2M
+key_buffer_size = 512M
+lc_messages_dir = /usr/share/mysql
+lc_messages = en_US
+log_bin = /var/log/mysql/mariadb-bin
+log_bin_index = /var/log/mysql/mariadb-bin.index
+log_bin_trust_function_creators = true
+log_error = /var/log/mysql/mysql_error.log
+log_slow_verbosity = query_plan
+log_warnings = 2
+long_query_time = 1
+max_connections = 100
+max_heap_table_size = 64M
+max_allowed_packet = 512M
+max-binlog-size = 512M
+max_binlog_total_size = 2G
+myisam_sort_buffer_size = 512M
+port = 3306
+pid-file = /var/run/mysqld/mysqld.pid
+query_cache_limit = 0
+query_cache_size = 0 
+read_buffer_size = 2M
+read_rnd_buffer_size = 2M
+skip-name-resolve
+socket = /var/run/mysqld/mysqld.sock
+sort_buffer_size = 2M
+table_open_cache = 400
+table_definition_cache = 800
+tmp_table_size = 32M
+tmpdir = /tmp
+transaction_isolation = READ-COMMITTED
+user = mysql
+wait_timeout = 600
+[mariadb-dump]
+max_allowed_packet = 512M
+quick
+quote-names
+[isamchk]
+key_buffer = 16M
+EOF
+
+systemctl restart mariadb.service
+
 }
 
 configure() { :; }

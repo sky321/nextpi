@@ -116,6 +116,8 @@ EOF
     # CONFIGURE PHP
     ##########################################
 
+# https://www.c-rieger.de/nextcloud-installationsanleitung/#c02
+
 # Backup old conf files PHP
 cp /etc/php/${PHPVER}/fpm/pool.d/www.conf /etc/php/${PHPVER}/fpm/pool.d/www.conf.bak
 cp /etc/php/${PHPVER}/fpm/php-fpm.conf /etc/php/${PHPVER}/fpm/php-fpm.conf.bak

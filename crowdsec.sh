@@ -57,7 +57,8 @@ EOF
 # Dynamic Increase of Blocking Time 
 
 if [[ -f /etc/cowdsec/profiles.yaml ]]; then
-      sudo sed -i 's/#duration_expr/duration_expr/' /etc/crowdsec/profiles.yaml
+      sudo sed -i 's/^#duration_expr:.*$/duration_expr: Sprintf("%dh", 8 * (3 ^ GetDecisionsCount(Alert.GetValue())))/' /etc/crowdsec/profiles.yaml
+      sudo sed -i 's/^   duration:.*$/   duration: 8h/' /etc/crowdsec/profiles.yaml
 fi
 
 # Allowlist for SURY IPs

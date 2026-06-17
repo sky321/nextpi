@@ -16,7 +16,7 @@ install()
 {
   apt-get update
   apt install -y --no-install-recommends unattended-upgrades 
-  rm /etc/apt/apt.conf.d/50unattended-upgrades
+  rm /etc/apt/apt.conf.d/20auto-upgrades
 }
 
 configure() 
@@ -36,10 +36,11 @@ APT::Periodic::AutocleanInterval "7";
 Unattended-Upgrade::Automatic-Reboot "$AUTOREBOOT";
 Unattended-Upgrade::Automatic-Reboot-Time "04:00";
 Unattended-Upgrade::Origins-Pattern {
-o=Debian,n="$RELEASE",l=Debian;
-o="Raspberry Pi Foundation",n="$RELEASE",l="Raspberry Pi Foundation";
+#o=Debian,n="$RELEASE",l=Debian;
+#o="Raspberry Pi Foundation",n="$RELEASE",l="Raspberry Pi Foundation";
 #o=deb.sury.org,a="$RELEASE",n="$RELEASE";
-o=packagecloud.io/crowdsec/crowdsec,a="$RELEASE",n="$RELEASE";
+#o=packagecloud.io/crowdsec/crowdsec,a="$RELEASE",n="$RELEASE";
+"origin=*";
 }
 Dpkg::Options {
    "--force-confdef";

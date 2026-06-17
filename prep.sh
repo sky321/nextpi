@@ -12,8 +12,7 @@ echo
 echo "----- update the OS -----"
 echo
 echo
-sudo apt-get update -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove && sudo apt-get clean
-
+sudo apt-get update -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove
 
 echo
 echo

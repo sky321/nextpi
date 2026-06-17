@@ -1,3 +1,4 @@
+- new php.ini file lead to access denied nextcloud
 - code cleanup (delete old # stuff)
 - add comments to nextpi.cnf
 - change nextpi.cnf for variable (dbname)

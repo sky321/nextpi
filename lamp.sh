@@ -241,7 +241,7 @@ sed -i '$amysql.trace_mode=Off' /etc/php/${PHPVER}/mods-available/mysqli.ini
   done
 
   cd /tmp
-  mysql_secure_installation <<EOF
+  mariadb-secure-installation <<EOF
 $DBPASSWD
 y
 y

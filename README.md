@@ -14,16 +14,6 @@
 - cd nextpi
 - change nextpi.cnf (only var above the line are currently used)
 
-------------not needed for newer bullseye versions --------------
-
-- change standard PI user
-	- sudo ./chgusr1.sh
-	- login as root
-	- /home/pi/nextpi/chgusr2.sh
-	- login as new user
-	
-------------not needed for newer bullseye versions --------------
-	
 - install nextcloud
 	- cd nextpi	
 	- sudo ./install.sh

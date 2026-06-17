@@ -94,7 +94,7 @@ net.ipv6.conf.default.accept_redirects=0
 EOF
 
 # update sudo  
-mv /etc/sudoers.d/010_pi-nopasswd /home/${newuser}
+#mv /etc/sudoers.d/010_pi-nopasswd /home/${newuser}
 
 ## Hostname replacement 
   echo "replace Hostname...."

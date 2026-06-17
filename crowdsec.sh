@@ -21,9 +21,10 @@ echo ""
 echo " » Crowdsec wird heruntergeladen+installiert // crowdsec will be downloaded+installed"
 echo ""
 
-curl -s https://packagecloud.io/install/repositories/crowdsec/crowdsec/script.deb.sh | sudo bash
+#curl -s https://packagecloud.io/install/repositories/crowdsec/crowdsec/script.deb.sh | sudo bash
+curl -s https://install.crowdsec.net | sudo sh
 apt-get install crowdsec -y
-apt-get install crowdsec-firewall-bouncer-nftables -y
+apt-get install crowdsec-firewall-bouncer-iptables -y
 
 }
 
@@ -75,7 +76,7 @@ grep -q use_wal /etc/crowdsec/config.yaml || sudo sed -i "/db_config:/a\  use_wa
 systemctl reload crowdsec && systemctl restart crowdsec.service crowdsec-firewall-bouncer.service
 
 # get rid of sury blacklist
-for i in 37 38 39; do cscli decisions delete --ip "169.150.247.$i"; done
+#for i in 37 38 39; do cscli decisions delete --ip "169.150.247.$i"; done
 
 #cron update job
 echo "0 2 * * * /usr/bin/cscli hub update && /usr/bin/cscli hub upgrade > /dev/null 2>&1" >> /var/spool/cron/crontabs/root

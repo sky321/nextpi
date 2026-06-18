@@ -68,11 +68,11 @@ sed -i 's/port 6379/port 0/' $REDIS_CONF
 sed -i 's/\# unixsocket\ .*$/unixsocket \/var\/run\/redis\/redis.sock/' $REDIS_CONF
 sed -i 's/\#\ unixsocketperm\ .*$/unixsocketperm 770/g' $REDIS_CONF
 sed -i 's/# maxclients\ .*$/maxclients 10240/' $REDIS_CONF
-sed -i 's/# requirepass foobared/requirepass Redis-Passwort-Bitte-ändern/' $REDIS_CONF
+#sed -i 's/# requirepass foobared/requirepass Redis-Passwort-Bitte-ändern/' $REDIS_CONF
 
 #  sed -i "s|# unixsocket .*|unixsocket /var/run/redis/redis.sock|" $REDIS_CONF
 #  sed -i "s|# unixsocketperm .*|unixsocketperm 770|"               $REDIS_CONF
-#  sed -i "s|# requirepass .*|requirepass $REDISPASS|"              $REDIS_CONF
+  sed -i "s|# requirepass .*|requirepass $REDISPASS|"              $REDIS_CONF
 #  sed -i 's|# maxmemory-policy .*|maxmemory-policy allkeys-lru|'   $REDIS_CONF
 #  sed -i 's|# rename-command CONFIG ""|rename-command CONFIG ""|'  $REDIS_CONF
 #  sed -i "s|^port.*|port 0|"                                       $REDIS_CONF

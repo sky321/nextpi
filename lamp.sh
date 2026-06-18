@@ -140,7 +140,7 @@ sed -i 's/pm.start_servers =.*/pm.start_servers = 22/' /etc/php/${PHPVER}/fpm/po
 sed -i 's/pm.min_spare_servers =.*/pm.min_spare_servers = 15/' /etc/php/${PHPVER}/fpm/pool.d/www.conf
 sed -i 's/pm.max_spare_servers =.*/pm.max_spare_servers = 30/' /etc/php/${PHPVER}/fpm/pool.d/www.conf
 sed -i "s/;pm.max_requests =.*/pm.max_requests = 1000/" /etc/php/${PHPVER}/fpm/pool.d/www.conf
-sed -i "s/allow_url_fopen =.*/allow_url_fopen = 1/" /etc/php/${PHPVER}/fpm/php.ini
+
 sed -i "s/output_buffering =.*/output_buffering = Off/" /etc/php/${PHPVER}/cli/php.ini
 sed -i "s/max_execution_time =.*/max_execution_time = 3600/" /etc/php/${PHPVER}/cli/php.ini
 sed -i "s/max_input_time =.*/max_input_time = 3600/" /etc/php/${PHPVER}/cli/php.ini
@@ -149,6 +149,7 @@ sed -i "s/upload_max_filesize =.*/upload_max_filesize = 10240M/" /etc/php/${PHPV
 sed -i "s/;date.timezone.*/date.timezone = Europe\/\Berlin/" /etc/php/${PHPVER}/cli/php.ini
 sed -i "s/;cgi.fix_pathinfo.*/cgi.fix_pathinfo=0/" /etc/php/${PHPVER}/cli/php.ini
 
+sed -i "s/allow_url_fopen =.*/allow_url_fopen = 1/" /etc/php/${PHPVER}/fpm/php.ini
 sed -i "s/memory_limit = 128M/memory_limit = 1G/" /etc/php/${PHPVER}/fpm/php.ini
 sed -i "s/output_buffering =.*/output_buffering = Off/" /etc/php/${PHPVER}/fpm/php.ini
 sed -i "s/max_execution_time =.*/max_execution_time = 3600/" /etc/php/${PHPVER}/fpm/php.ini

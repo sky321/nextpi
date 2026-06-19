@@ -15,7 +15,6 @@
 - change nextpi.cnf (only var above the line are currently used)
 
 - install nextcloud
-	- cd nextpi	
 	- sudo ./install.sh
 - reboot (after reboot the ssh port is changed -> nextpi.cnf)
 

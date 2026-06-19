@@ -150,12 +150,12 @@ sed -i "s/;date.timezone.*/date.timezone = Europe\/\Berlin/" /etc/php/${PHPVER}/
 sed -i "s/;cgi.fix_pathinfo.*/cgi.fix_pathinfo=0/" /etc/php/${PHPVER}/cli/php.ini
 
 sed -i "s/allow_url_fopen =.*/allow_url_fopen = 1/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/memory_limit = 128M/memory_limit = 1G/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/memory_limit = 128M/memory_limit = 798M/" /etc/php/${PHPVER}/fpm/php.ini
 sed -i "s/output_buffering =.*/output_buffering = Off/" /etc/php/${PHPVER}/fpm/php.ini
 sed -i "s/max_execution_time =.*/max_execution_time = 3600/" /etc/php/${PHPVER}/fpm/php.ini
 sed -i "s/max_input_time =.*/max_input_time = 3600/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/post_max_size =.*/post_max_size = 10G/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/upload_max_filesize =.*/upload_max_filesize = 10G/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/post_max_size =.*/post_max_size = 512M/" /etc/php/${PHPVER}/fpm/php.ini
+sed -i "s/upload_max_filesize =.*/upload_max_filesize = 512M/" /etc/php/${PHPVER}/fpm/php.ini
 sed -i "s/;date.timezone.*/date.timezone = Europe\/\Berlin/" /etc/php/${PHPVER}/fpm/php.ini
 # will lead to access denied
 #sed -i "s/;cgi.fix_pathinfo.*/cgi.fix_pathinfo=0/" /etc/php/${PHPVER}/fpm/php.ini

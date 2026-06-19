@@ -11,9 +11,11 @@
 ADMINUSER_=$( grep ADMINUSER /root/.nextpi.cnf | sed 's|ADMINUSER=||' )
 ADMINPASS_=$( grep ADMINPASS /root/.nextpi.cnf | sed 's|ADMINPASS=||' )
 DBADMIN=$( grep DBADMIN /root/.nextpi.cnf | sed 's|DBADMIN=||' )
-MAXFILESIZE=512M
-MEMORYLIMIT=768M
-MAXTRANSFERTIME=3600
+
+# all done in lamp.sh
+#MAXFILESIZE=512M
+#MEMORYLIMIT=768M
+#MAXTRANSFERTIME=3600
 
 DESCRIPTION="(Re)initiate Nextcloud to a clean configuration"
 INFOTITLE="Clean NextCloud configuration"
@@ -117,19 +119,20 @@ EOF
   sed -i "s|^;\?upload_tmp_dir =.*$|upload_tmp_dir = $UPLOADTMPDIR|" /etc/php/${PHPVER}/fpm/php.ini
   sed -i "s|^;\?sys_temp_dir =.*$|sys_temp_dir = $UPLOADTMPDIR|"     /etc/php/${PHPVER}/fpm/php.ini
 
-  # memory limit php
-  sed -i "s|^;\?memory_limit =.*$|memory_limit = $MEMORYLIMIT|"     /etc/php/${PHPVER}/cli/php.ini
-  sed -i "s|^;\?memory_limit =.*$|memory_limit = $MEMORYLIMIT|"     /etc/php/${PHPVER}/fpm/php.ini
+# all done in lamb.sh  
+# memory limit php
+  #sed -i "s|^;\?memory_limit =.*$|memory_limit = $MEMORYLIMIT|"     /etc/php/${PHPVER}/cli/php.ini
+  #sed -i "s|^;\?memory_limit =.*$|memory_limit = $MEMORYLIMIT|"     /etc/php/${PHPVER}/fpm/php.ini
   
   # upload limit php
-  sed -i "s|^;\?upload_max_filesize =.*$|upload_max_filesize = $MAXFILESIZE|"     /etc/php/${PHPVER}/cli/php.ini
-  sed -i "s|^;\?upload_max_filesize =.*$|upload_max_filesize = $MAXFILESIZE|"     /etc/php/${PHPVER}/fpm/php.ini
-  sed -i "s|^;\?post_max_size =.*$|post_max_size = $MAXFILESIZE|"     /etc/php/${PHPVER}/cli/php.ini
-  sed -i "s|^;\?post_max_size =.*$|post_max_size = $MAXFILESIZE|"     /etc/php/${PHPVER}/fpm/php.ini
+  #sed -i "s|^;\?upload_max_filesize =.*$|upload_max_filesize = $MAXFILESIZE|"     /etc/php/${PHPVER}/cli/php.ini
+  #sed -i "s|^;\?upload_max_filesize =.*$|upload_max_filesize = $MAXFILESIZE|"     /etc/php/${PHPVER}/fpm/php.ini
+  #sed -i "s|^;\?post_max_size =.*$|post_max_size = $MAXFILESIZE|"     /etc/php/${PHPVER}/cli/php.ini
+  #sed -i "s|^;\?post_max_size =.*$|post_max_size = $MAXFILESIZE|"     /etc/php/${PHPVER}/fpm/php.ini
   
   # session cockie secure PHP
-  sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/cli/php.ini
-  sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/fpm/php.ini
+  #sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/cli/php.ini
+  #sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/fpm/php.ini
 
   # 4 Byte UTF8 support nextcloud
   sudo -u www-data php occ config:system:set mysql.utf8mb4 --type boolean --value="true"

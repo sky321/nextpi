@@ -95,7 +95,7 @@ EOF
   # redis cache
   sed -i '$d' config/config.php
   cat >> config/config.php <<EOF
-  'memcache.local' => '\\OC\\Memcache\\Redis',
+  'memcache.local' => '\\OC\\Memcache\\APCu',
   'memcache.locking' => '\\OC\\Memcache\\Redis',
   'redis' =>
   array (

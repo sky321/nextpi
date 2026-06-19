@@ -149,26 +149,26 @@ sed -i "s/upload_max_filesize =.*/upload_max_filesize = 10240M/" /etc/php/${PHPV
 sed -i "s/;date.timezone.*/date.timezone = Europe\/\Berlin/" /etc/php/${PHPVER}/cli/php.ini
 sed -i "s/;cgi.fix_pathinfo.*/cgi.fix_pathinfo=0/" /etc/php/${PHPVER}/cli/php.ini
 
-sed -i "s/allow_url_fopen =.*/allow_url_fopen = 1/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/memory_limit = 128M/memory_limit = 1G/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/output_buffering =.*/output_buffering = Off/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/max_execution_time =.*/max_execution_time = 3600/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/max_input_time =.*/max_input_time = 3600/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/post_max_size =.*/post_max_size = 10G/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/upload_max_filesize =.*/upload_max_filesize = 10G/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/;date.timezone.*/date.timezone = Europe\/\Berlin/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/;cgi.fix_pathinfo.*/cgi.fix_pathinfo=0/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/;opcache.enable=.*/opcache.enable=1/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/;opcache.validate_timestamps=.*/opcache.validate_timestamps=1/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/;opcache.enable_cli=.*/opcache.enable_cli=1/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/;opcache.memory_consumption=.*/opcache.memory_consumption=256/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/;opcache.interned_strings_buffer=.*/opcache.interned_strings_buffer=64/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/;opcache.max_accelerated_files=.*/opcache.max_accelerated_files=100000/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/;opcache.revalidate_freq=.*/opcache.revalidate_freq=0/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/;opcache.save_comments=.*/opcache.save_comments=1/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/;opcache.huge_code_pages=.*/opcache.huge_code_pages=0/" /etc/php/${PHPVER}/fpm/php.ini
-sed -i "s/session.gc_maxlifetime =.*/session.gc_maxlifetime = 36000/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/allow_url_fopen =.*/allow_url_fopen = 1/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/memory_limit = 128M/memory_limit = 1G/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/output_buffering =.*/output_buffering = Off/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/max_execution_time =.*/max_execution_time = 3600/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/max_input_time =.*/max_input_time = 3600/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/post_max_size =.*/post_max_size = 10G/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/upload_max_filesize =.*/upload_max_filesize = 10G/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/;date.timezone.*/date.timezone = Europe\/\Berlin/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/;cgi.fix_pathinfo.*/cgi.fix_pathinfo=0/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/;session.cookie_secure.*/session.cookie_secure = True/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/;opcache.enable=.*/opcache.enable=1/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/;opcache.validate_timestamps=.*/opcache.validate_timestamps=1/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/;opcache.enable_cli=.*/opcache.enable_cli=1/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/;opcache.memory_consumption=.*/opcache.memory_consumption=256/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/;opcache.interned_strings_buffer=.*/opcache.interned_strings_buffer=64/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/;opcache.max_accelerated_files=.*/opcache.max_accelerated_files=100000/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/;opcache.revalidate_freq=.*/opcache.revalidate_freq=0/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/;opcache.save_comments=.*/opcache.save_comments=1/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/;opcache.huge_code_pages=.*/opcache.huge_code_pages=0/" /etc/php/${PHPVER}/fpm/php.ini
+#sed -i "s/session.gc_maxlifetime =.*/session.gc_maxlifetime = 36000/" /etc/php/${PHPVER}/fpm/php.ini
 
 sed -i "s|;emergency_restart_threshold.*|emergency_restart_threshold = 10|g" /etc/php/${PHPVER}/fpm/php-fpm.conf
 sed -i "s|;emergency_restart_interval.*|emergency_restart_interval = 1m|g" /etc/php/${PHPVER}/fpm/php-fpm.conf

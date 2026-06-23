@@ -24,7 +24,7 @@ configure()
   [[ $ACTIVE_     == "yes" ]] && local AUTOUPGRADE=1   || local AUTOUPGRADE=0
   [[ $AUTOREBOOT_ == "yes" ]] && local AUTOREBOOT=true || local AUTOREBOOT=false
 
-  local RELEASE=$( grep RELEASE /root/.nextpi.cnf | sed 's|RELEASE=||' )
+  local RELEASE=$(lsb_release -sc)
 
   # Raspbian case # TODO security only?
 

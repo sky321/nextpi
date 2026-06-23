@@ -27,7 +27,8 @@ install()
 {
     # GET PHP SOURCES
     ##########################################
-
+    
+    # use lsb_release 
     local RELEASE=$(lsb_release -sc)
     apt-get update
     $APTINSTALL curl apt-transport-https ca-certificates software-properties-common

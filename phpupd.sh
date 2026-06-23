@@ -17,7 +17,7 @@
 PHPALT=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
 PHPVER=8.2
 DATADIR=$( grep CHGDATADIR /root/.nextpi.cnf | sed 's|CHGDATADIR=||' )
-RELEASE=$( grep RELEASE /root/.nextpi.cnf | sed 's|RELEASE=||' )
+RELEASE=$(lsb_release -sc)
 
 APTINSTALL="apt-get install -y --no-install-recommends"
 export DEBIAN_FRONTEND=noninteractive

@@ -31,12 +31,12 @@ install()
     # use lsb_release 
     local RELEASE=$(lsb_release -sc)
     apt-get update
-    $APTINSTALL curl apt-transport-https ca-certificates software-properties-common
+    $APTINSTALL curl apt-transport-https ca-certificates
 
     # include Sury Repo 
     curl -sSLo /tmp/debsuryorg-archive-keyring.deb https://packages.sury.org/debsuryorg-archive-keyring.deb
     dpkg -i /tmp/debsuryorg-archive-keyring.deb
-    sh -c 'echo "deb [signed-by=/usr/share/keyrings/debsuryorg-archive-keyring.gpg] https://packages.sury.org/php/ $RELEASE main" > /etc/apt/sources.list.d/php.list'
+    sh -c 'echo "deb [signed-by=/usr/share/keyrings/debsuryorg-archive-keyring.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
   
 
     # INSTALL 

@@ -28,34 +28,22 @@ install()
     # GET PHP SOURCES
     ##########################################
 
-    local RELEASE=$( grep RELEASE /root/.nextpi.cnf | sed 's|RELEASE=||' )
+    local RELEASE=$(lsb_release -sc)
     apt-get update
-    $APTINSTALL apt-transport-https ca-certificates software-properties-common
-    
-    # do some apt pinning
-#    cat << EOF > /etc/apt/preferences.d/php
-#Package: *
-#Pin: origin packages.sury.org
-#Pin-Priority: -1
+    $APTINSTALL curl apt-transport-https ca-certificates software-properties-common
 
-#Package: php${PHPVER}-* libapache2-mod-php${PHPVER} libpcre2-* libgd3 libgd-dev
-#Pin: origin packages.sury.org
-#Pin-Priority: 500
-#EOF
-    
-#    echo "deb https://packages.sury.org/php/ $RELEASE main" > /etc/apt/sources.list.d/php.list
-#    wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-    
-#    curl -sSLo /usr/share/keyrings/deb.sury.org-php.gpg https://packages.sury.org/php/apt.gpg
-#    echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $RELEASE main" | sudo tee /etc/apt/sources.list.d/php.list
+    # include Sury Repo 
+    curl -sSLo /tmp/debsuryorg-archive-keyring.deb https://packages.sury.org/debsuryorg-archive-keyring.deb
+    dpkg -i /tmp/debsuryorg-archive-keyring.deb
+    sh -c 'echo "deb [signed-by=/usr/share/keyrings/debsuryorg-archive-keyring.gpg] https://packages.sury.org/php/ $RELEASE main" > /etc/apt/sources.list.d/php.list'
+  
 
     # INSTALL 
     ##########################################
 
     apt-get update
-    $APTINSTALL apt-utils cron curl ip2host
-    $APTINSTALL apache2
-
+    $APTINSTALL apt-utils cron ip2host apache2
+    
     $APTINSTALL -t $RELEASE php${PHPVER} libapache2-mod-php${PHPVER} php${PHPVER}-curl php${PHPVER}-gd php${PHPVER}-fpm libapache2-mod-fcgid php${PHPVER}-cli php${PHPVER}-opcache \
                             php${PHPVER}-mbstring php${PHPVER}-xml php${PHPVER}-zip php${PHPVER}-common php${PHPVER}-ldap \
                             php${PHPVER}-intl php${PHPVER}-bz2 php${PHPVER}-gmp php${PHPVER}-bcmath php${PHPVER}-apcu 

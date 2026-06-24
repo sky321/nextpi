@@ -104,7 +104,7 @@ EOF
 ## Alias for nextcloud occ cmd
 if [ ! -f /root/.bashrc ]; then touch /root/.bashrc; fi
 
-cat <<EOF >> /$PINEWUSER/.bashrc
+cat <<EOF >> /home/$PINEWUSER/.bash_aliases
 alias nocc="sudo -u www-data /usr/bin/php /var/www/nextcloud/occ"
 EOF
   

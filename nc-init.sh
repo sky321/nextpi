@@ -158,6 +158,8 @@ EOF
   sudo -u www-data php /var/www/nextcloud/occ app:install calendar
   sudo -u www-data php /var/www/nextcloud/occ app:install contacts
   sudo -u www-data php /var/www/nextcloud/occ app:install tasks
+  sudo -u www-data php /var/www/nextcloud/occ app:install uppush
+  sudo -u www-data php /var/www/nextcloud/occ app:install dav_push
 
   sudo -u www-data php /var/www/nextcloud/occ app:enable calendar
   sudo -u www-data php /var/www/nextcloud/occ app:enable contacts

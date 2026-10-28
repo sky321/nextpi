@@ -33,10 +33,12 @@ Your certificate will be automatically renewed"
   apt-get update
 # apt-get install --no-install-recommends -y certbot python3-certbot-apache
   apt-get install --no-install-recommends -y snapd
-  snap install core
-  snap refresh core
-  snap install certbot --classic
-  ln -s /snap/bin/certbot /usr/bin/certbot
+  snap install snapd
+#  snap install core
+#  snap refresh core
+  snap install --classic certbot
+#  ln -s /snap/bin/certbot /usr/bin/certbot
+  ln -s /snap/bin/certbot /usr/local/bin/certbot
 
   # put config file in place
   rm -f /root/.fritz.cnf

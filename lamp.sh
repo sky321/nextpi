@@ -22,7 +22,7 @@
 PHPVER=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
 APTINSTALL="apt-get install -y --no-install-recommends"
 export DEBIAN_FRONTEND=noninteractive
-
+maintenance:repair --include-expensive
 install()
 {
     # GET PHP SOURCES
@@ -31,7 +31,7 @@ install()
     # use lsb_release 
     local RELEASE=$(lsb_release -sc)
     apt-get update
-    $APTINSTALL curl apt-transport-https ca-certificates
+    $APTINSTALL apt-transport-https
 
     # include Sury Repo 
 #    curl -sSLo /tmp/debsuryorg-archive-keyring.deb https://packages.sury.org/debsuryorg-archive-keyring.deb

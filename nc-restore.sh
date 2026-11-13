@@ -22,6 +22,7 @@ DBPASSWD="$( grep password /root/.my.cnf | sed 's|password=||' )"
 PHPVER=$( grep PHPVER /root/.nextpi.cnf | sed 's|PHPVER=||' )
 USBDEV=$( grep USBDEV /root/.nextpi.cnf | sed 's|USBDEV=||' )
 USBDIR=$( grep USBDIR /root/.nextpi.cnf | sed 's|USBDIR=||' )
+PINEWUSER=$( grep USBDIR /root/.nextpi.cnf | sed 's|PINEWUSER=||' )
 
 cd "$NCDIR"
 sudo -u www-data php occ maintenance:mode --on
@@ -95,6 +96,9 @@ sed -i "s|$SECRETOLD|$SECRETNEW|"  "$NCDIR"/config/config.php
 
 sudo -u www-data php occ maintenance:mode --off
 
+# copy home from backup
+cp "$BACKUPDIR"/"$PINEWUSER"/* /home/"$PINEWUSER"
+
 #
 # Afterwork 
 #
@@ -149,6 +153,9 @@ sed -i 's|^# *notifications:|notifications:|' /etc/crowdsec/profiles.yaml
 sed -i 's|^# *- email_default| - email_default|' /etc/crowdsec/profiles.yaml
 
 systemctl restart crowdsec
+
+# enroll to crowdsec server
+sudo cscli console enroll --quick
 
 # drop incompatible old 2Fact App if needed
 #sudo -u www-data php /var/www/nextcloud/occ app:disable twofactor_totp

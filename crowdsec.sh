@@ -81,4 +81,7 @@ systemctl reload crowdsec && systemctl restart crowdsec.service crowdsec-firewal
 #cron update job
 echo "0 2 * * * /usr/bin/cscli hub update && /usr/bin/cscli hub upgrade > /dev/null 2>&1" >> /var/spool/cron/crontabs/root
 
+# enroll to crowdsec server
+sudo cscli console enroll --quick
+
 }

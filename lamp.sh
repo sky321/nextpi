@@ -275,7 +275,7 @@ slave_connections_needed_for_purge = 0
 general_log_file = /var/log/mysql/mysql.log
 innodb_buffer_pool_size = 1G
 innodb_log_buffer_size = 32M
-innodb_log_file_size = 512M
+innodb_log_file_size = 256M
 innodb_read_only_compressed=OFF
 join_buffer_size = 2M
 key_buffer_size = 512M
@@ -305,11 +305,12 @@ socket = /var/run/mysqld/mysqld.sock
 sort_buffer_size = 2M
 table_open_cache = 400
 table_definition_cache = 800
-tmp_table_size = 32M
+tmp_table_size = 64M
 tmpdir = /tmp
 transaction_isolation = READ-COMMITTED
 user = mysql
 wait_timeout = 600
+slow_query_log = ON
 [mariadb-dump]
 max_allowed_packet = 512M
 quick

@@ -57,7 +57,7 @@ EOF
 
 # Dynamic Increase of Blocking Time 
 
-if [[ -f /etc/cowdsec/profiles.yaml ]]; then
+if [[ -f /etc/crowdsec/profiles.yaml ]]; then
       sudo sed -i 's/^#duration_expr:.*$/duration_expr: Sprintf("%dh", (GetDecisionsCount(Alert.GetValue()) * GetDecisionsCount(Alert.GetValue()) + 1) * 8)/' /etc/crowdsec/profiles.yaml
       sudo sed -i 's/^   duration:.*$/   duration: 8h/' /etc/crowdsec/profiles.yaml
 fi

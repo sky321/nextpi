@@ -31,7 +31,7 @@ install()
     # use lsb_release 
     local RELEASE=$(lsb_release -sc)
     apt-get update
-    $APTINSTALL apt-transport-https
+    $APTINSTALL apt-transport-https jq
 
     # include Sury Repo 
 #    curl -sSLo /tmp/debsuryorg-archive-keyring.deb https://packages.sury.org/debsuryorg-archive-keyring.deb

@@ -33,7 +33,8 @@ configure()
   mkdir $USBDIR
 
   # Initiat logrotate
-#  echo "init logrotate...."
+  echo "init logrotate...."
+  sed -i 's|^weekly|daily|'     /etc/logrotate.conf 
 
 #  cat >> /etc/logrotate.d/unattended-upgrades <<'EOF'
 #/var/log/unattended-upgrades/unattended-upgrades.log

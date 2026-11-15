@@ -22,6 +22,10 @@ echo "-----------------------User agent"
 sudo awk -F\" '{print $6}' ${logfile} | sort | uniq -c
 echo "-----------------------Blank User Agents from"
 sudo awk -F\" '($6 ~ /^-?$/)' ${logfile} | awk '{print $1}' | sort | uniq | ip2host
+echo "-----------------------IP access greater 10"
+sudo awk '{print $1}' ${logfile} | sort | uniq -c | awk '{if($1>10)print $1, $2}'
+echo "-----------------------IP access greater 10 Hosts"
+sudo awk '{print $1}' ${logfile} | sort | uniq -c | awk '{if($1>10)print $2}' | ip2host
 #echo "----------------------Request"
 #sudo awk -F\" '{print $2}' ${logfile} | sort | uniq -c | sort
 #echo "----------------------What did a special IP?"

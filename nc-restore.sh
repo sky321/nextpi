@@ -99,6 +99,10 @@ sudo -u www-data php occ maintenance:mode --off
 # copy home from backup
 cp "$BACKUPDIR"/"$PINEWUSER"/* /home/"$PINEWUSER"
 
+# set environment var for apache-check
+echo "APACHELOG=/var/log/apache2/access.log" >> /etc/environment
+
+
 #
 # Afterwork 
 #

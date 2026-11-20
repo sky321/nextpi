@@ -80,6 +80,7 @@ systemctl reload crowdsec && systemctl restart crowdsec.service crowdsec-firewal
 
 #cron update job
 echo "0 2 * * * /usr/bin/cscli hub update && /usr/bin/cscli hub upgrade > /dev/null 2>&1" >> /var/spool/cron/crontabs/root
+echo "0 3 * * * sh /home/sky/nextpi/ban-ip.sh >> /var/log/ban-ip.log 2>&1" >> /var/spool/cron/crontabs/root
 
 
 }

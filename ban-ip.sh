@@ -1,7 +1,10 @@
 #!/bin/bash
 logfile='/var/log/apache2/access.log.1'
 
+echo "--------------------------------------"
+date
 echo "Datei erstellen...."
+
 sudo awk '{print $1}' ${logfile} | sort | uniq -c | awk '{if($1>10)print $2}' > ban-ip.txt
 
 while read ZEILE ; do

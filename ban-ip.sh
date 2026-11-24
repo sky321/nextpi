@@ -11,10 +11,10 @@ while read ZEILE ; do
         IP=$(echo $ZEILE)
         HOST=$(echo $ZEILE | ip2host)
 
-        if [[ $HOST =~ "vodafone" || $HOST =~ "telefonica" ]];
+        if [[ $HOST =~ "vodafone" || $HOST =~ "telefonica" || $HOST =~ "fritz.box" ]];
         then
             echo $IP "---" $HOST 
-            echo "Vodafone || Telefonica NOT BANNED"
+            echo "Vodafone || Telefonica || Fritz - NOT BANNED"
         else
                 echo $IP "---" $HOST
                 cscli decision add -i $IP -d 200h
